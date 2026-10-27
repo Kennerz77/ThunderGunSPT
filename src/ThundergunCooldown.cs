@@ -45,12 +45,20 @@ namespace Thundergun
         // Returning false swallows the trigger pull: the player just pulls again once it's recharged
         private static bool TriggerPrefix(Player.FirearmController.Idling __instance, bool pressed)
         {
-            Weapon weapon = __instance.Weapon;
-            if (!pressed || !ThundergunIds.Is(weapon))
+            try
+            {
+                Weapon weapon = __instance.Weapon;
+                if (!pressed || !ThundergunIds.Is(weapon))
+                    return true;
+                bool charged = weapon.Chambers.Length > 0 && weapon.Chambers[0].ContainedItem != null;
+                // A fresh canister waits for its tech beep to finish
+                return !charged || (Remaining(weapon) <= 0f && ThundergunCharges.Armed(weapon));
+            }
+            catch (System.Exception e)
+            {
+                ThundergunPlugin.Log.LogError($"Thundergun trigger rule failed, firing normally: {e}");
                 return true;
-            bool charged = weapon.Chambers.Length > 0 && weapon.Chambers[0].ContainedItem != null;
-            // A fresh canister waits for its tech beep to finish
-            return !charged || (Remaining(weapon) <= 0f && ThundergunCharges.Armed(weapon));
+            }
         }
     }
 }

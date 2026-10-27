@@ -68,26 +68,55 @@ namespace Thundergun
         // No place given for the old canister means the reload drops it at the player's feet
         private static bool ReloadMagPrefix(Player.FirearmController __instance, ref ItemAddress itemAddress, Callback callback)
         {
-            if (!(__instance.Item is Weapon weapon) || !ThundergunIds.Is(weapon))
-                return true;
-            if (Refuse(weapon, callback))
-                return false;
-            itemAddress = null;
+            try
+            {
+                if (!(__instance.Item is Weapon weapon) || !ThundergunIds.Is(weapon))
+                    return true;
+                if (Refuse(weapon, callback))
+                    return false;
+                itemAddress = null;
+            }
+            catch (Exception e)
+            {
+                Failed("reload", e);
+            }
             return true;
         }
 
         // The fast reload already drops the old canister; it only has to wait for the canister to be spent
-        private static bool QuickReloadPrefix(Player.FirearmController __instance, Callback callback) =>
-            !(__instance.Item is Weapon weapon) || !Refuse(weapon, callback);
+        private static bool QuickReloadPrefix(Player.FirearmController __instance, Callback callback)
+        {
+            try
+            {
+                return !(__instance.Item is Weapon weapon) || !Refuse(weapon, callback);
+            }
+            catch (Exception e)
+            {
+                Failed("quick reload", e);
+                return true;
+            }
+        }
 
         // Charges only come in a canister: none are loaded loose
         private static bool ReloadWithAmmoPrefix(Player.FirearmController __instance, Callback callback)
         {
-            if (!(__instance.Item is Weapon weapon) || !ThundergunIds.Is(weapon))
+            try
+            {
+                if (!(__instance.Item is Weapon weapon) || !ThundergunIds.Is(weapon))
+                    return true;
+                callback?.Fail("Thundergun charges only come in canisters");
+                return false;
+            }
+            catch (Exception e)
+            {
+                Failed("loose ammo", e);
                 return true;
-            callback?.Fail("Thundergun charges only come in canisters");
-            return false;
+            }
         }
+
+        // A rule that throws must never leave the hands waiting on a half-handled reload: log it, the game's own runs
+        private static void Failed(string rule, Exception e) =>
+            ThundergunPlugin.Log.LogError($"Thundergun {rule} rule failed, using the game's own: {e}");
 
         // ---------- Arming ----------
 

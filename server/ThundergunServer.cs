@@ -19,7 +19,7 @@ public record ModMetadata : IModMetadata
     public string Name { get; init; } = "Thundergun";
     public string Author { get; init; } = "Kennerz";
     public List<string>? Contributors { get; init; }
-    public SemanticVersioning.Version Version { get; init; } = new("1.0.1");
+    public SemanticVersioning.Version Version { get; init; } = new("1.0.2");
     public SemanticVersioning.Range SptVersion { get; init; } = new("~4.1.0");
     public List<string>? Incompatibilities { get; init; }
     /// <summary>Hideout Uncensored provides weapons in the hideout, where the wall buy is (the client depends on it too).</summary>
@@ -150,6 +150,17 @@ public class ThundergunItemLoader(
         // As heavy as a light machine gun, and then some: 9.35 kg, for Group 935
         gun.Weight = 9.35;
         gun.DurabilityBurnRatio = 0;
+        // Nothing can go wrong with it: a jam, misfeed or misfire needs a magazine pulled or a bolt cycled, and the
+        // cartridge is locked in until it's spent, so the hands would never be freed (the "busy hands" glitch)
+        gun.AllowJam = false;
+        gun.AllowFeed = false;
+        gun.AllowMisfire = false;
+        gun.AllowSlide = false;
+        gun.AllowOverheat = false;
+        gun.BaseMalfunctionChance = 0;
+        charge.Properties.MisfireChance = 0;
+        charge.Properties.MalfMisfireChance = 0;
+        charge.Properties.MalfFeedChance = 0;
         // Always 9.35 kg in all: the cartridge and its charges add nothing, loaded or spare
         canister.Properties.Weight = 0;
         charge.Properties.Weight = 0;

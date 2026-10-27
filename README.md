@@ -2,7 +2,7 @@
 
 The **Thundergun** from Call of Duty Zombies, in SPT. The BO3 HD model with its real first-person animations, a blast of air that kills everything in front of you and throws the bodies, and a chalk wall buy in your hideout to get it.
 
-Version 1.0.1, for **SPT 4.1.6**.
+Version 1.0.2, for **SPT 4.1.6**.
 
 ## Requirements
 
@@ -72,3 +72,4 @@ Delete `BepInEx\plugins\Thundergun\` and `SPT_Runtime\user\mods\Thundergun\`. Yo
 
 - **1.0.0:** first release.
 - **1.0.1:** hot patch. Traders pay a flat 935,000 RUB for the Thundergun (plus the Pack-a-Punch fee, 500,000 or 5,000 depending on PaP's mode, when infused). A pressure cartridge sells for 10,000 RUB, 2,000 less per spent charge, and 0 when empty. The Thundergun no longer loses durability.
+- **1.0.2:** hot patch for the "hands are busy" glitch. The Thundergun can no longer jam, misfeed, misfire or overheat (a malfunction could leave the hands stuck, as its cartridge cannot be pulled out to clear it), and its reload and trigger rules now fall back to the game's own if they ever fail, instead of leaving a reload half done.

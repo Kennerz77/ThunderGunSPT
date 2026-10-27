@@ -8,7 +8,7 @@ namespace Thundergun
     /// Client side of the Thundergun. Pack-a-Punch support is optional (soft dependency): nothing here touches PaP
     /// unless it's installed. Hideout Uncensored is required: weapons in the hideout, where the wall buy is, come from it.
     /// </summary>
-    [BepInPlugin(PluginGuid, "Kennerz-Thundergun", "1.0.1")] // Forge rule: "Username-ModName"
+    [BepInPlugin(PluginGuid, "Kennerz-Thundergun", "1.0.2")] // Forge rule: "Username-ModName"
     [BepInDependency("com.kennerz.paphideoutmodule", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(ThundergunDraw.HideoutUncensoredGuid, "1.3.0")] // hard: the wall buy hands you the gun through it
     public class ThundergunPlugin : BaseUnityPlugin
