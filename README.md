@@ -9,13 +9,13 @@ Version 1.0.0, for **SPT 4.1.6**.
 | Mod | Version | Why |
 |---|---|---|
 | SPT | 4.1.x (made on 4.1.6) | |
+| [Hideout Uncensored](https://sp-mod.com/mod/3167/hideout-uncensored) by **trappuss** ([GitHub](https://github.com/trappuss/SPT-Mods-Release)) | 1.3.0 or newer, **both** its client and server parts | Weapons anywhere in the hideout: the wall buy hands you the Thundergun straight away, outside the shooting range |
 
 Optional:
 
 | Mod | What it adds |
 |---|---|
 | Kennerz-PaPHideoutModule (by Kennerz, same author) | Pack-a-Punch the Thundergun into the **Zeus Cannon**: four charges per cartridge, a bigger, purple blast and BO3's upgraded shot sound. |
-| [Hideout Uncensored](https://sp-mod.com/mod/3167/hideout-uncensored) by **trappuss** ([GitHub](https://github.com/trappuss/SPT-Mods-Release)) | Weapons anywhere in the hideout: a Thundergun bought off the wall goes straight into your hands. Without it, it's equipped and you draw it in the shooting range. |
 
 ## Installing
 
@@ -29,7 +29,7 @@ Optional:
 
 The mod gives you nothing for free and mails you nothing. Once your hideout's **side room is open** (the Emergency Wall upgrades done), there's a **chalk outline of the Thundergun** on a wall in your hideout, with a green **ammo case** beside it.
 
-- **The wall:** look at it and buy the Thundergun for **935,000 ₽** (from your stash). It slides out of the wall, BO style, loaded with a full cartridge. If a primary weapon slot is free it's equipped (and drawn, with Hideout Uncensored); otherwise it goes to your stash. The wall sells it again on your first hideout visit after a raid.
+- **The wall:** look at it and buy the Thundergun for **935,000 ₽** (from your stash). It slides out of the wall, BO style, loaded with a full cartridge. If a primary weapon slot is free it's equipped and drawn; otherwise it goes to your stash. The wall sells it again on your first hideout visit after a raid.
 - **The ammo case:** buy a full **Pressure Cartridge** for **10,000 ₽**.
 - Not enough money or no room in your stash: nothing is charged.
 
@@ -67,8 +67,9 @@ Delete `BepInEx\plugins\Thundergun\` and `SPT_Runtime\user\mods\Thundergun\`. Yo
   - MJPW: the Pack-a-Punch camo mask and the ammo light counter
   - Collie and Aszry: the Maya rig used for some of the animations
   - The original Treyarch developers: the weapon models and animations (2010)
-- **Hideout Uncensored** by trappuss ([page](https://sp-mod.com/mod/3167/hideout-uncensored), [GitHub](https://github.com/trappuss/SPT-Mods-Release)): optional; weapons anywhere in the hideout.
+- **Hideout Uncensored** by trappuss ([page](https://sp-mod.com/mod/3167/hideout-uncensored), [GitHub](https://github.com/trappuss/SPT-Mods-Release)): holding the gun anywhere in the hideout, beyond the shooting range. Required; not included, install it separately.
 - Made by Kennerz.
+
 ## Changelog
 
 - **1.0.0:** first release.

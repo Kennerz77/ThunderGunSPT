@@ -28,49 +28,80 @@ namespace Thundergun
                 postfix: new HarmonyMethod(Method(nameof(CreateWeaponPostfix))));
             harmony.Patch(AccessTools.Method(typeof(MenuPlayerPoser), nameof(MenuPlayerPoser.OnRandomizeAnimation)),
                 new HarmonyMethod(Method(nameof(RandomizePrefix))));
+            harmony.Patch(AccessTools.Method(typeof(PlayerBones), nameof(PlayerBones.Kinematics)),
+                postfix: new HarmonyMethod(Method(nameof(KinematicsPostfix))));
+            harmony.Patch(AccessTools.Method(typeof(PlayerBones), nameof(PlayerBones.ShiftWeaponRoot)),
+                postfix: new HarmonyMethod(Method(nameof(ShiftWeaponRootPostfix))));
         }
 
         private static MethodInfo Method(string name) => typeof(ThundergunMenuPose).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic);
 
+        // Bones of the menu characters holding the Thundergun; in-raid bodies never get in here
+        private static readonly Dictionary<PlayerBones, Holding> Holds = new Dictionary<PlayerBones, Holding>();
+
         /// <summary>
-        /// On a menu character holding the Thundergun (it also skips the random weapon moves). The menu hangs the gun
-        /// off the body's right hand by the right hand marker; the left hand then reaches for its marker on the front
-        /// grip. The Thundergun is so long that the body's left arm can't reach it (first person moves the shoulder
-        /// forward instead), so the gun is swung about the right hand, a little each frame, until its front grip
-        /// points to just in front of the left shoulder: a cross-body carry with both hands on the grips. Done by
-        /// turning the right hand marker the other way, since the poser lines the gun up by it.
+        /// On a menu character holding the Thundergun (it also skips the random weapon moves). Each frame the poser
+        /// places the gun, then sends both hands to their markers: either it hangs the gun off the body's right hand
+        /// by the right marker (PlayerBones.Kinematics), or the body's third person animation places it
+        /// (ShiftWeaponRoot) and the right hand reaches for it. The Thundergun is so long that the body's left arm
+        /// can't reach the front grip either way (first person moves the shoulder forward instead), so right after
+        /// the gun is placed it is swung about the right marker until its front grip sits just in front of the left
+        /// shoulder: a cross-body carry with both hands on the grips. Worked out fresh every frame from where the
+        /// game just put the gun, so nothing builds up (an earlier version turned the marker a little each frame,
+        /// which spun the right hand forever whenever the animation, not the hand, placed the gun).
         /// </summary>
         private class Holding : MonoBehaviour
         {
             public MenuPlayerPoser Poser;
-            public Transform[] RightMarkers = new Transform[0];
+            public Transform RightMarker;
             public Transform LeftMarker;
 
-            // Where the front grip should be: ahead of and a little below the left shoulder, an easy reach
-            private static readonly Vector3 ReachAhead = new Vector3(0f, -0.12f, 0.32f);
+            // The carry, in the body's frame (x right, y up, z forward), metres: the front grip low and ahead of the
+            // left shoulder, the whole gun nudged forward and to the left, off the torso, and a slight roll about the
+            // barrel line so it sits upright
+            private static readonly Vector3 Reach = new Vector3(0.021f, -0.291f, 0.324f);
+            private static readonly Vector3 Shift = new Vector3(-0.080f, -0.002f, 0.099f);
+            private const float Roll = -5.07f;
 
-            // Before the poser's LateUpdate lines the gun up by the right marker
-            private void Update()
+            public void Swing()
             {
                 Transform shoulder = Poser?.PBones?.LeftShoulder?.Original;
-                Transform palm = Poser?.PBones?.RightPalm;
-                if (shoulder == null || palm == null || LeftMarker == null || RightMarkers.Length == 0)
+                Transform root = Poser?.PBones?.Weapon_Root_Anim;
+                if (shoulder == null || root == null || LeftMarker == null || RightMarker == null)
                     return;
-                Transform body = Poser.transform;
-                Vector3 pivot = palm.position;
-                Vector3 target = shoulder.position + body.rotation * ReachAhead;
+                Quaternion body = Poser.transform.rotation;
+                // Off the torso first (the right hand follows its marker)
+                root.position += body * Shift;
+                Vector3 pivot = RightMarker.position;
+                Vector3 target = shoulder.position + body * Reach;
                 Vector3 now = LeftMarker.position - pivot, want = target - pivot;
                 if (now.sqrMagnitude < 1e-6f || want.sqrMagnitude < 1e-6f)
                     return;
-                // A fraction of the way each frame: settles in a few frames and stays put
-                Quaternion swing = Quaternion.Slerp(Quaternion.identity, Quaternion.FromToRotation(now, want), 0.35f);
-                Quaternion back = Quaternion.Inverse(swing);
-                foreach (Transform marker in RightMarkers)
-                {
-                    if (marker != null)
-                        marker.rotation = back * marker.rotation;
-                }
+                // Front grip onto the target, then rolled about the barrel line to sit upright
+                Quaternion swing = Quaternion.AngleAxis(Roll, want.normalized) * Quaternion.FromToRotation(now, want);
+                root.SetPositionAndRotation(pivot + swing * (root.position - pivot), swing * root.rotation);
             }
+
+            private void OnDestroy()
+            {
+                if (Poser?.PBones != null && Holds.TryGetValue(Poser.PBones, out Holding hold) && hold == this)
+                    Holds.Remove(Poser.PBones);
+            }
+        }
+
+        // The gun hangs off the right hand: swing it about there
+        private static void KinematicsPostfix(PlayerBones __instance)
+        {
+            if (Holds.TryGetValue(__instance, out Holding hold) && hold != null)
+                hold.Swing();
+        }
+
+        // The body animation placed the gun: hang it off the right hand instead (as the other branch does, so the
+        // hold looks the same whichever the menu animation picks), which swings it via KinematicsPostfix
+        private static void ShiftWeaponRootPostfix(PlayerBones __instance)
+        {
+            if (Holds.TryGetValue(__instance, out Holding hold) && hold != null && hold.RightMarker != null)
+                __instance.Kinematics(hold.RightMarker, 0f);
         }
 
         private static void CreateWeaponPostfix(PlayerModelLoader __instance, Item weapon)
@@ -83,7 +114,10 @@ namespace Thundergun
                 if (!thundergun)
                 {
                     if (hold != null)
+                    {
+                        Holds.Remove(poser.PBones);
                         Object.Destroy(hold);
+                    }
                     return;
                 }
                 // The game's animator wrapper drives this same Unity Animator
@@ -102,8 +136,10 @@ namespace Thundergun
                 hold = hold ?? poser.gameObject.AddComponent<Holding>();
                 hold.Poser = poser;
                 Transform[] all = animator.GetComponentsInChildren<Transform>(true);
-                hold.RightMarkers = all.Where(t => t.name == "weapon_R_IK_marker" || t.name == "weapon_R_hand_marker").ToArray();
+                hold.RightMarker = all.FirstOrDefault(t => t.name == "weapon_R_IK_marker") ?? all.FirstOrDefault(t => t.name == "weapon_R_hand_marker");
                 hold.LeftMarker = all.FirstOrDefault(t => t.name == "weapon_L_IK_marker") ?? all.FirstOrDefault(t => t.name == "weapon_L_hand_marker");
+                if (poser.PBones != null)
+                    Holds[poser.PBones] = hold;
             }
             catch (System.Exception e)
             {

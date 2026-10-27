@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-// Readers for Greyhound's SEModel / SEAnim exports (dtzxporter spec, version 1). From the PaP Hideout Module, plus notetracks.
+// Readers for Greyhound's SEModel / SEAnim exports (format version 1). From the PaP Hideout Module, plus notetracks.
 // Kept free of UnityEngine so the parsing can be tested outside the editor.
 namespace Thundergun.SEFormats
 {

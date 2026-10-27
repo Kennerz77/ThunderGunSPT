@@ -24,7 +24,7 @@ namespace Thundergun
     /// buy) sells the gun, and a green ammo case beside it sells full pressure cartridges, both for roubles from the
     /// stash. A bought gun sits in its outline until the next raid; the wall offers it again on the first hideout visit
     /// after one. The two stations are root objects named <see cref="WallName"/> and <see cref="BoxName"/>; aim + F11
-    /// brings them to the player in turn and saves where they are (BepInEx\config), and UnityExplorer can fine-tune them.
+    /// brings them to the player in turn and saves where they are (BepInEx\config); unmoved, they stand at Defaults.
     /// </summary>
     internal class ThundergunStations : MonoBehaviour
     {
@@ -204,7 +204,7 @@ namespace Thundergun
         {
             Transform player = ((Component)owner.HideoutPlayer).transform;
             Dictionary<string, (Vector3 position, Quaternion rotation)> saved = Load();
-            // Unplaced: in front of the player, facing them (move them with UnityExplorer and save)
+            // Fallback only (Defaults always holds both): in front of the player, facing them
             Vector3 ahead = Vector3.ProjectOnPlane(player.forward, Vector3.up).normalized;
             Quaternion facing = Quaternion.LookRotation(-ahead, Vector3.up);
             (Vector3, Quaternion) wallAt = saved.TryGetValue(WallName, out var w) ? w : (player.position + ahead * 2.5f + Vector3.up * 1.3f, facing);
@@ -227,7 +227,7 @@ namespace Thundergun
             }, loaded: true));
             _box = Root(BoxName, boxAt);
             StartCoroutine(Model(AmmoCaseTpl, _box, model => FitCollider(_box, model)));
-            ThundergunPlugin.Log.LogInfo($"Hideout stations set out ({(saved.Count > 0 ? "saved positions" : "in front of the player: place them with UnityExplorer")})");
+            ThundergunPlugin.Log.LogInfo("Hideout stations set out");
         }
 
         private static Transform Root(string name, (Vector3 position, Quaternion rotation) at)

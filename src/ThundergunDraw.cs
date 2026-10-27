@@ -13,11 +13,13 @@ namespace Thundergun
     /// <summary>
     /// A Thundergun bought off the wall into an empty primary slot goes straight into the player's hands. In the
     /// hideout's weapons mode the hands hold a copy of the gear made when the mode started, so the new gun is copied
-    /// into it first. With Hideout Uncensored (weapons anywhere in the hideout) it's drawn through its slot key, as
-    /// that mod expects; otherwise only in the shooting range, where the game allows weapons.
+    /// into it first. Hideout Uncensored (a hard dependency: weapons anywhere in the hideout) draws it through its slot
+    /// key, as that mod expects; should that fail, only the shooting range draws it, where the game allows weapons.
     /// </summary>
     internal static class ThundergunDraw
     {
+        public const string HideoutUncensoredGuid = "com.trappuss.hideoutuncensored";
+
         private static readonly string[] Slots = { "FirstPrimaryWeapon", "SecondPrimaryWeapon" };
 
         /// <summary>The primary slots empty right now (taken before the purchase is sent: the server fills the first).</summary>
@@ -97,7 +99,7 @@ namespace Thundergun
         private static void Notify(string message) => EFT.Communications.NotificationManager.DisplayMessageNotification(message);
 
         /// <summary>
-        /// Hideout Uncensored (optional) keeps weapons out anywhere in the hideout and decides every frame whether they
+        /// Hideout Uncensored keeps weapons out anywhere in the hideout and decides every frame whether they
         /// should be; it's asked to draw through its own slot-key handler, by reflection, as the PaP machine does.
         /// </summary>
         private static class HideoutUncensored
