@@ -23,8 +23,8 @@ namespace Thundergun
     /// The mod's own way to get the Thundergun, no other mod needed: a chalk outline of it on a hideout wall (BO's wall
     /// buy) sells the gun, and a green ammo case beside it sells full pressure cartridges, both for roubles from the
     /// stash. A bought gun sits in its outline until the next raid; the wall offers it again on the first hideout visit
-    /// after one. The two stations are root objects named <see cref="WallName"/> and <see cref="BoxName"/>; aim + F11
-    /// brings them to the player in turn and saves where they are (BepInEx\config); unmoved, they stand at Defaults.
+    /// after one. The two stations are root objects named <see cref="WallName"/> and <see cref="BoxName"/>, at fixed
+    /// spots in the side room (<see cref="Positions"/>).
     /// </summary>
     internal class ThundergunStations : MonoBehaviour
     {
@@ -35,8 +35,6 @@ namespace Thundergun
         // Shown in the prompts; the server's config.json has the prices it charges (keep them in step)
         private const int WeaponPrice = 935_000, CartridgePrice = 10_000;
         private const float UseDistance = 2.5f;
-
-        private static readonly string PositionsFile = Path.Combine(BepInEx.Paths.ConfigPath, ThundergunPlugin.PluginGuid + ".stations.json");
 
         private static HideoutPlayerOwner _owner;
         private static float _ownerSince;
@@ -52,18 +50,6 @@ namespace Thundergun
             harmony.Patch(AccessTools.Method(typeof(HideoutPlayerOwner), nameof(HideoutPlayerOwner.Init)),
                 postfix: new HarmonyMethod(typeof(ThundergunStations).GetMethod(nameof(OwnerInitPostfix), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)));
             host.AddComponent<ThundergunStations>();
-        }
-
-        private bool _bringBoxNext;
-
-        /// <summary>The station in front of the player, facing them: the wall at chest height, the box on the floor.</summary>
-        private static void MoveHere(Transform station, bool wall, HideoutPlayer player)
-        {
-            Transform body = ((Component)player).transform;
-            Vector3 ahead = Vector3.ProjectOnPlane(body.forward, Vector3.up).normalized;
-            Vector3 at = body.position + ahead * (wall ? 1.5f : 1f) + Vector3.up * (wall ? 1.3f : 0f);
-            station.SetPositionAndRotation(at, Quaternion.LookRotation(-ahead, Vector3.up));
-            NotificationManager.DisplayMessageNotification($"{station.name} moved here.");
         }
 
         // Every hideout visit: a gun bought before the last raid is on sale again
@@ -109,14 +95,6 @@ namespace Thundergun
                 _wallMenu.Reset();
                 _boxMenu.Reset();
                 return;
-            }
-            // Quick placement: aim (right mouse) + F11 brings the chalk wall, the next press the ammo box, in turn,
-            // and keeps where they now are
-            if (Input.GetKeyDown(KeyCode.F11) && Input.GetMouseButton(1))
-            {
-                MoveHere(_bringBoxNext ? _box : _wall, wall: !_bringBoxNext, owner.HideoutPlayer);
-                _bringBoxNext = !_bringBoxNext;
-                Save();
             }
             ShowWallGun(_bought);
             _wallMenu.Tick(owner, _wall, UseDistance, WallOptions);
@@ -202,15 +180,7 @@ namespace Thundergun
 
         private void SetUp(HideoutPlayerOwner owner)
         {
-            Transform player = ((Component)owner.HideoutPlayer).transform;
-            Dictionary<string, (Vector3 position, Quaternion rotation)> saved = Load();
-            // Fallback only (Defaults always holds both): in front of the player, facing them
-            Vector3 ahead = Vector3.ProjectOnPlane(player.forward, Vector3.up).normalized;
-            Quaternion facing = Quaternion.LookRotation(-ahead, Vector3.up);
-            (Vector3, Quaternion) wallAt = saved.TryGetValue(WallName, out var w) ? w : (player.position + ahead * 2.5f + Vector3.up * 1.3f, facing);
-            (Vector3, Quaternion) boxAt = saved.TryGetValue(BoxName, out var b) ? b : (player.position + ahead * 2f + Vector3.Cross(Vector3.up, ahead) * 1.2f, facing);
-
-            _wall = Root(WallName, wallAt);
+            _wall = Root(WallName, Positions[WallName]);
             Transform chalk = BuildChalk(_wall);
             // Drawn life size: the gun's real length, measured from its model once
             StartCoroutine(Model(ThundergunIds.Weapon, _wall, model =>
@@ -225,7 +195,7 @@ namespace Thundergun
                 if (chalk != null)
                     SizeChalk(chalk, length);
             }, loaded: true));
-            _box = Root(BoxName, boxAt);
+            _box = Root(BoxName, Positions[BoxName]);
             StartCoroutine(Model(AmmoCaseTpl, _box, model => FitCollider(_box, model)));
             ThundergunPlugin.Log.LogInfo("Hideout stations set out");
         }
@@ -404,61 +374,12 @@ namespace Thundergun
 
         // ---------- Positions ----------
 
-        private void Save()
-        {
-            if (_wall == null || _box == null)
-            {
-                NotificationManager.DisplayWarningNotification("The Thundergun stations aren't out: open the hideout first.");
-                return;
-            }
-            try
-            {
-                var lines = new[] { (WallName, _wall), (BoxName, _box) }.Select(s =>
-                {
-                    Vector3 p = s.Item2.position;
-                    Vector3 r = s.Item2.eulerAngles;
-                    return FormattableString.Invariant($"{s.Item1} {p.x} {p.y} {p.z} {r.x} {r.y} {r.z}");
-                });
-                File.WriteAllLines(PositionsFile, lines);
-                NotificationManager.DisplayMessageNotification("Thundergun station positions saved.");
-                ThundergunPlugin.Log.LogInfo($"Station positions saved to {PositionsFile}:\n{string.Join("\n", lines)}");
-            }
-            catch (Exception e)
-            {
-                ThundergunPlugin.Log.LogError($"Saving station positions failed: {e.Message}");
-            }
-        }
-
-        // Where the user placed them in the hideout (2026-10-27): used until a stations file is saved
-        private static readonly Dictionary<string, (Vector3, Quaternion)> Defaults = new Dictionary<string, (Vector3, Quaternion)>
+        // Where they stand in the side room (placed in game, 2026-10-27)
+        private static readonly Dictionary<string, (Vector3, Quaternion)> Positions = new Dictionary<string, (Vector3, Quaternion)>
         {
             [WallName] = (new Vector3(7.546152f, 1.049445f, 6.46787f), Quaternion.Euler(0f, 179.1013f, 0f)),
             [BoxName] = (new Vector3(7.227804f, 0.3301507f, 6.391765f), Quaternion.Euler(2.6909f, 182.4395f, 0f)),
         };
-
-        /// <summary>One line per station: name, position x y z, rotation x y z (degrees).</summary>
-        private static Dictionary<string, (Vector3, Quaternion)> Load()
-        {
-            var result = new Dictionary<string, (Vector3, Quaternion)>(Defaults);
-            try
-            {
-                if (!File.Exists(PositionsFile))
-                    return result;
-                foreach (string line in File.ReadAllLines(PositionsFile))
-                {
-                    string[] f = line.Split(' ');
-                    if (f.Length != 7)
-                        continue;
-                    float[] v = f.Skip(1).Select(s => float.Parse(s, System.Globalization.CultureInfo.InvariantCulture)).ToArray();
-                    result[f[0]] = (new Vector3(v[0], v[1], v[2]), Quaternion.Euler(v[3], v[4], v[5]));
-                }
-            }
-            catch (Exception e)
-            {
-                ThundergunPlugin.Log.LogWarning($"Couldn't read {PositionsFile}: {e.Message}");
-            }
-            return result;
-        }
     }
 
     /// <summary>

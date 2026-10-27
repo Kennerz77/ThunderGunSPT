@@ -33,8 +33,6 @@ The mod gives you nothing for free and mails you nothing. Once your hideout's **
 - **The ammo case:** buy a full **Pressure Cartridge** for **10,000 ₽**.
 - Not enough money or no room in your stash: nothing is charged.
 
-**Moving them:** stand where you want one and aim (hold right mouse) + **F11**: the first press brings the chalk wall in front of you, the next the ammo case, then the wall again, and so on. Positions are saved as you go (`BepInEx\config\com.kennerz.thundergun.stations.json`).
-
 ## How it works
 
 - **The shot:** no bullet. Everything in a cone in front of the gun, in clear line of sight, is hit at once: up to 12 m it dies (credited to you, so kills count for quests and stats) and its body is thrown back; up to 14 m it's stunned. Walls and cover stop it; chain-link, grates, glass, grass and other people don't. You and your group are never hit. A visible wave of bending air rushes out with every shot.

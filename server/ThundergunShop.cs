@@ -64,7 +64,11 @@ public class ThundergunShop(ISptLogger<ThundergunShop> logger, PaymentService pa
         if (slot == null && !inventoryHelper.CanPlaceItemsInInventory(sessionId, [items]))
             return httpResponseUtil.AppendErrorToOutput(output, "No room in your stash.");
 
+        // The 5-argument overload exists on every SPT 4.1.x (the newer one with requestedStackIds may not); it only
+        // passes null for those stack ids, so it behaves the same. Marked obsolete for removal in a later SPT.
+#pragma warning disable CS0618
         paymentService.AddPaymentToOutput(pmcData, Money.ROUBLES, price, sessionId, output);
+#pragma warning restore CS0618
         if (output.Warnings?.Count > 0)
             return output;
         if (slot != null)
