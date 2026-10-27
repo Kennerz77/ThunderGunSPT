@@ -1,0 +1,7886 @@
+{
+ "WeaponPrefab": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "PoolHistory",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "string",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "Colliders",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "PPtr<$Collider>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 4,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "Renderers",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "PPtr<$Renderer>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 4,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "_originallyEnabledComponents",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "PPtr<$Component>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 4,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "RegisteredComponentsToClean",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "PPtr<$Component>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 4,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$GameObject>",
+    "name": "_weaponObject",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$GameObject>",
+    "name": "_weaponObjectSimple",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$RuntimeAnimatorController>",
+    "name": "_originalAnimatorController",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$RuntimeAnimatorController>",
+    "name": "_animatorSimple",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$RuntimeAnimatorController>",
+    "name": "_animatorSpirit",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$TextAsset>",
+    "name": "_fastAnimatorControllerBinaryData",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$Avatar>",
+    "name": "_avatar",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$RestSettings>",
+    "name": "RestSettings",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$GameObject>",
+    "name": "DefaultMuzzlePrefab",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$GameObject>",
+    "name": "DefaultSmokeport",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$GameObject>",
+    "name": "DefaultHeatHazeEffect",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "RecoilCenter",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "RotationCenter",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "RotationCenterNoStock",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector2f",
+    "name": "DupletAccuracyPenaltyX",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector2f",
+    "name": "DupletAccuracyPenaltyY",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "AimPlane",
+    "name": "FarPlane",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "string",
+    "name": "Name",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "Depth",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "AimPlane",
+    "name": "DefaultAimPlane",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "string",
+    "name": "Name",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "Depth",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "AimPlane",
+    "name": "CustomAimPlanes",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "AimPlane",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "string",
+    "name": "Name",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "Depth",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$GameObject>",
+    "name": "_objectInstance",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$Transform>",
+    "name": "_localWeaponRoot",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "RemoveChildrenOf",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "string",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "AnimatedBones",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "string",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$TransformLinks>",
+    "name": "Hierarchy",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "LayersDefaultStates",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "MaterialConfig",
+    "name": "MaterialsConfig",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "MaterialConfig",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "string",
+    "name": "renderer",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "PPtr<$Material>",
+    "name": "material",
+    "flags": 0
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 5,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "LODConfig",
+    "name": "LodsConfig",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "LODConfig",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "screenRelativeTransitionHeight",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "fadeTransitionWidth",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "vector",
+    "name": "renderers",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 49152
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "string",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 7,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 8,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   }
+  ]
+ },
+ "MuzzleFume": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "StartPos",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "EmitterRadius",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "ConusSize",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "Sizes",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "Speeds",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "LifeTimes",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SizesRnd",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Size",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Speed",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "LifeTime",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "Gradient",
+    "name": "Color",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key0",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key1",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key2",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key3",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key4",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key5",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key6",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "ColorRGBA",
+    "name": "key7",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "r",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "g",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "b",
+    "flags": 2097153
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "a",
+    "flags": 2097153
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime0",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime1",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime2",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime3",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime4",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime5",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime6",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "ctime7",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime0",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime1",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime2",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime3",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime4",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime5",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime6",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt16",
+    "name": "atime7",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "m_Mode",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "SInt8",
+    "name": "m_ColorSpace",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "m_NumColorKeys",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "m_NumAlphaKeys",
+    "flags": 16385
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "CountMin",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "CountRange",
+    "flags": 0
+   }
+  ]
+ },
+ "MuzzleManager": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$Material>",
+    "name": "JetMaterial",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "AtlasXCount",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "AtlasYCount",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "MoveCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "JetLightCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "ShotLength",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "TestPlay",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "TestShoot",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "TestHold",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "TestDebugPosition",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "TestDelay",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$MuzzleLight>",
+    "name": "Light",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "MeshParentName",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$Transform>",
+    "name": "Hierarchy",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   }
+  ]
+ },
+ "MuzzleSparks": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "StartPos",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "EmitterRadius",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "ConusSize",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "CountMin",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "CountRange",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "CurveValue",
+    "name": "LifetimeCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "Value",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "CurveValue",
+    "name": "SpeedCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "Value",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "CurveValue",
+    "name": "GravityCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "Value",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "CurveValue",
+    "name": "DragCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "Value",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ByteCurveValue",
+    "name": "EmissionCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "Value",
+    "flags": 16384
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "UInt8",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ByteCurveValue",
+    "name": "SizeCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "Value",
+    "flags": 16384
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "UInt8",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ByteCurveValue",
+    "name": "TurbulenceAmplitudeCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "Value",
+    "flags": 16384
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "UInt8",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ByteCurveValue",
+    "name": "TurbulenceFrequencyCurve",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "AnimationCurve",
+    "name": "Curve",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 4,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "Value",
+    "flags": 16384
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "Values",
+    "flags": 49152
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "UInt8",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "EmissionTimeShift",
+    "flags": 0
+   }
+  ]
+ },
+ "HeatHazeEmitter": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "Bounds",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "Center",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector2f",
+    "name": "LifetimeDelta",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector2f",
+    "name": "Size",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "Count",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "VelocityFactor",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Angle",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "DelayInSec",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Chance",
+    "flags": 1
+   }
+  ]
+ },
+ "MuzzleSmoke": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$Material>",
+    "name": "Material",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeEnd",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "BrakeDistance",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "DragValue",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Gravity",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeVelocity",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "TurbulenceDensity",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "TurbulenceIntensity",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeDiffusionBySmokeVelocity",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "MuzzleSpeedMultiplier",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "SpeedTurbulenceDensity",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "SpeedTurbulenceStrength",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "SpeedSmokeStrength",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "SpeedStartDiffusion",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "Smoke",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeStrength",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeLength",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeLengthRandomness",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SmokeIncreasingByShot",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "ShotFactorDropTime",
+    "flags": 0
+   }
+  ]
+ },
+ "WeaponSoundPlayer": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "SoundElement",
+    "name": "AdditionalSounds",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "SoundElement",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "string",
+    "name": "EventName",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "RollOff",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "Volume",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "vector",
+    "name": "SoundClips",
+    "flags": 0
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "PPtr<$AudioClip>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 7,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 7,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "SoundElement",
+    "name": "MainSounds",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "SoundElement",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "string",
+    "name": "EventName",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "RollOff",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "Volume",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "vector",
+    "name": "SoundClips",
+    "flags": 0
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "PPtr<$AudioClip>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 7,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 7,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$SoundBank>",
+    "name": "Body",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$SoundBank>",
+    "name": "Tail",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$SoundBank>",
+    "name": "Doublet",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$SoundBank>",
+    "name": "BodySilenced",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$SoundBank>",
+    "name": "TailSilenced",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$SoundBank>",
+    "name": "DoubletSilenced",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "Non_auto",
+    "flags": 16640
+   }
+  ]
+ },
+ "FoldableStockView": {
+  "ns": "EFT.Visual",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "BonePosition",
+    "name": "_bonePositions",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "BonePosition",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "string",
+    "name": "BoneName",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 6,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "PPtr<$Transform>",
+    "name": "Bone",
+    "flags": 0
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 5,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 4,
+    "type": "Quaternionf",
+    "name": "FoldedRotation",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "w",
+    "flags": 2097152
+   },
+   {
+    "d": 4,
+    "type": "Quaternionf",
+    "name": "UnfoldedRotation",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "w",
+    "flags": 2097152
+   }
+  ]
+ },
+ "MuzzleJet": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "Particle",
+    "name": "Particles",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "Particle",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "Position",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "Size",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "Vector2f",
+    "name": "RandomShift",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "AxisShift",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "Type",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "ParticlesCount",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "JetBounds",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "PositionDensity",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "Sizes",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "RandomShiftsX",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "RandomShiftsY",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "AxisShift",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "SizesMult",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "AxisShiftMult",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Chance",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "Vector2f",
+    "name": "RandomShiftsMult",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   }
+  ]
+ },
+ "SoundBank": {
+  "ns": "EFT",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "CustomLength",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "BaseVolume",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "BasePitch",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "DeltaVolume",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "DeltaPitch",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "Rolloff",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "IgnoreOcclusion",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "Physical",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "HasEnvironment",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "SourceType",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "AllowLimitedPlay",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "_clipLiength",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "EnvironmentVariety",
+    "name": "Environments",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "EnvironmentVariety",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "DistanceVarity",
+    "name": "Clips",
+    "flags": 0
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "DistanceVarity",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 7,
+    "type": "vector",
+    "name": "Clips",
+    "flags": 0
+   },
+   {
+    "d": 8,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 9,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 9,
+    "type": "PPtr<$AudioClip>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 10,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 10,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$DistanceBlendOptions>",
+    "name": "BlendOptions",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   }
+  ]
+ },
+ "PreviewPivot": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "pivotPosition",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Quaternionf",
+    "name": "pivotRotation",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "w",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "scale",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "SpawnPosition",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "IconSettings",
+    "name": "Icon",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Vector3f",
+    "name": "position",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "hasOffset",
+    "flags": 16640
+   },
+   {
+    "d": 2,
+    "type": "Quaternionf",
+    "name": "rotation",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "w",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "boundsScale",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "perspective",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "UInt8",
+    "name": "orthographic",
+    "flags": 16640
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "orthographicSize",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "PPtr<$Sprite>",
+    "name": "overrideIcon",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 3,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   }
+  ]
+ },
+ "TransformLinks": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "Transforms",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "PPtr<$Transform>",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 4,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$Transform>",
+    "name": "Self",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "CachedTransform",
+    "name": "_cachedTransforms",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "CachedTransform",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "Vector3f",
+    "name": "Position",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 4,
+    "type": "Quaternionf",
+    "name": "Rotation",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "w",
+    "flags": 2097152
+   },
+   {
+    "d": 4,
+    "type": "PPtr<$Transform>",
+    "name": "Transform",
+    "flags": 0
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 5,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   }
+  ]
+ },
+ "ShellExtractionData": {
+  "ns": "EFT",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "ExtractionSettings",
+    "name": "ShotSettings",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceXRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceYRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceZRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeX",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeY",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeZ",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "ShellForceMultiplier",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ExtractionSettings",
+    "name": "MisfireSettings",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceXRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceYRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceZRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeX",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeY",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeZ",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "ShellForceMultiplier",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ExtractionSettings",
+    "name": "JamSettings",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceXRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceYRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceZRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeX",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeY",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeZ",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "ShellForceMultiplier",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "ExtractionSettings",
+    "name": "PatronExtractionSettings",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceXRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceYRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsForceZRange",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeX",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeY",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector2f",
+    "name": "ShellsRotationRangeZ",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "ShellForceMultiplier",
+    "flags": 0
+   }
+  ]
+ },
+ "AnimationEventsStateBehaviour": {
+  "ns": "AnimationEventSystem",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "AnimationEventsContainer",
+    "name": "EventsContainer",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "FullName",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "FullNameHash",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$AnimatorControllerStaticData>",
+    "name": "EventsData",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "EventsListId",
+    "flags": 0
+   }
+  ]
+ },
+ "LActionState": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "PPtr<$AnimatorControllerStaticData>",
+    "name": "StaticData",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "int",
+    "name": "LActionSetupId",
+    "flags": 0
+   }
+  ]
+ },
+ "HotObject": {
+  "ns": "",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "IsApplyAllMaterials",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "Vector3f",
+    "name": "Temperature",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "TemperatureCelsio",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "vector",
+    "name": "materialsId",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16384
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "data",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "AABB",
+    "name": "HeatBounds",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Vector3f",
+    "name": "m_Center",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector3f",
+    "name": "m_Extent",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "float",
+    "name": "VisibleHeatAlpha",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "UseHeatHaze",
+    "flags": 16640
+   },
+   {
+    "d": 1,
+    "type": "AABB",
+    "name": "HeatHazeBounds",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "Vector3f",
+    "name": "m_Center",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "Vector3f",
+    "name": "m_Extent",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 3,
+    "type": "float",
+    "name": "z",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "Vector2f",
+    "name": "HeatParticleLifetimeDelta",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "x",
+    "flags": 2097152
+   },
+   {
+    "d": 2,
+    "type": "float",
+    "name": "y",
+    "flags": 2097152
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "HeatParticleCountByTemp",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "HeatParticleLifeTimeByTemp",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 1,
+    "type": "AnimationCurve",
+    "name": "HeatParticleSizeByTemp",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 3,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   }
+  ]
+ },
+ "AnimatorControllerStaticData": {
+  "ns": "AnimationEventSystem",
+  "asm": "Assembly-CSharp",
+  "nodes": [
+   {
+    "d": 0,
+    "type": "MonoBehaviour",
+    "name": "Base",
+    "flags": 32768
+   },
+   {
+    "d": 1,
+    "type": "PPtr<GameObject>",
+    "name": "m_GameObject",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 65
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 65
+   },
+   {
+    "d": 1,
+    "type": "UInt8",
+    "name": "m_Enabled",
+    "flags": 16641
+   },
+   {
+    "d": 1,
+    "type": "PPtr<MonoScript>",
+    "name": "m_Script",
+    "flags": 0
+   },
+   {
+    "d": 2,
+    "type": "int",
+    "name": "m_FileID",
+    "flags": 8388609
+   },
+   {
+    "d": 2,
+    "type": "SInt64",
+    "name": "m_PathID",
+    "flags": 8388609
+   },
+   {
+    "d": 1,
+    "type": "string",
+    "name": "m_Name",
+    "flags": 557057
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 540673
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 524289
+   },
+   {
+    "d": 3,
+    "type": "char",
+    "name": "data",
+    "flags": 524289
+   },
+   {
+    "d": 1,
+    "type": "EventsCollection",
+    "name": "_stateHashToEventsCollection",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "EventsCollection",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "AnimationEvent",
+    "name": "_animationEvents",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 6,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 6,
+    "type": "AnimationEvent",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 7,
+    "type": "AnimationEventParameter",
+    "name": "Parameter",
+    "flags": 32768
+   },
+   {
+    "d": 8,
+    "type": "UInt8",
+    "name": "BoolParam",
+    "flags": 16640
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "FloatParam",
+    "flags": 0
+   },
+   {
+    "d": 8,
+    "type": "int",
+    "name": "IntParam",
+    "flags": 0
+   },
+   {
+    "d": 8,
+    "type": "string",
+    "name": "StringParam",
+    "flags": 32768
+   },
+   {
+    "d": 9,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 10,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 10,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "int",
+    "name": "ParamType",
+    "flags": 0
+   },
+   {
+    "d": 7,
+    "type": "string",
+    "name": "_functionName",
+    "flags": 32768
+   },
+   {
+    "d": 8,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 9,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 9,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 7,
+    "type": "int",
+    "name": "_functionNameHash",
+    "flags": 0
+   },
+   {
+    "d": 7,
+    "type": "UInt8",
+    "name": "Enabled",
+    "flags": 16640
+   },
+   {
+    "d": 7,
+    "type": "float",
+    "name": "_time",
+    "flags": 0
+   },
+   {
+    "d": 7,
+    "type": "EventCondition",
+    "name": "EventConditions",
+    "flags": 32768
+   },
+   {
+    "d": 8,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 9,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 9,
+    "type": "EventCondition",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 10,
+    "type": "UInt8",
+    "name": "BoolValue",
+    "flags": 16640
+   },
+   {
+    "d": 10,
+    "type": "float",
+    "name": "FloatValue",
+    "flags": 0
+   },
+   {
+    "d": 10,
+    "type": "int",
+    "name": "IntValue",
+    "flags": 0
+   },
+   {
+    "d": 10,
+    "type": "string",
+    "name": "ParameterName",
+    "flags": 32768
+   },
+   {
+    "d": 11,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 12,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 12,
+    "type": "char",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 10,
+    "type": "int",
+    "name": "ConditionParamType",
+    "flags": 0
+   },
+   {
+    "d": 10,
+    "type": "int",
+    "name": "ConditionMode",
+    "flags": 0
+   },
+   {
+    "d": 1,
+    "type": "LActionSetup",
+    "name": "_stateHashToLActionSetups",
+    "flags": 32768
+   },
+   {
+    "d": 2,
+    "type": "Array",
+    "name": "Array",
+    "flags": 32768
+   },
+   {
+    "d": 3,
+    "type": "int",
+    "name": "size",
+    "flags": 0
+   },
+   {
+    "d": 3,
+    "type": "LActionSetup",
+    "name": "data",
+    "flags": 32768
+   },
+   {
+    "d": 4,
+    "type": "float",
+    "name": "StartThreshold",
+    "flags": 0
+   },
+   {
+    "d": 4,
+    "type": "AnimationCurve",
+    "name": "LayerWeight",
+    "flags": 32768
+   },
+   {
+    "d": 5,
+    "type": "vector",
+    "name": "m_Curve",
+    "flags": 32769
+   },
+   {
+    "d": 6,
+    "type": "Array",
+    "name": "Array",
+    "flags": 16385
+   },
+   {
+    "d": 7,
+    "type": "int",
+    "name": "size",
+    "flags": 1
+   },
+   {
+    "d": 7,
+    "type": "Keyframe",
+    "name": "data",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "time",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "value",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "inSlope",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "outSlope",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "int",
+    "name": "weightedMode",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "inWeight",
+    "flags": 1
+   },
+   {
+    "d": 8,
+    "type": "float",
+    "name": "outWeight",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "m_PreInfinity",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "m_PostInfinity",
+    "flags": 1
+   },
+   {
+    "d": 5,
+    "type": "int",
+    "name": "m_RotationOrder",
+    "flags": 1
+   },
+   {
+    "d": 4,
+    "type": "int",
+    "name": "_stateHash",
+    "flags": 0
+   }
+  ]
+ }
+}

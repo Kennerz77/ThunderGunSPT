@@ -1,0 +1,19 @@
+# Build output
+bin/
+obj/
+*.bundle
+*.bundle.manifest
+
+# Unity generated (imported game assets, rebuilt by build_bundle.ps1)
+UnityProject/Library/
+UnityProject/Logs/
+UnityProject/UserSettings/
+UnityProject/Temp/
+UnityProject/obj/
+UnityProject/AssetBundles/
+UnityProject/Assets/Thundergun/
+
+# Local
+logs/
+*.log
+.vs/

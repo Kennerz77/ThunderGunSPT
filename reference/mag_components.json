@@ -1,0 +1,49 @@
+[
+ {
+  "owner": "MB:PreviewPivot@mag_saiga12_izhmash_Sb5_12x76_5",
+  "class": "PreviewPivot",
+  "fields": {
+   "m_Name": "",
+   "pivotPosition": {
+    "x": 0.00016401521861553192,
+    "y": -0.07015129923820496,
+    "z": -0.019199080765247345
+   },
+   "pivotRotation": {
+    "x": 0.0,
+    "y": 0.7071068286895752,
+    "z": 0.0,
+    "w": 0.7071067094802856
+   },
+   "scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "SpawnPosition": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Icon": {
+    "position": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "hasOffset": 0,
+    "rotation": {
+     "x": 0.0,
+     "y": 0.9063077569007874,
+     "z": 0.0,
+     "w": -0.4226183295249939
+    },
+    "boundsScale": 0.8999999761581421,
+    "perspective": 15.0,
+    "orthographic": 0,
+    "orthographicSize": 10.0,
+    "overrideIcon": null
+   }
+  }
+ }
+]

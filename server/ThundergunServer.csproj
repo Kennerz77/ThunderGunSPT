@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>ThundergunServer</AssemblyName>
+    <RootNamespace>ThundergunServer</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+
+    <!-- Only this install. Do NOT point at D:\OTHER LAUNCHERS\BSTATE GAMES. -->
+    <SptRuntime>D:\OTHER LAUNCHERS\BUTTERSTATE\SPT_Runtime</SptRuntime>
+    <ModOutputPath>$(SptRuntime)\user\mods\Thundergun</ModOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <Reference Include="SPTarkov.Server.Core" HintPath="$(SptRuntime)\SPTarkov.Server.Core.dll" Private="false" />
+    <Reference Include="SPTarkov.DI" HintPath="$(SptRuntime)\SPTarkov.DI.dll" Private="false" />
+    <Reference Include="SPTarkov.Common" HintPath="$(SptRuntime)\SPTarkov.Common.dll" Private="false" />
+    <Reference Include="SemanticVersioning" HintPath="$(SptRuntime)\SemanticVersioning.dll" Private="false" />
+    <!-- Harmony patches (profile writes), through SPT's own wrapper (both ship with the server) -->
+    <Reference Include="SPTarkov.Reflection" HintPath="$(SptRuntime)\SPTarkov.Reflection.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(SptRuntime)\0Harmony.dll" Private="false" />
+    <!-- Optional at runtime: only ThundergunPaPServer touches it, and only when PaP's server mod is loaded -->
+    <Reference Include="PaPHideoutServer" HintPath="$(SptRuntime)\user\mods\PaPHideoutServer\PaPHideoutServer.dll" Private="false" />
+  </ItemGroup>
+
+  <Target Name="CopyToMods" AfterTargets="Build">
+    <MakeDir Directories="$(ModOutputPath)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModOutputPath)" />
+    <Message Importance="high" Text="Copied $(TargetFileName) -> $(ModOutputPath)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,2504 @@
+{
+ "name": "weapon_izhmash_saiga12k_10_12g.generated",
+ "active": true,
+ "layer": 0,
+ "pos": [
+  0.024168,
+  1.471757,
+  0.027882
+ ],
+ "rot": [
+  0.0,
+  1e-06,
+  -0.0,
+  1.0
+ ],
+ "scale": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "comps": [
+  "Transform",
+  "Animator",
+  "LODGroup",
+  "MB:TransformLinks"
+ ],
+ "children": [
+  {
+   "name": "Base HumanLCollarbone",
+   "active": true,
+   "layer": 0,
+   "pos": [
+    0.000541,
+    -0.042553,
+    0.066809
+   ],
+   "rot": [
+    0.661369,
+    0.166045,
+    0.21149,
+    0.700208
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "comps": [
+    "Transform"
+   ],
+   "children": [
+    {
+     "name": "Base HumanLUpperarm",
+     "active": true,
+     "layer": 0,
+     "pos": [
+      -0.133375,
+      -0.0,
+      -0.0
+     ],
+     "rot": [
+      -0.0154,
+      0.387199,
+      -0.581965,
+      0.714952
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "comps": [
+      "Transform"
+     ],
+     "children": [
+      {
+       "name": "Base HumanLForearm1",
+       "active": true,
+       "layer": 0,
+       "pos": [
+        -0.296512,
+        -0.0,
+        0.0
+       ],
+       "rot": [
+        0.010878,
+        0.037083,
+        -0.54524,
+        0.837389
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "comps": [
+        "Transform"
+       ],
+       "children": [
+        {
+         "name": "Base HumanLForearm2",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.083651,
+          0.0,
+          0.0
+         ],
+         "rot": [
+          -0.161217,
+          0.004839,
+          0.001062,
+          0.986907
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "Base HumanLForearm3",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.083651,
+            -0.0,
+            0.0
+           ],
+           "rot": [
+            -0.313139,
+            -0.0,
+            -0.0,
+            0.949707
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": [
+            {
+             "name": "Base HumanLPalm",
+             "active": true,
+             "layer": 0,
+             "pos": [
+              -0.083651,
+              -0.0,
+              0.0
+             ],
+             "rot": [
+              -0.755338,
+              -0.354967,
+              -0.145827,
+              0.531222
+             ],
+             "scale": [
+              1.0,
+              1.0,
+              1.0
+             ],
+             "comps": [
+              "Transform"
+             ],
+             "children": [
+              {
+               "name": "Base HumanLDigit11",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.041277,
+                -0.020866,
+                0.040041
+               ],
+               "rot": [
+                0.633668,
+                0.169193,
+                -0.030549,
+                0.754258
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanLDigit12",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.03977,
+                  -0.0,
+                  0.0
+                 ],
+                 "rot": [
+                  -0.141969,
+                  -0.080979,
+                  0.045535,
+                  0.985502
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanLDigit13",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.037273,
+                    0.0,
+                    0.0
+                   ],
+                   "rot": [
+                    -0.172786,
+                    0.018631,
+                    -0.057957,
+                    0.983076
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanLDigit21",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.105338,
+                0.000316,
+                0.036054
+               ],
+               "rot": [
+                -0.046231,
+                -0.204545,
+                0.119467,
+                0.970439
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanLDigit22",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.056215,
+                  -0.0,
+                  -0.0
+                 ],
+                 "rot": [
+                  -0.028789,
+                  -0.01772,
+                  0.376766,
+                  0.925691
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanLDigit23",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.02715,
+                    0.0,
+                    -0.0
+                   ],
+                   "rot": [
+                    0.010584,
+                    -0.0031,
+                    0.401214,
+                    0.915918
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanLDigit31",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.107503,
+                0.011885,
+                0.008879
+               ],
+               "rot": [
+                -0.120579,
+                -0.180804,
+                0.347567,
+                0.912123
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanLDigit32",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.058767,
+                  0.0,
+                  -0.0
+                 ],
+                 "rot": [
+                  -0.003613,
+                  0.014377,
+                  0.450088,
+                  0.892861
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanLDigit33",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.033499,
+                    0.0,
+                    -0.0
+                   ],
+                   "rot": [
+                    0.003093,
+                    -0.003258,
+                    0.417205,
+                    0.908801
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanLDigit41",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.105145,
+                0.009927,
+                -0.016265
+               ],
+               "rot": [
+                -0.161013,
+                -0.151402,
+                0.514203,
+                0.828703
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanLDigit42",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.050606,
+                  0.0,
+                  -0.0
+                 ],
+                 "rot": [
+                  -0.010801,
+                  0.037335,
+                  0.366869,
+                  0.92946
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanLDigit43",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.030034,
+                    0.0,
+                    0.0
+                   ],
+                   "rot": [
+                    0.002861,
+                    -0.003438,
+                    0.355365,
+                    0.934717
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanLDigit51",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.098697,
+                0.002117,
+                -0.038634
+               ],
+               "rot": [
+                -0.286147,
+                -0.150291,
+                0.582658,
+                0.745682
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanLDigit52",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.040162,
+                  0.0,
+                  0.0
+                 ],
+                 "rot": [
+                  0.004047,
+                  -0.00123,
+                  0.402322,
+                  0.915489
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanLDigit53",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.019784,
+                    -0.0,
+                    -0.0
+                   ],
+                   "rot": [
+                    0.003018,
+                    -0.002763,
+                    0.177283,
+                    0.984151
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Base HumanRCollarbone",
+   "active": true,
+   "layer": 0,
+   "pos": [
+    0.069722,
+    -0.040977,
+    -0.005383
+   ],
+   "rot": [
+    0.19542,
+    0.685179,
+    0.690239,
+    -0.126141
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "comps": [
+    "Transform"
+   ],
+   "children": [
+    {
+     "name": "Base HumanRUpperarm",
+     "active": true,
+     "layer": 0,
+     "pos": [
+      -0.118286,
+      -0.061473,
+      -0.003836
+     ],
+     "rot": [
+      -0.113872,
+      -0.323218,
+      -0.402161,
+      0.849017
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "comps": [
+      "Transform"
+     ],
+     "children": [
+      {
+       "name": "Base HumanRForearm1",
+       "active": true,
+       "layer": 0,
+       "pos": [
+        -0.29651,
+        -0.0,
+        0.0
+       ],
+       "rot": [
+        -0.01228,
+        -0.059255,
+        -0.843619,
+        0.533521
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "comps": [
+        "Transform"
+       ],
+       "children": [
+        {
+         "name": "Base HumanRForearm2",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.083652,
+          0.0,
+          0.0
+         ],
+         "rot": [
+          0.074083,
+          1.9e-05,
+          -7e-06,
+          0.997252
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "Base HumanRForearm3",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.083652,
+            -0.0,
+            -0.0
+           ],
+           "rot": [
+            0.140601,
+            0.0,
+            -1e-06,
+            0.990066
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": [
+            {
+             "name": "Base HumanRPalm",
+             "active": true,
+             "layer": 0,
+             "pos": [
+              -0.083652,
+              0.0,
+              0.0
+             ],
+             "rot": [
+              0.702952,
+              0.34614,
+              -0.150577,
+              0.602804
+             ],
+             "scale": [
+              1.0,
+              1.0,
+              1.0
+             ],
+             "comps": [
+              "Transform"
+             ],
+             "children": [
+              {
+               "name": "Base HumanRDigit11",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.041277,
+                -0.020866,
+                -0.040041
+               ],
+               "rot": [
+                0.869205,
+                0.305342,
+                -0.080306,
+                -0.380527
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanRDigit12",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.03977,
+                  0.0,
+                  -0.0
+                 ],
+                 "rot": [
+                  -0.193136,
+                  0.022982,
+                  0.148908,
+                  0.969534
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanRDigit13",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.037273,
+                    -0.0,
+                    0.0
+                   ],
+                   "rot": [
+                    -0.025312,
+                    0.020358,
+                    0.341187,
+                    0.939434
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanRDigit21",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.105338,
+                0.000316,
+                -0.036054
+               ],
+               "rot": [
+                0.003298,
+                0.023786,
+                0.077851,
+                0.996676
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanRDigit22",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.056215,
+                  -0.0,
+                  0.0
+                 ],
+                 "rot": [
+                  0.000134,
+                  -0.000403,
+                  0.373727,
+                  0.927539
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanRDigit23",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.02715,
+                    0.0,
+                    0.0
+                   ],
+                   "rot": [
+                    0.000207,
+                    -0.000291,
+                    0.388128,
+                    0.921605
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanRDigit31",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.107503,
+                0.011886,
+                -0.008879
+               ],
+               "rot": [
+                0.115464,
+                0.055676,
+                0.407439,
+                0.904191
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanRDigit32",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.058767,
+                  0.0,
+                  0.0
+                 ],
+                 "rot": [
+                  0.00074,
+                  0.002719,
+                  0.692381,
+                  0.721526
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanRDigit33",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.033499,
+                    0.0,
+                    -0.0
+                   ],
+                   "rot": [
+                    0.068701,
+                    0.036396,
+                    0.438055,
+                    0.89558
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanRDigit41",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.105145,
+                0.009927,
+                0.016265
+               ],
+               "rot": [
+                0.125103,
+                0.05388,
+                0.476228,
+                0.868708
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanRDigit42",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.050606,
+                  0.0,
+                  0.0
+                 ],
+                 "rot": [
+                  0.031341,
+                  -0.003097,
+                  0.647722,
+                  0.761225
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanRDigit43",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.030035,
+                    0.0,
+                    0.0
+                   ],
+                   "rot": [
+                    0.07933,
+                    0.036372,
+                    0.395769,
+                    0.914194
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              },
+              {
+               "name": "Base HumanRDigit51",
+               "active": true,
+               "layer": 0,
+               "pos": [
+                -0.098697,
+                0.002118,
+                0.038635
+               ],
+               "rot": [
+                0.159175,
+                0.059939,
+                0.491392,
+                0.854169
+               ],
+               "scale": [
+                1.0,
+                1.0,
+                1.0
+               ],
+               "comps": [
+                "Transform"
+               ],
+               "children": [
+                {
+                 "name": "Base HumanRDigit52",
+                 "active": true,
+                 "layer": 0,
+                 "pos": [
+                  -0.040162,
+                  0.0,
+                  0.0
+                 ],
+                 "rot": [
+                  0.020489,
+                  -0.019387,
+                  0.574164,
+                  0.818254
+                 ],
+                 "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                 ],
+                 "comps": [
+                  "Transform"
+                 ],
+                 "children": [
+                  {
+                   "name": "Base HumanRDigit53",
+                   "active": true,
+                   "layer": 0,
+                   "pos": [
+                    -0.019784,
+                    0.0,
+                    -0.0
+                   ],
+                   "rot": [
+                    0.009493,
+                    -0.001406,
+                    0.419677,
+                    0.907623
+                   ],
+                   "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                   ],
+                   "comps": [
+                    "Transform"
+                   ],
+                   "children": []
+                  }
+                 ]
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Camera_animated",
+   "active": true,
+   "layer": 0,
+   "pos": [
+    0.04156,
+    0.032118,
+    0.054066
+   ],
+   "rot": [
+    -0.707107,
+    -1e-06,
+    -1e-06,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "comps": [
+    "Transform"
+   ],
+   "children": []
+  },
+  {
+   "name": "Weapon_root",
+   "active": true,
+   "layer": 0,
+   "pos": [
+    0.132657,
+    -0.057801,
+    -0.010453
+   ],
+   "rot": [
+    -0.707107,
+    -0.0,
+    -0.0,
+    0.707107
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "comps": [
+    "Transform"
+   ],
+   "children": [
+    {
+     "name": "Weapon_root_anim",
+     "active": true,
+     "layer": 0,
+     "pos": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "rot": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+     ],
+     "scale": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "comps": [
+      "Transform"
+     ],
+     "children": [
+      {
+       "name": "weapon",
+       "active": true,
+       "layer": 0,
+       "pos": [
+        -0.0,
+        0.0,
+        -0.0
+       ],
+       "rot": [
+        0.0,
+        -0.0,
+        -1e-06,
+        1.0
+       ],
+       "scale": [
+        1.000001,
+        1.0,
+        1.0
+       ],
+       "comps": [
+        "Transform"
+       ],
+       "children": [
+        {
+         "name": "aim_camera",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.011828,
+          -0.113636,
+          0.039639
+         ],
+         "rot": [
+          -0.0,
+          1.0,
+          1e-06,
+          -0.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "Bend_Goal_Left",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.209314,
+          -0.389561,
+          -0.320634
+         ],
+         "rot": [
+          0.5986,
+          0.536709,
+          0.556991,
+          0.208286
+         ],
+         "scale": [
+          1.000002,
+          1.0,
+          0.999999
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "Bend_Goal_Right",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.31106,
+          0.028815,
+          -0.302616
+         ],
+         "rot": [
+          0.383224,
+          -0.020645,
+          0.900981,
+          0.202355
+         ],
+         "scale": [
+          1.000001,
+          1.0,
+          0.999999
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "fireport",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6e-05,
+          -0.900208,
+          -0.001721
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.000001
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "default_muzzleflash_no_dtk_big(Clone)",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MB:MuzzleSparks",
+            "MB:MuzzleSmoke",
+            "MB:MuzzleFume",
+            "MB:MuzzleJet",
+            "MB:MuzzleFume",
+            "MB:HeatHazeEmitter"
+           ],
+           "children": []
+          },
+          {
+           "name": "DefaultHeatHaze(Clone)",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MB:HeatHazeEmitter"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "mod_align_front",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          3.4e-05,
+          -0.683929,
+          0.043632
+         ],
+         "rot": [
+          0.0,
+          -0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_handguard",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6.2e-05,
+          -0.48699,
+          0.012462
+         ],
+         "rot": [
+          -1e-06,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_magazine",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.000149,
+          -0.460001,
+          -0.02399
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_magazine_new",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.000149,
+          -0.472016,
+          -0.024051
+         ],
+         "rot": [
+          -0.0,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_mount_000",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.025248,
+          -0.336218,
+          -0.018589
+         ],
+         "rot": [
+          0.0,
+          -0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_mount_001",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -5.7e-05,
+          -0.777106,
+          -0.002619
+         ],
+         "rot": [
+          0.0,
+          -0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_muzzle",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6e-05,
+          -0.873931,
+          -0.001721
+         ],
+         "rot": [
+          0.0,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_pistol_grip",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          1.1e-05,
+          -0.303772,
+          -0.03547
+         ],
+         "rot": [
+          -0.0,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_reciever",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6.2e-05,
+          -0.476774,
+          0.037078
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_sight_rear",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.000135,
+          -0.476635,
+          0.037668
+         ],
+         "rot": [
+          -1e-06,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "mod_stock",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.015715,
+          -0.236213,
+          -0.017446
+         ],
+         "rot": [
+          -0.036884,
+          -0.0,
+          0.0,
+          0.99932
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "patron_in_weapon",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          7e-05,
+          -0.461418,
+          -0.001977
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "shellport",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          7e-05,
+          -0.461418,
+          -0.001977
+         ],
+         "rot": [
+          -0.0,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "smokeport",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.011573,
+          -0.468839,
+          0.019068
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.000001
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "extractor_smoke",
+           "active": true,
+           "layer": 19,
+           "pos": [
+            0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            0.0,
+            0.707107,
+            0.707107
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MB:MuzzleFume"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "weapon_bolt",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6.1e-05,
+          -0.446193,
+          0.01764
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "mod_charge",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            0.030723,
+            -0.015011,
+            -0.007718
+           ],
+           "rot": [
+            -2e-06,
+            0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": []
+          },
+          {
+           "name": "saiga12_bolt_LOD0",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MeshFilter",
+            "MeshRenderer"
+           ],
+           "children": []
+          },
+          {
+           "name": "weapon_bolt_cover",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.074043,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": [
+            {
+             "name": "saiga12_bolt_cover_LOD0",
+             "active": true,
+             "layer": 0,
+             "pos": [
+              -0.0,
+              0.0,
+              0.0
+             ],
+             "rot": [
+              0.0,
+              -0.0,
+              -0.0,
+              1.0
+             ],
+             "scale": [
+              1.0,
+              1.0,
+              1.0
+             ],
+             "comps": [
+              "Transform",
+              "MeshFilter",
+              "MeshRenderer"
+             ],
+             "children": []
+            }
+           ]
+          },
+          {
+           "name": "weapon_bolt_larva",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.01278,
+            -0.018356
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": [
+            {
+             "name": "saiga12_larva_LOD0",
+             "active": true,
+             "layer": 0,
+             "pos": [
+              -0.0,
+              0.0,
+              0.0
+             ],
+             "rot": [
+              0.0,
+              -0.0,
+              -0.0,
+              1.0
+             ],
+             "scale": [
+              1.0,
+              1.0,
+              1.0
+             ],
+             "comps": [
+              "Transform",
+              "MeshFilter",
+              "MeshRenderer"
+             ],
+             "children": []
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "weapon_hammer",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6e-05,
+          -0.356841,
+          -0.023662
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "saiga12_hammer_LOD0",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MeshFilter",
+            "MeshRenderer"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "weapon_izhmash_saiga12k_10_12g_LOD0",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.0,
+          0.0,
+          0.0
+         ],
+         "rot": [
+          0.0,
+          -0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform",
+          "MeshFilter",
+          "MeshRenderer"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_izhmash_saiga12k_10_12g_LOD1",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.01725,
+          -0.363847,
+          -0.016018
+         ],
+         "rot": [
+          0.0,
+          -0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform",
+          "MeshFilter",
+          "MeshRenderer",
+          "BoxCollider"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_L_hand_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.05257,
+          -0.487118,
+          -0.043072
+         ],
+         "rot": [
+          -0.209574,
+          -0.411209,
+          0.719673,
+          0.518708
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_L_IK_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.052467,
+          -0.4871,
+          -0.043074
+         ],
+         "rot": [
+          -0.209859,
+          -0.410939,
+          0.719427,
+          0.519147
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_LCollarbone_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.132116,
+          -0.077263,
+          0.015248
+         ],
+         "rot": [
+          0.975973,
+          0.164581,
+          0.081713,
+          0.117102
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_R_hand_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.032439,
+          -0.166091,
+          -0.116154
+         ],
+         "rot": [
+          0.702853,
+          0.703754,
+          -0.072989,
+          0.073486
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_R_IK_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.032486,
+          -0.166163,
+          -0.116199
+         ],
+         "rot": [
+          0.703082,
+          0.703478,
+          -0.073189,
+          0.073739
+         ],
+         "scale": [
+          1.000001,
+          1.0,
+          1.000001
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_RCollarbone_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.062935,
+          -0.005071,
+          0.016824
+         ],
+         "rot": [
+          0.061137,
+          -0.011743,
+          0.890005,
+          -0.451681
+         ],
+         "scale": [
+          1.000001,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "weapon_release",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          6e-05,
+          -0.375545,
+          -0.03534
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "saiga12_release_LOD0",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MeshFilter",
+            "MeshRenderer"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "weapon_selector",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.019741,
+          -0.292121,
+          -0.00886
+         ],
+         "rot": [
+          0.050527,
+          0.0,
+          3e-06,
+          0.998723
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "saiga12_fire_selector_LOD0",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MeshFilter",
+            "MeshRenderer"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "weapon_stock_lock",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.017323,
+          -0.250804,
+          -0.013842
+         ],
+         "rot": [
+          -0.0,
+          -0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "saiga_12_stock_lock_LOD0",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MeshFilter",
+            "MeshRenderer"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "weapon_trigger",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          1e-05,
+          -0.314293,
+          -0.034018
+         ],
+         "rot": [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "saiga12_trigger_LOD0",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            -0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            -0.0,
+            -0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform",
+            "MeshFilter",
+            "MeshRenderer"
+           ],
+           "children": []
+          }
+         ]
+        },
+        {
+         "name": "weapon_vest_IK_marker",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          -0.322081,
+          -0.122105,
+          -0.287537
+         ],
+         "rot": [
+          0.201981,
+          -0.010313,
+          0.951839,
+          0.230435
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": []
+        },
+        {
+         "name": "prop",
+         "active": true,
+         "layer": 0,
+         "pos": [
+          0.0,
+          0.0,
+          0.0
+         ],
+         "rot": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+         ],
+         "scale": [
+          1.0,
+          1.0,
+          1.0
+         ],
+         "comps": [
+          "Transform"
+         ],
+         "children": [
+          {
+           "name": "prop_bone_001",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": []
+          },
+          {
+           "name": "prop_bone_002",
+           "active": true,
+           "layer": 0,
+           "pos": [
+            0.0,
+            0.0,
+            0.0
+           ],
+           "rot": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+           ],
+           "scale": [
+            1.0,
+            1.0,
+            1.0
+           ],
+           "comps": [
+            "Transform"
+           ],
+           "children": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
