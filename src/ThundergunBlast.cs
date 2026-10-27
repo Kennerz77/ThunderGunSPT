@@ -33,11 +33,13 @@ namespace Thundergun
         public static readonly Fixed<float> MovementPenalty = new Fixed<float>(15f), TurnPenalty = new Fixed<float>(12f);
         public static readonly Fixed<bool> ShowWave = new Fixed<bool>(true);
 
-        public static ConfigEntry<float> PurchaseVolume, WallBuyVolume, DenyVolume;
+        public static ConfigEntry<float> ShotVolume, FoleyVolume, PurchaseVolume, WallBuyVolume, DenyVolume;
 
         public static void Bind(ConfigFile config)
         {
             const string audio = "Volume";
+            ShotVolume = config.Bind(audio, "Shot", 1f, Volume("The Thundergun's blast. (The Zeus Cannon's BO3 shot on top is Pack-a-Punch's \"Pack-a-Punch shot\" slider.)"));
+            FoleyVolume = config.Bind(audio, "Reload and handling", 1f, Volume("Drawing, reloading, the tech beep, the dry click and the gun's rattle."));
             PurchaseVolume = config.Bind(audio, "Purchase", 0.8f, Volume("BO3's \"cha-ching\" when you buy from the wall or the ammo box."));
             WallBuyVolume = config.Bind(audio, "Wall buy", 0.8f, Volume("The sound of the gun coming out of the chalk wall."));
             DenyVolume = config.Bind(audio, "Deny", 0.8f, Volume("BO3's buzz when a purchase is refused (not enough money, no room)."));
@@ -255,13 +257,17 @@ namespace Thundergun
 
         /// <summary>
         /// The ragdoll's own bones only (the corpse also carries item bodies, the dropped gun's among them, which stay
-        /// kinematic). Their velocity is set rather than added to, over the first few physics steps: the ragdoll
-        /// starts by clamping every bone to 2 m/s, and the throw has to win.
+        /// kinematic). Their velocity is set rather than added to, over the first physics steps: the ragdoll starts by
+        /// clamping every bone to 2 m/s, and the throw has to win. Held for <see cref="FlingSteps"/> steps (about 0.16 s)
+        /// rather than just long enough to win, so the joints and the ground don't bleed the speed off at once and the
+        /// body carries it further: the same launch speed, a stronger throw.
         /// </summary>
+        private const int FlingSteps = 8;
+
         private static IEnumerator Fling(CorpseRagdoll ragdoll, Vector3 velocity)
         {
             int flung = 0;
-            for (int step = 0; step < 3; step++)
+            for (int step = 0; step < FlingSteps; step++)
             {
                 flung = 0;
                 foreach (RigidbodySpawner spawner in ragdoll._rigidbodySpawners ?? new RigidbodySpawner[0])

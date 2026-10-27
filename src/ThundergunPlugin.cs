@@ -24,7 +24,8 @@ namespace Thundergun
         {
             Log = Logger;
             Runner = this;
-            ThundergunSettings.Bind(Config);            var harmony = new HarmonyLib.Harmony(PluginGuid);
+            ThundergunSettings.Bind(Config);
+            ThundergunSounds.Enable();            var harmony = new HarmonyLib.Harmony(PluginGuid);
             try
             {
                 ThundergunRootReset.Enable(harmony);

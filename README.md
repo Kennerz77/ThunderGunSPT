@@ -42,7 +42,7 @@ The mod gives you nothing for free and mails you nothing. Once your hideout's **
 
 ## Settings (F12)
 
-Volume only: **Purchase** (BO3's cha-ching), **Wall buy** (the gun coming off the wall) and **Deny** (a refused purchase).
+Volume sliders only: **Shot** (the blast), **Reload and handling** (draw, reload, tech beep, dry click, rattle), **Purchase** (BO3's cha-ching), **Wall buy** (the gun coming off the wall) and **Deny** (a refused purchase). The Zeus Cannon's BO3 shot layer follows Pack-a-Punch's own "Pack-a-Punch shot" slider.
 
 Prices are in `SPT_Runtime\user\mods\Thundergun\config.json` (create it to change them):
 

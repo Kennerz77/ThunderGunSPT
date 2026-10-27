@@ -153,8 +153,10 @@ namespace Thundergun
             if (_prefab != null)
                 ThundergunPaP.ApplyCamo(_prefab.gameObject, ShownWeapon());
 
-            // The container's sound player carries BO3's shot for Pack-a-Punch
-            AudioClip shot = _prefab?.GetComponent<WeaponSoundPlayer>()?.AdditionalSounds
+            // The container's sound player: at the F12 levels, and it carries BO3's shot for Pack-a-Punch
+            WeaponSoundPlayer sounds = _prefab?.GetComponent<WeaponSoundPlayer>();
+            ThundergunSounds.Register(sounds);
+            AudioClip shot = sounds?.AdditionalSounds
                 .FirstOrDefault(s => s.EventName == "SndTgPapShot")?.SoundClips?.FirstOrDefault();
             ThundergunPaP.RegisterShot(shot);
             ThundergunPlugin.Log.LogInfo($"Thundergun model on {name}: {_lights.Count(m => m != null)}/4 ammo lights on {_slots.Count} card(s), " +
