@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using BepInEx.Bootstrap;
 using EFT;
@@ -15,6 +15,9 @@ namespace Thundergun
     internal static class ThundergunPaPBridge
     {
         public static bool IsInfused(Item item) => PaPApi.IsInfused(item) && !InMachine(item);
+
+        /// <summary>What the machine added to the gun's worth: its fee, which depends on the mode picked in PaP.</summary>
+        public static int InfusedFeeRub => PaPApi.BonusesActive ? 500_000 : 5_000;
 
         // Weapons infused when the set last changed (profile ids), so a change can tell which ones were just stripped
         private static HashSet<string> _infused = new HashSet<string>();
@@ -109,6 +112,8 @@ namespace Thundergun
         }
 
         public static bool IsInfused(Item item) => Installed && item != null && ThundergunPaPBridge.IsInfused(item);
+
+        public static int InfusedFeeRub => Installed ? ThundergunPaPBridge.InfusedFeeRub : 0;
 
         /// <summary>The profile id behind a hideout weapons-mode copy (the id itself without PaP).</summary>
         public static string OriginalId(string itemId) => Installed ? ThundergunPaPBridge.OriginalId(itemId) : itemId;

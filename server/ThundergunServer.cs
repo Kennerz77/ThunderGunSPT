@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
@@ -19,7 +19,7 @@ public record ModMetadata : IModMetadata
     public string Name { get; init; } = "Thundergun";
     public string Author { get; init; } = "Kennerz";
     public List<string>? Contributors { get; init; }
-    public SemanticVersioning.Version Version { get; init; } = new("1.0.0");
+    public SemanticVersioning.Version Version { get; init; } = new("1.0.1");
     public SemanticVersioning.Range SptVersion { get; init; } = new("~4.1.0");
     public List<string>? Incompatibilities { get; init; }
     /// <summary>Hideout Uncensored provides weapons in the hideout, where the wall buy is (the client depends on it too).</summary>
@@ -140,6 +140,8 @@ public class ThundergunItemLoader(
         charge.Properties.InitialSpeed = 0;
         charge.Properties.ProjectileCount = 1;
         charge.Properties.Tracer = false;
+        // Nothing wears the gun out: no durability burn from its shots
+        charge.Properties.DurabilityBurnModificator = 0;
         // Its own "calibre" in place of 12 gauge: the cell shows the id without "Caliber", the stats its translation
         charge.Properties.Caliber = Caliber;
 
@@ -147,6 +149,7 @@ public class ThundergunItemLoader(
         gun.AmmoCaliber = Caliber;
         // As heavy as a light machine gun, and then some: 9.35 kg, for Group 935
         gun.Weight = 9.35;
+        gun.DurabilityBurnRatio = 0;
         // Always 9.35 kg in all: the cartridge and its charges add nothing, loaded or spare
         canister.Properties.Weight = 0;
         charge.Properties.Weight = 0;
