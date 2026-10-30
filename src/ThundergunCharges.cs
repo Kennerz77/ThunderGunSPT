@@ -142,23 +142,30 @@ namespace Thundergun
         // ---------- Zeus Cannon top-up ----------
 
         private static readonly string ToppedFile = Path.Combine(BepInEx.Paths.ConfigPath, ThundergunPlugin.PluginGuid + ".topped.txt");
-        private static HashSet<string> _topped;
+        private static Dictionary<string, int> _topped;
 
         /// <summary>
         /// Canisters (profile ids) a Zeus Cannon has already topped up, kept between sessions so one isn't topped up
         /// again after being part-fired. Hideout weapons-mode copies aren't saved, so they're never recorded.
         /// </summary>
-        private static HashSet<string> Topped
+        private static Dictionary<string, int> Topped
         {
             get
             {
                 if (_topped != null)
                     return _topped;
-                _topped = new HashSet<string>();
+                _topped = new Dictionary<string, int>();
                 try
                 {
                     if (File.Exists(ToppedFile))
-                        _topped.UnionWith(File.ReadAllLines(ToppedFile).Where(l => l.Length > 0));
+                    {
+                        foreach (string line in File.ReadAllLines(ToppedFile).Where(l => l.Length > 0))
+                        {
+                            // "id=charges"; older files have the id alone (topped to four)
+                            string[] parts = line.Split('=');
+                            _topped[parts[0]] = parts.Length > 1 && int.TryParse(parts[1], out int n) ? n : ZeusCharges;
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
@@ -168,13 +175,15 @@ namespace Thundergun
             }
         }
 
-        private static void Record(string canisterId)
+        /// <summary>The charges a profile canister held when last seen (or when topped up).</summary>
+        private static void Record(string canisterId, int charges)
         {
-            if (!Topped.Add(canisterId))
+            if (Topped.TryGetValue(canisterId, out int known) && known == charges)
                 return;
+            Topped[canisterId] = charges;
             try
             {
-                File.AppendAllText(ToppedFile, canisterId + Environment.NewLine);
+                File.WriteAllLines(ToppedFile, Topped.Select(p => p.Key + "=" + p.Value));
             }
             catch (Exception e)
             {
@@ -182,25 +191,55 @@ namespace Thundergun
             }
         }
 
-        /// <summary>A Zeus Cannon's canister it hasn't topped up yet gets its four charges (checked twice a second).</summary>
+        // Canister models (profile or copy) already looked at this session
+        private static readonly HashSet<string> LiveSeen = new HashSet<string>();
+
+        /// <summary>
+        /// A Zeus Cannon's canister is topped up to four charges the first time it's seen. The top-up is only the
+        /// client's (the server's own count is the plain two), so it's lost whenever the profile is reloaded: a canister
+        /// seen again in a later session with fewer charges than it was last known to hold is topped up again, while
+        /// charges fired down in play are remembered and stay spent.
+        /// </summary>
         public static void CheckZeus(Weapon weapon)
         {
             Item canister = weapon.GetCurrentMagazine();
             if (canister == null || !ThundergunPaP.IsInfused(weapon))
+            {
+                if (canister != null && Seen.Add("skip:" + canister.Id))
+                    ThundergunPlugin.Log.LogInfo($"Thundergun {weapon.Id}: canister {canister.Id} not topped up: gun counts as infused = {ThundergunPaP.IsInfused(weapon)}");
                 return;
+            }
             string original = ThundergunPaP.OriginalId(canister.Id);
-            if (Topped.Contains(original) || ToppedCopies.Contains(canister.Id))
+            bool profile = original == canister.Id;
+            int count = Count(weapon);
+            if (Topped.TryGetValue(original, out int last))
+            {
+                if (LiveSeen.Add(canister.Id) && count < last)
+                {
+                    ThundergunPlugin.Log.LogInfo($"Zeus Cannon {weapon.Id}: canister {canister.Id} (original {original}) held {last}, now {count} after a reload; topping it up");
+                    TopUp(weapon);
+                    Record(original, ZeusCharges);
+                    return;
+                }
+                // Fired down in the profile's own canister: remembered, so it stays spent
+                if (profile && count < last)
+                    Record(original, count);
                 return;
+            }
+            if (ToppedCopies.Contains(canister.Id))
+                return;
+            if (Seen.Add(canister.Id))
+                ThundergunPlugin.Log.LogInfo($"Zeus Cannon {weapon.Id}: new canister {canister.Id} (original {original}) holds {count}, topping it up");
+            LiveSeen.Add(canister.Id);
             TopUp(weapon);
-            // A weapons-mode copy is remembered for this session only (it's thrown away with the copy); the
-            // profile's own canister for good. Either way, once: firing it down never brings the charges back
-            if (original == canister.Id)
-                Record(original);
+            if (profile)
+                Record(original, ZeusCharges);
             else
                 ToppedCopies.Add(canister.Id);
         }
 
         private static readonly HashSet<string> ToppedCopies = new HashSet<string>();
+        private static readonly HashSet<string> Seen = new HashSet<string>();
 
         /// <summary>
         /// The gun just came out of the machine (the profile's gun): its canister gets four charges, as the server
@@ -213,7 +252,7 @@ namespace Thundergun
             TopUp(weapon);
             Item canister = weapon.GetCurrentMagazine();
             if (canister != null)
-                Record(canister.Id);
+                Record(canister.Id, ZeusCharges);
             foreach (Player player in UnityEngine.Object.FindObjectsOfType<Player>())
             {
                 if (player.IsYourPlayer && player.HandsController?.Item is Weapon held && held != weapon && ThundergunPaP.OriginalId(held.Id) == weapon.Id)

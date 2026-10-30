@@ -136,7 +136,7 @@ namespace Thundergun
     {
         // The plain gun's two charges sit on the middle bulbs, as on the gun
         private static readonly int[] Lit = { 1, 2 };
-        private static readonly Color On = Color.white * 1.2f;
+        private static readonly Color On = new Color(1f, 0.58f, 0.4f) * 1.15f;
 
         private Material[] _bulbs;
 

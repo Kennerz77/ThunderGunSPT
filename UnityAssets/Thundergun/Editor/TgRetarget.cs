@@ -532,6 +532,8 @@ namespace Thundergun.Editor
             bool first = true;
             foreach (MeshFilter mf in _gunBones[_gun.Bones[0].Name].GetComponentsInChildren<MeshFilter>())
             {
+                if (mf.sharedMesh == null)
+                    continue;
                 foreach (Vector3 v in mf.sharedMesh.vertices)
                 {
                     Vector3 p = weapon.InverseTransformPoint(mf.transform.TransformPoint(v));

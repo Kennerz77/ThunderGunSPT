@@ -207,6 +207,7 @@ namespace Thundergun.Editor
                 for (int m = 0; m < gun.Materials.Count; m++)
                     materials[m] = BuildMaterial(gun.Materials[m], false);
                 BuildGunMeshes(gun, gunBones, materials);
+                AddOriginsMaterials(gun, jgun, materials);
 
                 var anims = new Dictionary<string, CodAnim>();
                 Notetracks.Clear();
@@ -839,6 +840,50 @@ namespace Thundergun.Editor
         /// (_n), specular (_s) and gloss (_g) maps; the four glow materials light up the back body with BO3's emissive
         /// map (its _up variant for the Pack-a-Punched look).
         /// </summary>
+        /// <summary>
+        /// Blue copies of the control box (its gauge and lamp glow yellow): the emission map with red and blue swapped.
+        /// They ride on a switched-off renderer (tg_origins_materials); the client swaps them in on a gun upgraded in the
+        /// Origins machine, and back out.
+        /// </summary>
+        private static void AddOriginsMaterials(CodModel gun, Transform jgun, Dictionary<int, Material> materials)
+        {
+            var blues = new List<Material>();
+            foreach (int index in Enumerable.Range(0, gun.Materials.Count).Where(i => gun.Materials[i].Name.EndsWith("_control_box")))
+            {
+                Material source = materials[index];
+                if (!(source.GetTexture("_EmissionMap") is Texture2D emission))
+                    continue;
+                string path = AssetDatabase.GetAssetPath(emission);
+                var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false, false);
+                tex.LoadImage(File.ReadAllBytes(path));
+                Color32[] pixels = tex.GetPixels32();
+                for (int i = 0; i < pixels.Length; i++)
+                    (pixels[i].r, pixels[i].b) = (pixels[i].b, pixels[i].r);
+                tex.SetPixels32(pixels);
+                string bluePath = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path) + "_blue.png");
+                File.WriteAllBytes(bluePath, tex.EncodeToPNG());
+                Object.DestroyImmediate(tex);
+                AssetDatabase.ImportAsset(bluePath);
+                var importer = (TextureImporter)AssetImporter.GetAtPath(bluePath);
+                importer.sRGBTexture = true;
+                importer.SaveAndReimport();
+
+                string matPath = $"{TgPaths.Materials}/{source.name}_blue.mat";
+                AssetDatabase.DeleteAsset(matPath);
+                var blue = new Material(source) { name = source.name + "_blue" };
+                blue.SetTexture("_EmissionMap", AssetDatabase.LoadAssetAtPath<Texture2D>(bluePath));
+                AssetDatabase.CreateAsset(blue, matPath);
+                blues.Add(blue);
+            }
+            var go = new GameObject("tg_origins_materials");
+            go.layer = jgun.gameObject.layer;
+            go.transform.SetParent(jgun, false);
+            var r = go.AddComponent<MeshRenderer>();
+            r.sharedMaterials = blues.ToArray();
+            r.enabled = false;
+            Debug.Log($"[Thundergun] Origins materials: {string.Join(", ", blues.Select(m => m.name))}");
+        }
+
         public static Material BuildMaterial(CodMaterial m, bool upgraded)
         {
             if (m.Name.StartsWith("mtl_wpn_t7_zmb_hd_thundergun"))
@@ -864,7 +909,7 @@ namespace Thundergun.Editor
                 // The four sections of the canister's disc are its ammo lights (the client mod lights one per charge).
                 // As shipped: the plain gun's two, full. Sections 3 and 4 are the top pair.
                 mat.color = Color.black;
-                string emissive = Path.Combine(images, upgraded ? "i_wpn_t7_zmb_hd_thundergun_back_body_d_e_up.tiff" : "i_wpn_t7_zmb_hd_thundergun_back_body_d_e.tiff");
+                string emissive = Path.Combine(images, "i_wpn_t7_zmb_hd_thundergun_back_body_d_e.tiff");
                 bool lit = upgraded || m.Name.EndsWith("_3") || m.Name.EndsWith("_4");
                 SetEmission(mat, ImportTexture(emissive, TextureImporterType.Default, true), lit ? new Color(1f, 0.45f, 0.1f) * 2.2f : Color.black);
             }
@@ -942,8 +987,8 @@ namespace Thundergun.Editor
                 mat.SetColor("_SpecColor", new Color(0.3f, 0.3f, 0.3f));
                 mat.SetFloat("_Glossiness", 0.8f);
                 string glow = FindBySuffix(folder, "_e.png");
-                Texture2D map = glow != null && !upgraded ? ImportEmissive(glow) : null;
-                Color on = upgraded ? new Color(0.65f, 0.2f, 1f) * 6f : map != null ? Color.white * 3f : new Color(1f, 0.45f, 0.1f) * 5f;
+                Texture2D map = glow != null ? ImportEmissive(glow) : null;
+                Color on = map != null ? Color.white * 3f : new Color(1f, 0.45f, 0.1f) * 5f; // orange on the Zeus Cannon too
                 SetEmission(mat, map, lit ? on : Color.black);
             }
             else if (m.Name.EndsWith("_glass"))
@@ -954,9 +999,9 @@ namespace Thundergun.Editor
             }
             else if (m.Name.EndsWith("_glo"))
             {
-                // A small white glowing part (the gauge's backlight)
-                mat.color = Color.white;
-                SetEmission(mat, null, new Color(0.75f, 0.9f, 1f) * 1.2f);
+                // A small glowing part (the lamp at the drum's hub): orange, blue on an Origins gun (the client sets that)
+                mat.color = new Color(1f, 0.5f, 0.12f);
+                SetEmission(mat, null, new Color(1f, 0.45f, 0.1f) * 1.4f);
             }
             else
             {

@@ -16,6 +16,8 @@ namespace Thundergun
     {
         public static bool IsInfused(Item item) => PaPApi.IsInfused(item) && !InMachine(item);
 
+        public static bool IsOrigins(Item item) => IsInfused(item) && PaPApi.IsOriginsGun(item);
+
         /// <summary>What the machine added to the gun's worth: its fee, which depends on the mode picked in PaP.</summary>
         public static int InfusedFeeRub => PaPApi.BonusesActive ? 500_000 : 5_000;
 
@@ -46,6 +48,17 @@ namespace Thundergun
             PaPApi.RegisterName(ThundergunIds.Weapon, ThundergunIds.UpgradedName);
             // Its upgraded power is the blast and the extra charges, not PaP's bullet damage or fire rate
             PaPApi.RegisterBonuses(ThundergunIds.Weapon, PaPBonusSet.None);
+            // Camo on its body and magazine; the front barrel, control box and cables keep their own look
+            // Painted all over, as before; the inventory glow is orange, not PaP's purple
+            // Painted, cartridge included, but not the front end or the stock
+            PaPApi.KeepMaterialsPlain("thundergun", "stock", "control_box", "wire");
+            PaPApi.NoShotTail(ThundergunIds.Weapon); // its own blast stays as it is
+            // Origins camo: the drum wheel and the front muzzle are metal, the back tubes blue crystal
+            PaPApi.SetOriginsLook("front_body", true);
+            // The control box keeps its look: its gauge, needle and button share the material
+            PaPApi.KeepOriginsPlain("control_box");
+            PaPApi.SetOriginsLook("back_body", false);
+            PaPApi.SetOriginsLook("stock", false);
             PaPApi.WeaponUpgraded += OnUpgraded;
             PaPApi.InfusedChanged += OnInfusedChanged;
             _infused = new HashSet<string>(PaPApi.InfusedIds);
@@ -102,7 +115,9 @@ namespace Thundergun
     /// <summary>Pack-a-Punch hooks that are safe to call with or without PaP installed.</summary>
     internal static class ThundergunPaP
     {
-        public static readonly bool Installed = Chainloader.PluginInfos.ContainsKey("com.kennerz.paphideoutmodule");
+        // PaP 2.0.0 or newer: older ones lack the API these features call (an older one is treated as not installed)
+        public static readonly bool Installed =
+            Chainloader.PluginInfos.TryGetValue("com.kennerz.paphideoutmodule", out BepInEx.PluginInfo pap) && pap.Metadata.Version >= new System.Version(2, 0, 0);
         private static bool _shotRegistered;
 
         public static void Setup()
@@ -112,6 +127,9 @@ namespace Thundergun
         }
 
         public static bool IsInfused(Item item) => Installed && item != null && ThundergunPaPBridge.IsInfused(item);
+
+        /// <summary>Upgraded in PaP's Origins machine.</summary>
+        public static bool IsOrigins(Item item) => Installed && item != null && ThundergunPaPBridge.IsOrigins(item);
 
         public static int InfusedFeeRub => Installed ? ThundergunPaPBridge.InfusedFeeRub : 0;
 

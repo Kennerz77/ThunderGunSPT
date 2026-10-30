@@ -104,10 +104,11 @@ namespace Thundergun
         public static readonly HashSet<ThundergunView> Live = new HashSet<ThundergunView>();
 
         // Fallbacks for a model without the section map
-        private static readonly Color Orange = new Color(1f, 0.45f, 0.1f) * 2f;
+        private static readonly Color Orange = new Color(1f, 0.3f, 0.05f) * 2f;
         private static readonly Color Purple = new Color(0.65f, 0.2f, 1f) * 2f;
         // Multiply the orange section map: kept just above 1 so it glows without blowing out to white under bloom
-        private static readonly Color Plain = Color.white * 1.2f;
+        private static readonly Color Plain = new Color(1f, 0.58f, 0.4f) * 1.15f; // deeper, redder orange than the map's own
+        private static readonly Color OriginsBlue = new Color(0.25f, 0.6f, 1f) * 1.3f;
         private static readonly Color ZeusTint = new Color(1.1f, 0.7f, 1.6f) * 1.1f;
 
         // glow_1..4: this gun's own copies of the four bulb materials, and every renderer slot that should draw them
@@ -302,9 +303,11 @@ namespace Thundergun
             float warm = held != null ? ThundergunCharges.LightLevel(held) : 1f;
             bool powered = charges > 0 && warm > 0f;
             bool infused = ThundergunPaP.IsInfused(weapon);
+            _origins = infused && ThundergunPaP.IsOrigins(weapon);
+            ApplyOriginsLook();
             int capacity = infused ? ThundergunCharges.ZeusCharges : ThundergunCharges.PlainCharges;
             // BO3's orange section glow; the Zeus Cannon's carries a purple tint through it
-            Color on = _lightMap != null ? (infused ? ZeusTint : Plain) : (infused ? Purple : Orange);
+            Color on = _origins ? OriginsBlue : _lightMap != null ? Plain : Orange; // the Zeus Cannon's glow stays orange (blue from Origins)
 
             for (int i = 0; i < LightOrder.Length; i++)
             {
@@ -320,7 +323,7 @@ namespace Thundergun
                 // The plain gun's outer pair shows idle while it's powered; anything else unlit is dark
                 bool idle = powered && i >= capacity;
                 bool spent = !lit && !idle && level <= 0f;
-                if (level == _levels[i] && spent == _spent[i] && infused == _shownInfused && _primed)
+                if (level == _levels[i] && spent == _spent[i] && infused == _shownInfused && _origins == _shownOrigins && _primed)
                     continue;
                 _levels[i] = level;
                 _spent[i] = spent;
@@ -330,6 +333,7 @@ namespace Thundergun
                 SetBulb(bulb, level, infused, held != null);
             }
             _shownInfused = infused;
+            _shownOrigins = _origins;
             _primed = true;
         }
 
@@ -384,8 +388,93 @@ namespace Thundergun
         // A real light behind each grille section on the gun in the hands: a soft glow on the drum and the grille
         // around it, where the glow card alone is a flat picture
         private Light[] _bulbs;
-        private static readonly Color BulbOrange = new Color(1f, 0.5f, 0.15f);
-        private static readonly Color BulbZeus = new Color(1f, 0.5f, 1f);
+        private bool _origins, _shownOrigins;
+
+        // The lamp at the hub (the "_glo" material) is orange, blue on an Origins gun; the control box's gauge and lamp
+        // swap to their blue copies (carried in the weapon bundle on tg_origins_materials)
+        private List<Material> _glo;
+        private bool _gloOrigins = true;
+        private readonly Dictionary<Renderer, Material[]> _plainMats = new Dictionary<Renderer, Material[]>();
+        private bool _swappedOrigins;
+
+        private static string Bare(string name) => name.EndsWith(" (Instance)") ? name.Substring(0, name.Length - " (Instance)".Length) : name;
+
+        private void ApplyOriginsLook()
+        {
+            if (_glo == null)
+            {
+                _glo = new List<Material>();
+                foreach (Renderer r in GetComponentsInChildren<Renderer>(true))
+                {
+                    Material[] mats = r.sharedMaterials;
+                    bool changed = false;
+                    for (int i = 0; i < mats.Length; i++)
+                    {
+                        if (mats[i] != null && Bare(mats[i].name).EndsWith("_glo"))
+                        {
+                            var copy = new Material(mats[i]);
+                            mats[i] = copy;
+                            _glo.Add(copy);
+                            changed = true;
+                        }
+                    }
+                    if (changed)
+                        r.sharedMaterials = mats;
+                }
+            }
+            if (_gloOrigins != _origins)
+            {
+                _gloOrigins = _origins;
+                Color lamp = _origins ? new Color(0.25f, 0.6f, 1f) : new Color(1f, 0.45f, 0.1f);
+                foreach (Material m in _glo.Where(m => m != null))
+                {
+                    m.color = lamp;
+                    m.SetColor("_EmissionColor", lamp * 1.4f);
+                    m.EnableKeyword("_EMISSION");
+                }
+            }
+            if (_swappedOrigins == _origins)
+                return;
+            Renderer[] all = GetComponentsInChildren<Renderer>(true);
+            Renderer holder = all.FirstOrDefault(r => r.name == "tg_origins_materials");
+            if (holder == null)
+                return;
+            _swappedOrigins = _origins;
+            Dictionary<string, Material> blues = holder.sharedMaterials.Where(m => m != null).GroupBy(m => m.name).ToDictionary(g => g.Key, g => g.First());
+            foreach (Renderer r in all)
+            {
+                if (r == holder)
+                    continue;
+                Material[] mats = r.sharedMaterials;
+                if (_origins)
+                {
+                    bool changed = false;
+                    Material[] plain = (Material[])mats.Clone();
+                    for (int i = 0; i < mats.Length; i++)
+                    {
+                        if (mats[i] != null && blues.TryGetValue(Bare(mats[i].name) + "_blue", out Material blue))
+                        {
+                            mats[i] = blue;
+                            changed = true;
+                        }
+                    }
+                    if (changed)
+                    {
+                        _plainMats[r] = plain;
+                        r.sharedMaterials = mats;
+                    }
+                }
+                else if (_plainMats.TryGetValue(r, out Material[] plain))
+                {
+                    r.sharedMaterials = plain;
+                }
+            }
+            if (!_origins)
+                _plainMats.Clear();
+        }
+        private static readonly Color BulbOrange = new Color(1f, 0.35f, 0.08f);
+        private static readonly Color BulbZeus = new Color(1f, 0.35f, 0.08f);
+        private static readonly Color BulbBlue = new Color(0.3f, 0.65f, 1f);
         private const float BulbIntensity = 3.5f;
         private const float BulbRange = 0.16f;
 
@@ -418,7 +507,7 @@ namespace Thundergun
             Light l = _bulbs[bulb];
             if (l == null)
                 return;
-            l.color = infused ? BulbZeus : BulbOrange;
+            l.color = _origins ? BulbBlue : infused ? BulbZeus : BulbOrange;
             l.intensity = BulbIntensity * level * level;
             l.enabled = level > 0.01f;
         }

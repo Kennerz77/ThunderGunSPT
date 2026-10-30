@@ -8,6 +8,8 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Servers;
 using SPTarkov.Server.Core.Services.Commerce;
+using SPTarkov.Server.Core.Models.Spt.Config;
+using SPTarkov.Server.Core.Services.Items;
 using SPTarkov.Server.Core.Services.Modding.Custom;
 using Path = System.IO.Path;
 
@@ -19,7 +21,7 @@ public record ModMetadata : IModMetadata
     public string Name { get; init; } = "Thundergun";
     public string Author { get; init; } = "Kennerz";
     public List<string>? Contributors { get; init; }
-    public SemanticVersioning.Version Version { get; init; } = new("1.0.2");
+    public SemanticVersioning.Version Version { get; init; } = new("1.1.0");
     public SemanticVersioning.Range SptVersion { get; init; } = new("~4.1.0");
     public List<string>? Incompatibilities { get; init; }
     /// <summary>Hideout Uncensored provides weapons in the hideout, where the wall buy is (the client depends on it too).</summary>
@@ -100,8 +102,28 @@ public class ThundergunItemLoader(
     ISptLogger<ThundergunItemLoader> logger,
     CustomItemService customItemService,
     TemplateTable templateTable,
-    LocaleTable localeTable) : IOnLoad
+    LocaleTable localeTable,
+    ItemConfig itemConfig,
+    ItemFilterService itemFilterService) : IOnLoad
 {
+
+    /// <summary>
+    /// Wall-buys and ammo boxes only: out of random loot, bot gear, flea and daily rewards. (A Pack-a-Punched enemy gun
+    /// is PaP's own 1-in-200 roll, not this item showing up.)
+    /// </summary>
+    private void KeepOutOfTheWorld(IEnumerable<MongoId> ids)
+    {
+        List<MongoId> all = ids.ToList();
+        foreach (MongoId id in all)
+        {
+            itemConfig.Blacklist.Add(id);
+            itemConfig.LootableItemBlacklist.Add(id);
+            itemConfig.RewardItemBlacklist.Add(id);
+        }
+        itemFilterService.AddItemToBlacklistCache(all);
+        itemFilterService.AddItemToLootableBlacklistCache(all);
+    }
+
     public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         var items = templateTable.Items;
@@ -193,6 +215,7 @@ public class ThundergunItemLoader(
         AllowInPrimarySlots(items);
         UseOwnModels(weapon.Properties, canister.Properties);
         AddCaliberName();
+        KeepOutOfTheWorld([ThundergunIds.Weapon, ThundergunIds.Canister, ThundergunIds.Charge]);
         logger.Success("[Thundergun] Items added: Thundergun, Pressure Cartridge, Thundergun charge");
         return Task.CompletedTask;
     }

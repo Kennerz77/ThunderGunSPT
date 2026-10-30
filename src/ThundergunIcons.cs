@@ -19,7 +19,7 @@ namespace Thundergun
         private static readonly Dictionary<string, Texture2D> Images = new Dictionary<string, Texture2D>();
 
         // Bumped whenever the pictures change, so the game's disk cache of older ones (the white studio photos) is retired
-        private const int Salt = 0x54470002;
+        private const int Salt = 0x54470004;
 
         public static void Enable(Harmony harmony)
         {
@@ -33,7 +33,7 @@ namespace Thundergun
         public static string ImageFor(Item item)
         {
             if (ThundergunIds.Is(item))
-                return ThundergunPaP.IsInfused(item) ? "zeus_cannon" : "thundergun";
+                return ThundergunPaP.IsInfused(item) ? (ThundergunPaP.IsOrigins(item) ? "zeus_cannon_origins" : "zeus_cannon") : "thundergun";
             if (ThundergunIds.IsCartridge(item))
                 return item is Magazine m && m.Count > 0 ? "cartridge_full" : "cartridge_empty";
             return null;

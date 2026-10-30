@@ -21,8 +21,12 @@ namespace Thundergun.Editor
         private const float CamoEmission = 0.06f;
 
         // Bulbs: the plain gun's two (2 and 3), as the client lights them; the Zeus Cannon's four with the purple cast
-        private static readonly Color Plain = Color.white * 1.2f;
-        private static readonly Color Zeus = new Color(1.1f, 0.7f, 1.6f) * 1.1f;
+        private static readonly Color Plain = new Color(1f, 0.58f, 0.4f) * 1.15f; // deeper, redder orange
+        private static readonly Color Zeus = Plain; // the Zeus Cannon's bulbs are orange too
+        private static readonly Color OriginsBlue = new Color(0.25f, 0.6f, 1f) * 1.3f;
+        private const string OriginsCrystalPath = @"C:\Git\PaPHideoutModule\UnityProject\Assets\PaP\Camo\origins_crystal_c.png";
+        private const string OriginsPlatingPath = @"C:\Git\PaPHideoutModule\UnityProject\Assets\PaP\Camo\origins_camo_c.png";
+        private static Texture2D _crystal, _plating;
 
         private const int Width = 1024;
 
@@ -39,6 +43,14 @@ namespace Thundergun.Editor
                 {
                     rig.Add(camo);
                     RenderGun("zeus_cannon", camo, lit: new[] { 1, 2, 3, 4 }, Zeus);
+                    _crystal = LoadTexture(OriginsCrystalPath);
+                    _plating = LoadTexture(OriginsPlatingPath);
+                    if (_crystal != null && _plating != null)
+                    {
+                        rig.Add(_crystal);
+                        rig.Add(_plating);
+                        RenderGun("zeus_cannon_origins", camo, lit: new[] { 1, 2, 3, 4 }, OriginsBlue, origins: true);
+                    }
                 }
                 else
                 {
@@ -82,7 +94,16 @@ namespace Thundergun.Editor
         /// The gun from its left side (the control box), muzzle to the left as EFT pictures its guns. Laid out in CoD
         /// space through j_gun: the barrel (CoD +X) along +Z, up (CoD +Z) along +Y, its left (CoD +Y) along -X.
         /// </summary>
-        private static void RenderGun(string name, Texture2D camo, int[] lit, Color on)
+        private static Texture2D LoadTexture(string path)
+        {
+            if (!File.Exists(path))
+                return null;
+            var tex = new Texture2D(2, 2, TextureFormat.RGBA32, true) { wrapMode = TextureWrapMode.Repeat };
+            tex.LoadImage(File.ReadAllBytes(path));
+            return tex;
+        }
+
+        private static void RenderGun(string name, Texture2D camo, int[] lit, Color on, bool origins = false)
         {
             GameObject go = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(TgImporter.WeaponPrefabPath));
             try
@@ -93,7 +114,7 @@ namespace Thundergun.Editor
                 jgun.rotation = TgSpace.Rot(TgBo3.LoadModel().Bones[0].Rest);
                 Object.DestroyImmediate(go);
                 go = jgun.gameObject;
-                Dress(go, camo, lit, on);
+                Dress(go, camo, lit, on, null, origins);
                 Shoot(go, name, forward: Vector3.right, up: Vector3.up);
             }
             finally
@@ -149,7 +170,7 @@ namespace Thundergun.Editor
         }
 
         /// <summary>Copies of the model's materials: the bulbs lit or dark, the rest in camo where PaP would paint it.</summary>
-        private static void Dress(GameObject go, Texture2D camo, int[] lit, Color on, int[] spent = null)
+        private static void Dress(GameObject go, Texture2D camo, int[] lit, Color on, int[] spent = null, bool origins = false)
         {
             foreach (Renderer r in go.GetComponentsInChildren<Renderer>(true))
             {
@@ -168,12 +189,17 @@ namespace Thundergun.Editor
                         }
                     }
                     // As PaPCamo.ShouldPaint: nothing from the alpha-test queue up, nothing without a colour map
-                    if (camo != null && m.renderQueue < 2450 && m.HasProperty("_MainTex") && m.GetTexture("_MainTex") != null)
+                    // The Zeus Cannon's stock, control box and wires keep their look on the default camo, as in the game
+                    bool plainPart = !origins && (m.name.Contains("stock") || m.name.Contains("control_box") || m.name.Contains("wire"));
+                    Texture2D skin = !origins ? camo : m.name.Contains("front_body") ? _crystal
+                        : m.name.Contains("back_body") || m.name.Contains("stock") ? _plating : null;
+                    bool cutoutOk = false;
+                    if (camo != null && !plainPart && skin != null && (m.renderQueue < 2450 || cutoutOk) && m.HasProperty("_MainTex") && m.GetTexture("_MainTex") != null)
                     {
-                        copy.SetTexture("_MainTex", camo);
+                        copy.SetTexture("_MainTex", skin);
                         copy.SetTextureScale("_MainTex", Vector2.one * CamoTiling);
                         copy.color = Color.white;
-                        copy.SetTexture("_EmissionMap", camo);
+                        copy.SetTexture("_EmissionMap", skin);
                         copy.SetTextureScale("_EmissionMap", Vector2.one * CamoTiling);
                         copy.SetColor("_EmissionColor", new Color(CamoEmission, CamoEmission, CamoEmission));
                         copy.EnableKeyword("_EMISSION");
