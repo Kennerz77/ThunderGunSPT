@@ -16,7 +16,7 @@ namespace Thundergun.Editor
         public static string IconsDir => Path.GetFullPath(Path.Combine(Application.dataPath, "../../icons"));
 
         // PaP's camo albedo (read only, never changed) and the tiling PaP paints it with
-        private const string CamoAlbedo = @"C:\Git\PaPHideoutModule\UnityProject\Assets\PaP\Camo\pap_camo_albedo.png";
+        private const string CamoAlbedo = @"C:\Git\3_Working\PaPHideoutModule\UnityProject\Assets\PaP\Camo\pap_camo_albedo.png";
         private const float CamoTiling = 1f;
         private const float CamoEmission = 0.06f;
 
@@ -24,8 +24,8 @@ namespace Thundergun.Editor
         private static readonly Color Plain = new Color(1f, 0.58f, 0.4f) * 1.15f; // deeper, redder orange
         private static readonly Color Zeus = Plain; // the Zeus Cannon's bulbs are orange too
         private static readonly Color OriginsBlue = new Color(0.25f, 0.6f, 1f) * 1.3f;
-        private const string OriginsCrystalPath = @"C:\Git\PaPHideoutModule\UnityProject\Assets\PaP\Camo\origins_crystal_c.png";
-        private const string OriginsPlatingPath = @"C:\Git\PaPHideoutModule\UnityProject\Assets\PaP\Camo\origins_camo_c.png";
+        private const string OriginsCrystalPath = @"C:\Git\3_Working\PaPHideoutModule\UnityProject\Assets\PaP\Camo\origins_crystal_c.png";
+        private const string OriginsPlatingPath = @"C:\Git\3_Working\PaPHideoutModule\UnityProject\Assets\PaP\Camo\origins_camo_c.png";
         private static Texture2D _crystal, _plating;
 
         private const int Width = 1024;

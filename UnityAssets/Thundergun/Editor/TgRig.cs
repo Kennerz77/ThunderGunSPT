@@ -9,7 +9,7 @@ namespace Thundergun.Editor
     /// <summary>Paths and conversions shared by the importer, the retarget and the controller builder.</summary>
     public static class TgPaths
     {
-        public const string PortRoot = @"C:\Git\Source Codes\t5_thundergun 2\t5_thundergun";
+        public const string PortRoot = @"C:\Git\2_References\t5_thundergun 2\t5_thundergun";
         // The port's export folders, found by what they hold
         public static readonly string ModelDir = Directory.GetFiles(PortRoot + @"\model_export", "am_t5_thundergun.xmodel_bin",
             SearchOption.AllDirectories).Select(f => Path.GetDirectoryName(f)).FirstOrDefault();
