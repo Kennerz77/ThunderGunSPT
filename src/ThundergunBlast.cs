@@ -22,8 +22,8 @@ namespace Thundergun
     }
 
     /// <summary>
-    /// The Thundergun's numbers, fixed at the values tuned in playtesting (2026-10-27). Only the volumes are in the F12
-    /// menu.
+    /// The Thundergun's numbers, fixed at the values tuned in playtesting (2026-10-27). The volumes are in the F12
+    /// menu; the size and fit are in <see cref="ThundergunFit"/>.
     /// </summary>
     internal static class ThundergunSettings
     {
@@ -43,6 +43,7 @@ namespace Thundergun
             PurchaseVolume = config.Bind(audio, "Purchase", 0.8f, Volume("BO3's \"cha-ching\" when you buy from the wall or the ammo box."));
             WallBuyVolume = config.Bind(audio, "Wall buy", 0.8f, Volume("The sound of the gun coming out of the chalk wall."));
             DenyVolume = config.Bind(audio, "Deny", 0.8f, Volume("BO3's buzz when a purchase is refused (not enough money, no room)."));
+            ThundergunFit.Bind(config);
             DropOldEntries(config);
         }
 

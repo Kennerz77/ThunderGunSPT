@@ -53,15 +53,13 @@ namespace Thundergun
         private class Holding : MonoBehaviour
         {
             public MenuPlayerPoser Poser;
+            public Transform Model;
             public Transform RightMarker;
             public Transform LeftMarker;
 
-            // The carry, in the body's frame (x right, y up, z forward), metres: the front grip low and ahead of the
+            // The carry, in the body's frame (F12 "Third person", ThundergunFit): the front grip low and ahead of the
             // left shoulder, the whole gun nudged forward and to the left, off the torso, and a slight roll about the
             // barrel line so it sits upright
-            private static readonly Vector3 Reach = new Vector3(0.021f, -0.291f, 0.324f);
-            private static readonly Vector3 Shift = new Vector3(-0.080f, -0.002f, 0.099f);
-            private const float Roll = -5.07f;
 
             public void Swing()
             {
@@ -69,17 +67,22 @@ namespace Thundergun
                 Transform root = Poser?.PBones?.Weapon_Root_Anim;
                 if (shoulder == null || root == null || LeftMarker == null || RightMarker == null)
                     return;
+                // Sized first, about the right hand (which stays put): the swing below brings the smaller grip in
+                ThundergunFit.ApplyMenu(Model, root);
                 Quaternion body = Poser.transform.rotation;
                 // Off the torso first (the right hand follows its marker)
-                root.position += body * Shift;
+                root.position += body * ThundergunFit.MenuShift;
                 Vector3 pivot = RightMarker.position;
-                Vector3 target = shoulder.position + body * Reach;
+                Vector3 target = shoulder.position + body * ThundergunFit.MenuReach;
                 Vector3 now = LeftMarker.position - pivot, want = target - pivot;
                 if (now.sqrMagnitude < 1e-6f || want.sqrMagnitude < 1e-6f)
                     return;
                 // Front grip onto the target, then rolled about the barrel line to sit upright
-                Quaternion swing = Quaternion.AngleAxis(Roll, want.normalized) * Quaternion.FromToRotation(now, want);
+                Quaternion swing = Quaternion.AngleAxis(ThundergunFit.MenuRoll.Value, want.normalized) * Quaternion.FromToRotation(now, want);
                 root.SetPositionAndRotation(pivot + swing * (root.position - pivot), swing * root.rotation);
+                // Then the F12 turn about the right hand, in the body's frame
+                Quaternion turn = body * ThundergunFit.MenuTurn * Quaternion.Inverse(body);
+                root.SetPositionAndRotation(pivot + turn * (root.position - pivot), turn * root.rotation);
             }
 
             private void OnDestroy()
@@ -135,6 +138,7 @@ namespace Thundergun
                     return;
                 hold = hold ?? poser.gameObject.AddComponent<Holding>();
                 hold.Poser = poser;
+                hold.Model = animator.transform;
                 Transform[] all = animator.GetComponentsInChildren<Transform>(true);
                 hold.RightMarker = all.FirstOrDefault(t => t.name == "weapon_R_IK_marker") ?? all.FirstOrDefault(t => t.name == "weapon_R_hand_marker");
                 hold.LeftMarker = all.FirstOrDefault(t => t.name == "weapon_L_IK_marker") ?? all.FirstOrDefault(t => t.name == "weapon_L_hand_marker");

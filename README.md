@@ -2,7 +2,7 @@
 
 The **Thundergun** from Call of Duty Zombies, in SPT. The BO3 HD model with its real first-person animations, a blast of air that kills everything in front of you and throws the bodies, and a chalk wall buy in your hideout to get it.
 
-Version 1.1.0, for **SPT 4.1.6**. Made by **Kennerz**.
+Version 1.1.1, for **SPT 4.1.6**. Made by **Kennerz**.
 
 ## Requirements
 
@@ -44,7 +44,9 @@ The wall and the ammo case are the **only** way to get the Thundergun and its ca
 
 ## Settings (F12)
 
-Volume sliders only: **Shot** (the blast), **Reload and handling** (draw, reload, tech beep, dry click, rattle), **Purchase** (BO3's cha-ching), **Wall buy** (the gun coming off the wall) and **Deny** (a refused purchase). The Zeus Cannon's BO3 shot layer follows Pack-a-Punch's own "Pack-a-Punch shot" slider.
+**Size:** **Default** is smaller and sits lower, so it blocks less of your view, with the menu character's carry refitted to match. **Large** is BO3's full size, as the Thundergun first shipped.
+
+Volume sliders: **Shot** (the blast), **Reload and handling** (draw, reload, tech beep, dry click, rattle), **Purchase** (BO3's cha-ching), **Wall buy** (the gun coming off the wall) and **Deny** (a refused purchase). The Zeus Cannon's BO3 shot layer follows Pack-a-Punch's own "Pack-a-Punch shot" slider.
 
 Prices are in `SPT_Runtime\user\mods\Thundergun\config.json` (create it to change them):
 
@@ -76,3 +78,4 @@ Delete `BepInEx\plugins\Thundergun\` and `SPT_Runtime\user\mods\Thundergun\`. Yo
 - **1.0.1:** hot patch. Traders pay a flat 935,000 RUB for the Thundergun (plus the Pack-a-Punch fee, 500,000 or 5,000 depending on PaP's mode, when infused). A pressure cartridge sells for 10,000 RUB, 2,000 less per spent charge, and 0 when empty. The Thundergun no longer loses durability.
 - **1.0.2:** hot patch for the "hands are busy" glitch. The Thundergun can no longer jam, misfeed, misfire or overheat (a malfunction could leave the hands stuck, as its cartridge cannot be pulled out to clear it), and its reload and trigger rules now fall back to the game's own if they ever fail, instead of leaving a reload half done.
 - **1.1.0:** the Thundergun and its cartridges only come from the wall buy and the ammo case (never flea, traders, loot, bots or daily rewards); every cartridge loaded into the Zeus Cannon gets its four charges, also after a restart; the Zeus Cannon's lights stay orange (deeper and redder); camo on the body, tubes and cartridge but not the stock, control box or wires; Origins camo support with blue lights and its own inventory picture; no Pack-a-Punch shot tail over the blast. Needs PaP Hideout Module 2.0.0 or newer for the Pack-a-Punch features.
+- **1.1.1:** a Size option in F12. Default is smaller and sits lower, so it blocks less of your view, with the menu character holding it to match. Large is the old size.
