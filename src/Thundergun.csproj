@@ -13,17 +13,22 @@
     <GamePath>D:\OTHER LAUNCHERS\BUTTERSTATE</GamePath>
     <ManagedPath>$(GamePath)\EscapeFromTarkov_Data\Managed</ManagedPath>
     <PluginOutputPath>$(GamePath)\BepInEx\plugins\Thundergun</PluginOutputPath>
+    <!-- Release builds (-p:ReleaseBuild=true): F12 shows players only their settings (ReleaseMenu.cs) -->
+    <DefineConstants Condition="'$(ReleaseBuild)' == 'true'">$(DefineConstants);RELEASE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="BepInEx" HintPath="$(GamePath)\BepInEx\core\BepInEx.dll" Private="false" />
     <Reference Include="0Harmony" HintPath="$(GamePath)\BepInEx\core\0Harmony.dll" Private="false" />
+    <Reference Include="spt-common" HintPath="$(GamePath)\BepInEx\plugins\spt\spt-common.dll" Private="false" />
     <Reference Include="spt-reflection" HintPath="$(GamePath)\BepInEx\plugins\spt\spt-reflection.dll" Private="false" />
     <Reference Include="Assembly-CSharp" HintPath="$(ManagedPath)\Assembly-CSharp.dll" Private="false" />
+    <Reference Include="AnimationSystem.Types" HintPath="$(ManagedPath)\AnimationSystem.Types.dll" Private="false" />
     <Reference Include="Comfort" HintPath="$(ManagedPath)\Comfort.dll" Private="false" />
     <Reference Include="Comfort.Unity" HintPath="$(ManagedPath)\Comfort.Unity.dll" Private="false" />
     <Reference Include="UnityEngine" HintPath="$(ManagedPath)\UnityEngine.dll" Private="false" />
     <Reference Include="UnityEngine.CoreModule" HintPath="$(ManagedPath)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(ManagedPath)\UnityEngine.TextRenderingModule.dll" Private="false" />
     <Reference Include="UnityEngine.IMGUIModule" HintPath="$(ManagedPath)\UnityEngine.IMGUIModule.dll" Private="false" />
     <Reference Include="UnityEngine.AnimationModule" HintPath="$(ManagedPath)\UnityEngine.AnimationModule.dll" Private="false" />
     <Reference Include="UnityEngine.AudioModule" HintPath="$(ManagedPath)\UnityEngine.AudioModule.dll" Private="false" />
@@ -45,7 +50,7 @@
       <IconFiles Include="$(MSBuildProjectDirectory)\..\icons\*.png" />
     </ItemGroup>
     <Copy SourceFiles="@(IconFiles)" DestinationFolder="$(PluginOutputPath)\icons" />
-    <!-- BO3's purchase "cha-ching" for the hideout wall buy and ammo box -->
+    <!-- the original's purchase "cha-ching" for the hideout wall buy and ammo box -->
     <ItemGroup>
       <SoundFiles Include="$(MSBuildProjectDirectory)\..\sounds\*.wav" />
     </ItemGroup>

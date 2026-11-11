@@ -79,6 +79,8 @@ namespace Thundergun
                             ThundergunPlugin.Log.LogWarning($"Couldn't put the bought Thundergun into the weapons-mode gear: {added.Error}");
                     }
                 }
+                // Newly bought: drawn with the original's first raise
+                ThundergunBootUp.Next();
                 if (HideoutUncensored.Draw(owner, slotId))
                     Notify("Thundergun bought and equipped.");
                 else if (owner.InShootingRange && Enum.TryParse(slotId, out EquipmentSlot slot))

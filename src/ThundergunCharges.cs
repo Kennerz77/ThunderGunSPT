@@ -31,12 +31,29 @@ namespace Thundergun
 
         public static void Enable(Harmony harmony)
         {
-            Prefix(harmony, typeof(Player.FirearmController), "ReloadMag", nameof(ReloadMagPrefix));
-            Prefix(harmony, typeof(ClientFirearmController), "ReloadMag", nameof(ReloadMagPrefix));
-            Prefix(harmony, typeof(Player.FirearmController), "QuickReloadMag", nameof(QuickReloadPrefix));
-            Prefix(harmony, typeof(ClientFirearmController), "QuickReloadMag", nameof(QuickReloadPrefix));
-            Prefix(harmony, typeof(Player.FirearmController), "ReloadWithAmmo", nameof(ReloadWithAmmoPrefix));
-            Prefix(harmony, typeof(ClientFirearmController), "ReloadWithAmmo", nameof(ReloadWithAmmoPrefix));
+            // Every hands controller that declares the reloads: EFT's own and any mod's subclass (Fika's client
+            // controller overrides ReloadMag, which once let the canister be swapped with a charge still in it)
+            foreach (Type type in AccessTools.AllTypes().Where(t => typeof(Player.FirearmController).IsAssignableFrom(t)))
+            {
+                PrefixIfDeclared(harmony, type, "ReloadMag", nameof(ReloadMagPrefix));
+                PrefixIfDeclared(harmony, type, "QuickReloadMag", nameof(QuickReloadPrefix));
+                PrefixIfDeclared(harmony, type, "ReloadWithAmmo", nameof(ReloadWithAmmoPrefix));
+            }
+        }
+
+        private static void PrefixIfDeclared(Harmony harmony, Type type, string method, string prefix)
+        {
+            MethodInfo target = AccessTools.DeclaredMethod(type, method);
+            if (target == null || target.IsAbstract)
+                return;
+            try
+            {
+                harmony.Patch(target, new HarmonyMethod(typeof(ThundergunCharges).GetMethod(prefix, BindingFlags.Static | BindingFlags.NonPublic)));
+            }
+            catch (Exception e)
+            {
+                ThundergunPlugin.Log.LogWarning($"{type.Name}.{method}: the reload rule isn't on it ({e.Message})");
+            }
         }
 
         private static void Prefix(Harmony harmony, Type type, string method, string prefix)

@@ -91,8 +91,8 @@ namespace Thundergun.Editor
         }
 
         /// <summary>
-        /// The gun from its left side (the control box), muzzle to the left as EFT pictures its guns. Laid out in CoD
-        /// space through j_gun: the barrel (CoD +X) along +Z, up (CoD +Z) along +Y, its left (CoD +Y) along -X.
+        /// The gun from its left side (the control box), muzzle to the left as EFT pictures its guns. Laid out in the original game
+        /// space through j_gun: the barrel (the original game +X) along +Z, up (the original game +Z) along +Y, its left (the original game +Y) along -X.
         /// </summary>
         private static Texture2D LoadTexture(string path)
         {
@@ -111,7 +111,7 @@ namespace Thundergun.Editor
                 Transform jgun = go.GetComponentsInChildren<Transform>(true).First(t => t.name == "j_gun");
                 jgun.SetParent(null, true);
                 jgun.position = Vector3.zero;
-                jgun.rotation = TgSpace.Rot(TgBo3.LoadModel().Bones[0].Rest);
+                jgun.rotation = TgSpace.Rot(TgClassic.LoadModel().Bones[0].Rest);
                 Object.DestroyImmediate(go);
                 go = jgun.gameObject;
                 Dress(go, camo, lit, on, null, origins);

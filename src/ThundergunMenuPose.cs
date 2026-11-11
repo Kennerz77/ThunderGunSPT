@@ -11,7 +11,7 @@ namespace Thundergun
     /// <summary>
     /// The character on the raid confirmation and loading screens. The game poses it with the gun's own animations:
     /// "PATROL" to hold it, and every few seconds a random weapon move (look, check ammo, reload). The Thundergun's
-    /// animations are all first-person ones (its PATROL is BO3's sprint loop), which swing the gun around and leave the
+    /// animations are all first-person ones (its PATROL is the original's sprint loop), which swing the gun around and leave the
     /// body's hands reaching for nothing. So on these screens it holds still: the gun is posed once in its idle, its
     /// animator is stopped, and the character skips the random weapon moves.
     /// First person is untouched.

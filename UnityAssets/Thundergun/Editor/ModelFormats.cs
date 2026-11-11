@@ -3,70 +3,70 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-// Readers for the BO3 mod-tools binary exports (*.xmodel_bin / *.xanim_bin) in the BO1 Thundergun port.
+// Readers for the the original mod-tools binary exports (*.xmodel_bin / *.xanim_bin) in the the original Thundergun port.
 // A file is "*LZ4*", the uncompressed size (uint32) and one raw LZ4 block. Inside is the chunked binary form of the
 // text xmodel_export / xanim_export: each record starts with a 16-bit id, often with a 16-bit value packed after it,
 // and is 4-byte aligned. The ids below were mapped against the files themselves (every file parses to its last byte).
 // Kept free of UnityEngine so the parsing can be tested outside the editor.
-namespace Thundergun.CodFormats
+namespace Thundergun.ModelFormats
 {
-    public struct CodVec { public float X, Y, Z; }
+    public struct SrcVec { public float X, Y, Z; }
 
-    /// <summary>A bone or anim part pose in CoD space: position (inches) and the bone's own X/Y/Z axes in world space.</summary>
-    public struct CodPose
+    /// <summary>A bone or anim part pose in the original game space: position (inches) and the bone's own X/Y/Z axes in world space.</summary>
+    public struct SrcPose
     {
-        public CodVec Pos, AxisX, AxisY, AxisZ;
+        public SrcVec Pos, AxisX, AxisY, AxisZ;
     }
 
-    public class CodBone
+    public class SrcBone
     {
         public string Name;
         public int Parent;
-        public CodPose Rest;
+        public SrcPose Rest;
     }
 
-    public class CodCorner
+    public class SrcCorner
     {
         public int Vertex;
-        public CodVec Normal;
+        public SrcVec Normal;
         public float U, V;
     }
 
-    public class CodFace
+    public class SrcFace
     {
         public int Object, Material;
-        public CodCorner[] Corners = new CodCorner[3];
+        public SrcCorner[] Corners = new SrcCorner[3];
     }
 
-    public class CodVertex
+    public class SrcVertex
     {
-        public CodVec Pos;
+        public SrcVec Pos;
         public List<(int bone, float weight)> Weights = new List<(int, float)>();
     }
 
-    public class CodMaterial
+    public class SrcMaterial
     {
         public string Name, Type, Image;
     }
 
-    public class CodModel
+    public class SrcModel
     {
-        public List<CodBone> Bones = new List<CodBone>();
-        public List<CodVertex> Vertices = new List<CodVertex>();
-        public List<CodFace> Faces = new List<CodFace>();
+        public List<SrcBone> Bones = new List<SrcBone>();
+        public List<SrcVertex> Vertices = new List<SrcVertex>();
+        public List<SrcFace> Faces = new List<SrcFace>();
         public List<string> Objects = new List<string>();
-        public List<CodMaterial> Materials = new List<CodMaterial>();
+        public List<SrcMaterial> Materials = new List<SrcMaterial>();
 
         public int BoneIndex(string name) => Bones.FindIndex(b => b.Name == name);
 
-        public static CodModel Load(string path)
+        public static SrcModel Load(string path)
         {
-            var r = new CodReader(CodReader.Decompress(path), path);
-            var model = new CodModel();
+            var r = new SrcReader(SrcReader.Decompress(path), path);
+            var model = new SrcModel();
             int section = 0; // 1 bones, 2 vertices, 3 faces, 4 materials
             int bone = -1;
-            CodVertex vertex = null;
-            CodFace face = null;
+            SrcVertex vertex = null;
+            SrcFace face = null;
             int corner = -1;
 
             while (!r.End)
@@ -81,14 +81,14 @@ namespace Thundergun.CodFormats
                     case 0xF099: // BONE index parent "name"
                         r.Skip(2);
                         int index = r.I32(), parent = r.I32();
-                        while (model.Bones.Count <= index) model.Bones.Add(new CodBone());
+                        while (model.Bones.Count <= index) model.Bones.Add(new SrcBone());
                         model.Bones[index].Name = r.Str();
                         model.Bones[index].Parent = parent;
                         break;
                     case 0xDD9A: bone = r.U16(); break; // BONE (pose block)
                     case 0x9383: // OFFSET
                         r.Skip(2);
-                        CodVec offset = r.Vec();
+                        SrcVec offset = r.Vec();
                         if (section == 1) model.Bones[bone].Rest.Pos = offset;
                         else if (section == 2) vertex.Pos = offset;
                         break;
@@ -103,12 +103,12 @@ namespace Thundergun.CodFormats
                         int v = id == 0x8F03 ? r.U16() : SkipThen(r, 2, () => r.I32());
                         if (section == 2)
                         {
-                            while (model.Vertices.Count <= v) model.Vertices.Add(new CodVertex());
+                            while (model.Vertices.Count <= v) model.Vertices.Add(new SrcVertex());
                             vertex = model.Vertices[v];
                         }
                         else
                         {
-                            face.Corners[++corner] = new CodCorner { Vertex = v };
+                            face.Corners[++corner] = new SrcCorner { Vertex = v };
                         }
                         break;
                     case 0xEA46: r.Skip(2); break; // BONES (weight count)
@@ -118,13 +118,13 @@ namespace Thundergun.CodFormats
                         break;
                     case 0xBE92: r.Skip(2); r.I32(); section = 3; break; // NUMFACES
                     case 0x562F: // TRI object material (u8 u8)
-                        face = new CodFace { Object = r.U8(), Material = r.U8() };
+                        face = new SrcFace { Object = r.U8(), Material = r.U8() };
                         model.Faces.Add(face);
                         corner = -1;
                         break;
                     case 0x6711: // TRI16 object material (u16 u16)
                         r.Skip(2);
-                        face = new CodFace { Object = r.U16(), Material = r.U16() };
+                        face = new SrcFace { Object = r.U16(), Material = r.U16() };
                         model.Faces.Add(face);
                         corner = -1;
                         break;
@@ -147,7 +147,7 @@ namespace Thundergun.CodFormats
                     case 0xA1B2: r.Skip(2); section = 4; break; // NUMMATERIALS
                     case 0xA700: // MATERIAL index "name" "type" "image"
                         r.Skip(2);
-                        model.Materials.Add(new CodMaterial { Name = r.Str(), Type = r.Str(), Image = r.Str() });
+                        model.Materials.Add(new SrcMaterial { Name = r.Str(), Type = r.Str(), Image = r.Str() });
                         break;
                     // Material lighting properties we don't use
                     case 0x6DAB: case 0x37FF: case 0x4265: case 0x317C: case 0xE593: r.Skip(18); break; // 4 floats
@@ -160,27 +160,27 @@ namespace Thundergun.CodFormats
             return model;
         }
 
-        private static int SkipThen(CodReader r, int skip, Func<int> read)
+        private static int SkipThen(SrcReader r, int skip, Func<int> read)
         {
             r.Skip(skip);
             return read();
         }
     }
 
-    public class CodAnim
+    public class SrcAnim
     {
         public float FrameRate;
         public List<string> Parts = new List<string>();
         /// <summary>Per frame, per part (same order as <see cref="Parts"/>): the pose in view space.</summary>
-        public List<CodPose[]> Frames = new List<CodPose[]>();
+        public List<SrcPose[]> Frames = new List<SrcPose[]>();
 
         public int PartIndex(string name) => Parts.IndexOf(name);
 
-        public static CodAnim Load(string path)
+        public static SrcAnim Load(string path)
         {
-            var r = new CodReader(CodReader.Decompress(path), path);
-            var anim = new CodAnim();
-            CodPose[] frame = null;
+            var r = new SrcReader(SrcReader.Decompress(path), path);
+            var anim = new SrcAnim();
+            SrcPose[] frame = null;
             int part = -1;
 
             while (!r.End)
@@ -201,7 +201,7 @@ namespace Thundergun.CodFormats
                     case 0xB917: r.Skip(2); r.I32(); break; // NUMFRAMES
                     case 0xC723: // FRAME n
                         r.Skip(2); r.I32();
-                        frame = new CodPose[anim.Parts.Count];
+                        frame = new SrcPose[anim.Parts.Count];
                         anim.Frames.Add(frame);
                         break;
                     case 0x745A: part = r.U16(); break; // PART (pose block)
@@ -219,13 +219,13 @@ namespace Thundergun.CodFormats
         }
     }
 
-    internal class CodReader
+    internal class SrcReader
     {
         private readonly byte[] _d;
         private readonly string _path;
         public int Pos;
 
-        public CodReader(byte[] data, string path)
+        public SrcReader(byte[] data, string path)
         {
             _d = data;
             _path = path;
@@ -238,14 +238,14 @@ namespace Thundergun.CodFormats
         public ushort U16() { ushort v = BitConverter.ToUInt16(_d, Pos); Pos += 2; return v; }
         public int I32() { int v = BitConverter.ToInt32(_d, Pos); Pos += 4; return v; }
         public float F32() { float v = BitConverter.ToSingle(_d, Pos); Pos += 4; return v; }
-        public CodVec Vec() => new CodVec { X = F32(), Y = F32(), Z = F32() };
+        public SrcVec Vec() => new SrcVec { X = F32(), Y = F32(), Z = F32() };
 
         /// <summary>Three normalised int16 (axis rows and normals), after the record's id.</summary>
-        public CodVec Axis()
+        public SrcVec Axis()
         {
             float x = BitConverter.ToInt16(_d, Pos) / 32767f, y = BitConverter.ToInt16(_d, Pos + 2) / 32767f, z = BitConverter.ToInt16(_d, Pos + 4) / 32767f;
             Pos += 6;
-            return new CodVec { X = x, Y = y, Z = z };
+            return new SrcVec { X = x, Y = y, Z = z };
         }
 
         /// <summary>Null-terminated string, padded to the 4-byte record alignment.</summary>
@@ -263,7 +263,7 @@ namespace Thundergun.CodFormats
         {
             byte[] s = File.ReadAllBytes(path);
             if (s.Length < 9 || Encoding.ASCII.GetString(s, 0, 5) != "*LZ4*")
-                throw new InvalidDataException($"{path}: not an LZ4-packed BO3 export");
+                throw new InvalidDataException($"{path}: not an LZ4-packed model export");
             int rawSize = BitConverter.ToInt32(s, 5);
             var d = new byte[rawSize];
             int pos = 9, o = 0;

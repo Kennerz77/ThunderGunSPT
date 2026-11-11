@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Thundergun.CodFormats;
+using Thundergun.ModelFormats;
 using UnityEditor;
 using UnityEngine;
 
 namespace Thundergun.Editor
 {
     /// <summary>
-    /// Turns BO1 viewmodel animations into clips for EFT's weapon rig.
+    /// Turns the original viewmodel animations into clips for EFT's weapon rig.
     ///
-    /// The gun and its moving parts take BO1's poses directly. BO1 view space is anchored to the rig by one
-    /// translation: the right wrist in the first idle frame lands on the Saiga's right palm (BO1 holds its viewmodel
+    /// The gun and its moving parts take the original's poses directly. The original view space is anchored to the rig by one
+    /// translation: the right wrist in the first idle frame lands on the Saiga's right palm (the original holds its viewmodel
     /// lower and further out, for a narrower FOV). The camera follows tag_camera's motion relative to idle.
     ///
-    /// EFT's arms are a different skeleton, so they're solved, not copied: each palm goes where BO1's wrist is, the
-    /// elbow is placed by two-bone IK with BO1's elbow as the pole, and forearm twist is shared out over the two
+    /// EFT's arms are a different skeleton, so they're solved, not copied: each palm goes where the original's wrist is, the
+    /// elbow is placed by two-bone IK with the original's elbow as the pole, and forearm twist is shared out over the two
     /// twist bones. Orientations are matched through frames built from each rig's own joint positions (wrist to
     /// middle knuckle, index to pinky knuckle; each finger joint to the next), so neither rig's bone axis
     /// conventions matter.
@@ -24,19 +24,19 @@ namespace Thundergun.Editor
     {
         private readonly Transform _root;
         private readonly Dictionary<string, Transform> _rig;
-        private readonly CodModel _gun;
+        private readonly SrcModel _gun;
         private readonly Dictionary<string, Transform> _gunBones;
         private readonly Quaternion _jgunLocal;
-        private readonly CodModel _bind; // BO1's arms+gun animation rig (am_t5_thundergun), for bind-relative joints
+        private readonly SrcModel _bind; // The original's arms+gun animation rig (am_t5_thundergun), for bind-relative joints
 
         private readonly Dictionary<string, Vector3> _restPos = new Dictionary<string, Vector3>();
         private readonly Dictionary<string, Quaternion> _restRot = new Dictionary<string, Quaternion>();
         private readonly Dictionary<string, Quaternion> _restLocal = new Dictionary<string, Quaternion>();
         private readonly Dictionary<string, Vector3> _restLocalPos = new Dictionary<string, Vector3>();
 
-        private Vector3 _offset;      // BO1 view space -> prefab space translation
-        private CodPose _cameraRef;   // tag_camera at idle
-        private readonly CodAnim _idle; // poses for parts a partial animation doesn't key
+        private Vector3 _offset;      // The original view space -> prefab space translation
+        private SrcPose _cameraRef;   // tag_camera at idle
+        private readonly SrcAnim _idle; // poses for parts a partial animation doesn't key
 
         private readonly Side[] _sides;
 
@@ -45,9 +45,9 @@ namespace Thundergun.Editor
         private class Finger
         {
             public string[] Eft = new string[3];
-            public string[] Bo = new string[3];
+            public string[] Src = new string[3];
             public Quaternion[] Qe = new Quaternion[2];  // EFT joint 1-2: bone rotation -> anatomical frame
-            public Quaternion Bind23;                     // BO joint 2 -> 3 relative rotation at bind
+            public Quaternion Bind23;                     // The original joint 2 -> 3 relative rotation at bind
         }
 
         private class Side
@@ -57,15 +57,15 @@ namespace Thundergun.Editor
             public float L1, L2;
             public Quaternion QUpper, QFore1, QHand;
             public Vector3 RestPole;
-            public Vector3 Shift; // shoulder moved forward to reach BO1's grips
+            public Vector3 Shift; // shoulder moved forward to reach the original's grips
             public Finger[] Fingers;
         }
 
         // EFT Digit1..5 = thumb, index, middle, ring, pinky
         private static readonly string[] BoFingers = { "thumb", "index", "mid", "ring", "pinky" };
 
-        public TgRetarget(Transform root, Dictionary<string, Transform> rig, CodModel gun, Dictionary<string, Transform> gunBones,
-            Quaternion jgunLocal, CodModel bind, CodAnim idle)
+        public TgRetarget(Transform root, Dictionary<string, Transform> rig, SrcModel gun, Dictionary<string, Transform> gunBones,
+            Quaternion jgunLocal, SrcModel bind, SrcAnim idle)
         {
             _root = root;
             _rig = rig;
@@ -85,11 +85,11 @@ namespace Thundergun.Editor
 
             _sides = new[] { MakeSide("L", "le"), MakeSide("R", "ri") };
 
-            // Anchor, per axis, between BO1's own placement (its eye on EFT's eye) and the Saiga's (BO1's right wrist
-            // on the Saiga's right palm). BO1 carries the gun at the hip, further out than EFT's arms reach: take the
-            // Saiga's depth so the front grip is reachable, but keep most of BO1's low carry so the back of the gun
+            // Anchor, per axis, between the original's own placement (its eye on EFT's eye) and the Saiga's (the original's right wrist
+            // on the Saiga's right palm). The original carries the gun at the hip, further out than EFT's arms reach: take the
+            // Saiga's depth so the front grip is reachable, but keep most of the original's low carry so the back of the gun
             // stays clear of the camera.
-            CodPose[] idle0 = idle.Frames[0];
+            SrcPose[] idle0 = idle.Frames[0];
             _cameraRef = idle0[idle.PartIndex("tag_camera")];
             Vector3 eyeAnchor = _restPos["Camera_animated"] - TgSpace.Pos(_cameraRef.Pos);
             Vector3 palmAnchor = _restPos["Base HumanRPalm"] - TgSpace.Pos(idle0[idle.PartIndex("j_wrist_ri")].Pos);
@@ -105,13 +105,13 @@ namespace Thundergun.Editor
             }
         }
 
-        /// <summary>How far (0 = BO1's placement, 1 = the Saiga's) the gun moves on each prefab axis: right, up, forward.</summary>
+        /// <summary>How far (0 = the original's placement, 1 = the Saiga's) the gun moves on each prefab axis: right, up, forward.</summary>
         private static readonly Vector3 AnchorBlend = new Vector3(0.5f, 0.2f, 1f);
-        /// <summary>Hand-tuned in game: further out and a little up, framed like BO1/BO3's view of the gun.</summary>
+        /// <summary>Hand-tuned in game: further out and a little up, framed like the original/the original's view of the gun.</summary>
         private static readonly Vector3 ViewNudge = new Vector3(0f, 0.01f, 0.14f);
         private const float ReachMargin = 0.02f;
 
-        // The Thundergun's visible kick: straight back into the shoulder and settling, instead of BO1's upward rock
+        // The Thundergun's visible kick: straight back into the shoulder and settling, instead of the original's upward rock
         private const float KickBack = 0.06f, KickPeak = 0.04f, KickSettle = 0.25f;
         private const float CameraKickDegrees = 0.7f, CameraKickBack = 0.012f;
 
@@ -156,7 +156,7 @@ namespace Thundergun.Editor
                 for (int j = 0; j < 3; j++)
                 {
                     fg.Eft[j] = P($"Digit{k + 1}{j + 1}");
-                    fg.Bo[j] = $"j_{BoFingers[k]}_{b}_{j + 1}";
+                    fg.Src[j] = $"j_{BoFingers[k]}_{b}_{j + 1}";
                 }
                 Vector3 up = HandFrame(_restPos[s.Palm], _restPos[P("Digit31")], _restPos[P("Digit21")], _restPos[P("Digit51")]) * Vector3.up;
                 for (int j = 0; j < 2; j++)
@@ -164,7 +164,7 @@ namespace Thundergun.Editor
                     Vector3 dir = _restPos[fg.Eft[j + 1]] - _restPos[fg.Eft[j]];
                     fg.Qe[j] = Quaternion.Inverse(_restRot[fg.Eft[j]]) * Quaternion.LookRotation(dir, up);
                 }
-                int b2 = _bind.BoneIndex(fg.Bo[1]), b3 = _bind.BoneIndex(fg.Bo[2]);
+                int b2 = _bind.BoneIndex(fg.Src[1]), b3 = _bind.BoneIndex(fg.Src[2]);
                 fg.Bind23 = Quaternion.Inverse(TgSpace.Rot(_bind.Bones[b2].Rest)) * TgSpace.Rot(_bind.Bones[b3].Rest);
                 s.Fingers[k] = fg;
             }
@@ -181,19 +181,19 @@ namespace Thundergun.Editor
 
         // ---------- One frame ----------
 
-        /// <summary>Local transforms of every animated transform (path relative to the rig root) for one BO1 frame.</summary>
+        /// <summary>Local transforms of every animated transform (path relative to the rig root) for one the original frame.</summary>
         /// <param name="kickFrom">
         /// When set, the clip's own gun motion is taken out and replaced by <see cref="KickCurve"/>, counted from this
-        /// frame: everything BO1 moves with the gun (hands, parts) follows the replacement.
+        /// frame: everything the original moves with the gun (hands, parts) follows the replacement.
         /// </param>
         /// <param name="toIdle">
         /// 0..1: how far this frame's whole viewmodel (gun, hands, parts together) is moved onto the idle pose. Used to
         /// ease animations that start or end away from the idle into and out of it.
         /// </param>
-        public Dictionary<string, (Vector3 pos, Quaternion rot)> Solve(CodAnim anim, int frame, List<string> warnings, int kickFrom = -1, float toIdle = 0f)
+        public Dictionary<string, (Vector3 pos, Quaternion rot)> Solve(SrcAnim anim, int frame, List<string> warnings, int kickFrom = -1, float toIdle = 0f)
         {
-            CodPose[] f = anim.Frames[frame];
-            CodPose Part(string part)
+            SrcPose[] f = anim.Frames[frame];
+            SrcPose Part(string part)
             {
                 int i = anim.PartIndex(part);
                 return i >= 0 ? f[i] : _idle.Frames[0][Index(_idle, part)];
@@ -207,9 +207,9 @@ namespace Thundergun.Editor
             float kick = 0f, rumble = 0f;
             if (corrected)
             {
-                // Measured from the idle pose, not the shot's own first frame: BO1 starts the shot a little higher,
+                // Measured from the idle pose, not the shot's own first frame: the original starts the shot a little higher,
                 // and the snap up to it and back read as the gun clipping upwards
-                CodPose g0 = _idle.Frames[0][Index(_idle, "tag_weapon")], gt = Part("tag_weapon");
+                SrcPose g0 = _idle.Frames[0][Index(_idle, "tag_weapon")], gt = Part("tag_weapon");
                 Quaternion r0 = TgSpace.Rot(g0);
                 float w = kickFrom >= 0 ? 1f : toIdle;
                 kickRot = Quaternion.Slerp(Quaternion.identity, r0 * Quaternion.Inverse(TgSpace.Rot(gt)), w);
@@ -217,7 +217,7 @@ namespace Thundergun.Editor
                 kickToPos = Vector3.Lerp(kickFromPos, TgSpace.Pos(g0.Pos) + _offset, w);
                 if (kickFrom >= 0)
                 {
-                    // The shot: no BO1 rock, only a push straight back along the bore, and a short rumble through it
+                    // The shot: no the original rock, only a push straight back along the bore, and a short rumble through it
                     float t = (frame - kickFrom) / (anim.FrameRate > 0 ? anim.FrameRate : 30f);
                     kick = KickCurve(t);
                     rumble = Rumble(t);
@@ -235,8 +235,8 @@ namespace Thundergun.Editor
             var world = new Dictionary<string, Quaternion>();
             var result = new Dictionary<string, (Vector3, Quaternion)>();
 
-            // Camera: BO1's camera motion relative to idle, on top of the rig's camera
-            // Not during the shot: BO1's camera jumps up with it, which read as the gun kicking up. The shot gets a
+            // Camera: the original's camera motion relative to idle, on top of the rig's camera
+            // Not during the shot: the original's camera jumps up with it, which read as the gun kicking up. The shot gets a
             // small jolt of its own instead, a slight pitch and push back, so it still feels forceful.
             Quaternion camDelta = kickFrom >= 0
                 ? Quaternion.AngleAxis(CameraRumbleDegrees * rumble, Vector3.forward) * Quaternion.AngleAxis(-CameraKickDegrees * kick, Vector3.right)
@@ -260,7 +260,7 @@ namespace Thundergun.Editor
 
             // Moving parts, relative to their parent bone in the gun model
             var gunWorld = new Dictionary<string, (Vector3 p, Quaternion r)> { [_gun.Bones[0].Name] = (gunPos, gunRot) };
-            foreach (CodBone bone in _gun.Bones.Skip(1))
+            foreach (SrcBone bone in _gun.Bones.Skip(1))
             {
                 string parent = _gun.Bones[bone.Parent].Name;
                 (Vector3 pp, Quaternion pr) = gunWorld[parent];
@@ -290,7 +290,7 @@ namespace Thundergun.Editor
             return result;
         }
 
-        private void SolveArm(Side s, CodAnim anim, CodPose[] f, Func<string, Vector3> boPos, Func<string, Quaternion> boRot,
+        private void SolveArm(Side s, SrcAnim anim, SrcPose[] f, Func<string, Vector3> boPos, Func<string, Quaternion> srcRot,
             Dictionary<string, Quaternion> world, Dictionary<string, (Vector3, Quaternion)> result, List<string> warnings, int frame,
             Vector3 weaponPos, Quaternion weaponRot)
         {
@@ -300,7 +300,7 @@ namespace Thundergun.Editor
             result[TgRig.PathOf(collar, _root)] = (collar.parent.InverseTransformPoint(_root.TransformPoint(_restPos[s.Collar] + s.Shift)), _restLocal[s.Collar]);
             Vector3 pole = boPos($"j_elbow_{s.B}") - S;
 
-            // Two-bone IK: elbow on the plane through shoulder, wrist and BO1's elbow
+            // Two-bone IK: elbow on the plane through shoulder, wrist and the original's elbow
             Vector3 d = W - S;
             float dist = d.magnitude;
             float reach = s.L1 + s.L2 - 1e-4f;
@@ -322,7 +322,7 @@ namespace Thundergun.Editor
             Quaternion rFore2 = rFore1 * _restLocal[s.Fore2];
             Quaternion rFore3 = rFore2 * _restLocal[s.Fore3];
 
-            // Palm: BO1's hand frame, expressed in EFT's palm axes
+            // Palm: the original's hand frame, expressed in EFT's palm axes
             Vector3 bw = boPos($"j_wrist_{s.B}");
             Quaternion boHand = HandFrame(bw, boPos($"j_mid_{s.B}_1"), boPos($"j_index_{s.B}_1"), boPos($"j_pinky_{s.B}_1"));
             Quaternion rPalm = boHand * Quaternion.Inverse(s.QHand);
@@ -342,7 +342,7 @@ namespace Thundergun.Editor
             world[s.Palm] = rPalm;
 
             // EFT's hand IK pulls each palm onto its marker on the gun and bends the elbow towards its goal. The
-            // markers ride the animation (as in vanilla reloads), so the hands go where BO1's go: the left one
+            // markers ride the animation (as in vanilla reloads), so the hands go where the original's go: the left one
             // carries the fresh canister in instead of staying on the grip
             Quaternion toWeapon = Quaternion.Inverse(weaponRot);
             foreach (string marker in new[] { $"weapon_{s.E}_IK_marker", $"weapon_{s.E}_hand_marker" })
@@ -363,15 +363,15 @@ namespace Thundergun.Editor
                 Quaternion r2 = Quaternion.identity;
                 for (int j = 0; j < 2; j++)
                 {
-                    Vector3 fdir = boPos(fg.Bo[j + 1]) - boPos(fg.Bo[j]);
+                    Vector3 fdir = boPos(fg.Src[j + 1]) - boPos(fg.Src[j]);
                     Quaternion r = Quaternion.LookRotation(fdir, handUp) * Quaternion.Inverse(fg.Qe[j]);
                     SetLocal(result, fg.Eft[j], parent, r);
                     parent = r;
                     r2 = r;
                 }
-                // Last joint: no fingertip bone on either rig, so carry over BO1's bend relative to its bind pose
-                Quaternion bo2 = boRot(fg.Bo[1]), bo3 = boRot(fg.Bo[2]);
-                Quaternion delta = bo3 * Quaternion.Inverse(bo2 * fg.Bind23);
+                // Last joint: no fingertip bone on either rig, so carry over the original's bend relative to its bind pose
+                Quaternion rb2 = srcRot(fg.Src[1]), rb3 = srcRot(fg.Src[2]);
+                Quaternion delta = rb3 * Quaternion.Inverse(rb2 * fg.Bind23);
                 Quaternion r3 = delta * (r2 * _restLocal[fg.Eft[2]]);
                 SetLocal(result, fg.Eft[2], r2, r3);
             }
@@ -390,23 +390,23 @@ namespace Thundergun.Editor
             result[TgRig.PathOf(t, _root)] = (pos, rot);
         }
 
-        private static int Index(CodAnim anim, string part)
+        private static int Index(SrcAnim anim, string part)
         {
             int i = anim.PartIndex(part);
             if (i < 0)
-                throw new InvalidOperationException($"BO1 animation is missing part {part}");
+                throw new InvalidOperationException($"Source animation is missing part {part}");
             return i;
         }
 
         // ---------- Clips ----------
 
         /// <summary>
-        /// Bakes frames [first, last] of a BO1 animation into a clip with full position + rotation curves on every
+        /// Bakes frames [first, last] of a the original animation into a clip with full position + rotation curves on every
         /// animated transform, so switching states always restores the whole pose.
         /// </summary>
         /// <param name="easeIn">Frames over which the clip starts from the exact idle pose (it begins elsewhere).</param>
         /// <param name="easeOut">Frames over which the clip ends on the exact idle pose (the state after it is the idle).</param>
-        public AnimationClip BakeClip(string name, CodAnim anim, int first, int last, bool loop, List<string> warnings, bool kick = false,
+        public AnimationClip BakeClip(string name, SrcAnim anim, int first, int last, bool loop, List<string> warnings, bool kick = false,
             int easeIn = 0, int easeOut = 0)
         {
             first = Mathf.Clamp(first, 0, anim.Frames.Count - 1);
@@ -477,7 +477,7 @@ namespace Thundergun.Editor
         /// Places the weapon's markers from a solved frame: EFT's hand IK pulls the palms onto weapon_*_IK_marker,
         /// bends the elbows towards Bend_Goal_*, and aims with aim_camera.
         /// </summary>
-        public void PlaceMarkers(CodAnim idle, CodAnim adsUp)
+        public void PlaceMarkers(SrcAnim idle, SrcAnim adsUp)
         {
             // Pose the rig at idle so world positions can be read back
             ApplyFrame(idle, 0);
@@ -510,7 +510,7 @@ namespace Thundergun.Editor
             PlaceAt("shellport", "tag_brass");
             PlaceAt("patron_in_weapon", "tag_brass");
 
-            // ADS: BO1 aims through engine view offsets, not the viewmodel, so place the eye over the bore, just above
+            // ADS: the original aims through engine view offsets, not the viewmodel, so place the eye over the bore, just above
             // the top of the gun and a hand's width ahead of the grip (EFT lines aim_camera up with the camera)
             if (_rig.TryGetValue("aim_camera", out Transform aim) && _gunBones.TryGetValue("tag_flash", out Transform flash))
             {
@@ -555,7 +555,7 @@ namespace Thundergun.Editor
         }
 
         /// <summary>Applies a solved frame to the live rig (for marker placement and previews).</summary>
-        public void ApplyFrame(CodAnim anim, int frame)
+        public void ApplyFrame(SrcAnim anim, int frame)
         {
             var warnings = new List<string>();
             foreach (var (path, (p, r)) in Solve(anim, frame, warnings))

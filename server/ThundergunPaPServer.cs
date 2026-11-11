@@ -8,7 +8,7 @@ using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 namespace ThundergunServer;
 
 /// <summary>
-/// The Pack-a-Punched Thundergun (the Zeus Cannon) holds four charges per cartridge, as in BO1. Registered with PaP's
+/// The Pack-a-Punched Thundergun (the Zeus Cannon) holds four charges per cartridge, as in the original. Registered with PaP's
 /// server API (PaPServerApi), which runs it inside PaP's own upgrade and strip and sends the changed gun back to the
 /// client: upgrading tops the loaded cartridge up to four, however many it had left; stripping trims it back to a
 /// plain gun's two. Without PaP installed none of this loads.

@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Kennerz
+Copyright (c) 2026 Kenner
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-This license covers the mod's code (the .dll files). The Call of Duty models,
-textures, animations and sounds in the asset bundles and the sounds folder
-belong to Treyarch / Activision and are not covered by it.
+The MIT license covers this mod's code only. Third-party models, textures, animations,
+sounds and music in the asset bundles and sound folders belong to their respective
+owners and are not covered by it.

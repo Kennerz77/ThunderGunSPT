@@ -451,6 +451,8 @@ public class ThundergunProfileStoreHook(ISptLogger<ThundergunProfileStoreHook> l
     public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         ThundergunProfileStore.LogError = message => logger.Error(message);
+        // Players who switched the Thundergun off for normal gameplay: the Thunderguns and cartridges kept for them go (before anything reads them)
+        ThundergunNormalGame.RemoveOff(message => logger.Info(message));
         try
         {
             new ThundergunProfileStore.ProfileWritePatch().Enable();
@@ -471,6 +473,8 @@ public class ThundergunProfileStoreLoader(ISptLogger<ThundergunProfileStoreLoade
     {
         foreach (var (id, profile) in saveServer.GetProfiles())
         {
+            if (!ThundergunNormalGame.Now(id.ToString()))
+                continue; // zombies only: nothing kept to put back (ThundergunNormalGame removed it at start)
             try
             {
                 string? restored = ThundergunProfileStore.Restore(id, profile, jsonUtil);

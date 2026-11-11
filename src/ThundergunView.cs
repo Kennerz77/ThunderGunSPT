@@ -92,7 +92,7 @@ namespace Thundergun
     }
 
     /// <summary>
-    /// The ammo lights on the back of the gun, like BO1's: one per charge left. Unpowered (no charge, mid-reload,
+    /// The ammo lights on the back of the gun, like the original's: one per charge left. Unpowered (no charge, mid-reload,
     /// before the tech beep) the drum is dark all round. Powered, the plain Thundergun lights its two middle bulbs and
     /// shows the outer two idle; the Zeus Cannon lights all four with a purple cast. A shot puts one out.
     /// </summary>
@@ -154,7 +154,7 @@ namespace Thundergun
             if (_prefab != null)
                 ThundergunPaP.ApplyCamo(_prefab.gameObject, ShownWeapon());
 
-            // The container's sound player: at the F12 levels, and it carries BO3's shot for Pack-a-Punch
+            // The container's sound player: at the F12 levels, and it carries the original's shot for Pack-a-Punch
             WeaponSoundPlayer sounds = _prefab?.GetComponent<WeaponSoundPlayer>();
             ThundergunSounds.Register(sounds);
             AudioClip shot = sounds?.AdditionalSounds
@@ -306,7 +306,7 @@ namespace Thundergun
             _origins = infused && ThundergunPaP.IsOrigins(weapon);
             ApplyOriginsLook();
             int capacity = infused ? ThundergunCharges.ZeusCharges : ThundergunCharges.PlainCharges;
-            // BO3's orange section glow; the Zeus Cannon's carries a purple tint through it
+            // The original's orange section glow; the Zeus Cannon's carries a purple tint through it
             Color on = _origins ? OriginsBlue : _lightMap != null ? Plain : Orange; // the Zeus Cannon's glow stays orange (blue from Origins)
 
             for (int i = 0; i < LightOrder.Length; i++)

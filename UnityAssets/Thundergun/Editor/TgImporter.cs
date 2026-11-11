@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using EFT;
-using Thundergun.CodFormats;
+using Thundergun.ModelFormats;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -14,8 +14,8 @@ using Object = UnityEngine.Object;
 namespace Thundergun.Editor
 {
     /// <summary>
-    /// Builds the Thundergun's prefabs from the BO1 port (no Blender/FBX):
-    /// weapon_thundergun (EFT's weapon rig with the gun model, BO1 clips and the rebuilt Saiga controller),
+    /// Builds the Thundergun's prefabs from the the original port (no Blender/FBX):
+    /// weapon_thundergun (EFT's weapon rig with the gun model, the original clips and the rebuilt Saiga controller),
     /// weapon_thundergun_container (WeaponPrefab, sound player and the other EFT components the game reads), and the
     /// Zeus canister magazines (the canister mesh, split off the gun: EFT shows the magazine item in mod_magazine).
     /// </summary>
@@ -28,27 +28,28 @@ namespace Thundergun.Editor
 
         // Gun model faces on these bones are the canisters (the one in the gun, and the fresh one during a reload)
         private static readonly string[] CanisterBones = { "tag_ammo_drum_01", "tag_ammo_drum_02" };
-        // Faces with this material aren't drawn (BO3 hides it)
+        // Faces with this material aren't drawn (the original hides it)
         private const string HiddenMaterial = "mtl_weapon_scope_acog_lens";
 
         private const string Anims = "vm_thunder_gun_";
 
         /// <summary>
-        /// Which BO3 HD animation (and frame range, 30 fps) plays in each of EFT's Hands states. The reload is BO3's
+        /// Which the original HD animation (and frame range, 30 fps) plays in each of EFT's Hands states. The reload is the original's
         /// empty reload, split at its own notes: cell eject 1, canisters out 6, in 33, cell lock 62, end 90. The first
-        /// raise (switches flipped, barrel extended) is the arming draw and the inspect. States without a BO3
+        /// raise (switches flipped, barrel extended) is the arming draw and the inspect. States without a the original
         /// counterpart use the idle.
         /// </summary>
         private static readonly Dictionary<string, (string anim, int first, int last, bool loop)> HandsMap =
             new Dictionary<string, (string, int, int, bool)>
             {
                 // EFT lets the next shot or reload start only as the idle loop comes round: a short loop (like the
-                // Saiga's 0.3 s) keeps the gun responsive. BO3's full breathing idle plays as the long-idle fidget.
+                // Saiga's 0.3 s) keeps the gun responsive. The original's full breathing idle plays as the long-idle fidget.
                 ["IDLE"] = (Anims + "idle", 0, 9, true),
                 ["TOO IDLE"] = (Anims + "idle", 0, 999, true),
                 ["SPAWN"] = (Anims + "pullout", 0, 0, false),
-                // Every draw is BO3's first raise: switches flipped, barrel run out
-                ["OUT TO IDLE"] = (Anims + "first_raise", 0, 999, false),
+                // A plain draw is the original's pullout; the original's first raise (switches flipped, barrel run out) only when the gun
+                // is newly in the hands: OUT TO IDLE ARM, picked by the TgBootUp bool (AddBootUpChoice, ThundergunBootUp)
+                ["OUT TO IDLE"] = (Anims + "pullout", 0, 999, false),
                 ["OUT TO IDLE ARM"] = (Anims + "first_raise", 0, 999, false),
                 ["IDLE TO OUT"] = (Anims + "putaway", 0, 999, false),
                 ["FAST IDLE TO OUT"] = (Anims + "putaway_quick", 0, 999, false),
@@ -76,14 +77,14 @@ namespace Thundergun.Editor
                 ["PATROL OUT"] = (Anims + "sprint_in", 0, 999, false),
                 ["PATROL"] = (Anims + "sprint_loop", 0, 999, true),
                 ["PATROL IN"] = (Anims + "sprint_out", 0, 999, false),
-                // Inspecting the gun: BO3's first raise flips the switches and runs the barrel out
+                // Inspecting the gun: the original's first raise flips the switches and runs the barrel out
                 ["LOOK"] = (Anims + "first_raise", 0, 999, false),
                 ["CHECK"] = (Anims + "idle", 0, 999, true),
             };
 
         /// <summary>
         /// Playback speed of some Hands states. EFT waits for the shot state to finish before the next trigger pull
-        /// (or the empty click) registers: BO3's 0.9 s shot played at 2.5x keeps the kick and lets the gun cycle.
+        /// (or the empty click) registers: the original's 0.9 s shot played at 2.5x keeps the kick and lets the gun cycle.
         /// </summary>
         private static readonly Dictionary<string, float> StateSpeeds = new Dictionary<string, float>
         {
@@ -109,7 +110,7 @@ namespace Thundergun.Editor
         };
 
         /// <summary>
-        /// BO3's sound notes ("sndnt#alias") and the sound each plays: (our event, clip). States playing a range of an
+        /// The original's sound notes ("sndnt#alias") and the sound each plays: (our event, clip). States playing a range of an
         /// animation with notes get exactly those sounds instead of the Saiga's.
         /// </summary>
         private static readonly Dictionary<string, (string sound, string clip)> SoundAliases = new Dictionary<string, (string, string)>
@@ -120,7 +121,7 @@ namespace Thundergun.Editor
             ["fly_thundergun_cell_lock"] = ("TgCellLock", "fly_thundergun_cell_slide_lock"),
         };
 
-        /// <summary>Sounds BO3's notes don't have: BO1's tech beep closes the reload, as the canister locks home.</summary>
+        /// <summary>Sounds the original's notes don't have: the original's tech beep closes the reload, as the canister locks home.</summary>
         private static readonly Dictionary<string, (int frame, string sound, string clip)[]> ExtraNotes = new Dictionary<string, (int, string, string)[]>
         {
             [Anims + "reload_empty"] = new[] { (80, "TgBeep", "thundergun_reload_beep") },
@@ -135,9 +136,59 @@ namespace Thundergun.Editor
             .Concat(ExtraNotes.Values.SelectMany(n => n).Select(n => new KeyValuePair<string, string>(n.sound, n.clip)))
             .Concat(new[]
             {
-                // Not an animation note: BO3's remastered shot, played by the client mod as the Pack-a-Punched sound
+                // Not an animation note: the original's remastered shot, played by the client mod as the Pack-a-Punched sound
                 new KeyValuePair<string, string>("TgPapShot", "wpn_thundergun_fire_plr"),
             }).ToDictionary(kv => kv.Key, kv => kv.Value);
+
+        /// <summary>
+        /// Every way into OUT TO IDLE (the plain pullout) gets a twin into OUT TO IDLE ARM (the first raise) that only
+        /// runs while the TgBootUp bool is set (ThundergunBootUp sets it as a draw starts); the plain one only without it.
+        /// </summary>
+        private static void AddBootUpChoice(AnimatorController controller)
+        {
+            const string param = "TgBootUp";
+            if (!controller.parameters.Any(p => p.name == param))
+                controller.AddParameter(param, AnimatorControllerParameterType.Bool);
+            int twins = 0;
+            foreach (AnimatorControllerLayer layer in controller.layers)
+            {
+                AnimatorStateMachine sm = layer.stateMachine;
+                AnimatorState plain = sm.states.Select(c => c.state).FirstOrDefault(st => st.name == "OUT TO IDLE");
+                AnimatorState boot = sm.states.Select(c => c.state).FirstOrDefault(st => st.name == "OUT TO IDLE ARM");
+                if (plain == null || boot == null)
+                    continue;
+                foreach (ChildAnimatorState from in sm.states)
+                    foreach (AnimatorStateTransition t in from.state.transitions.Where(t => t.destinationState == plain).ToArray())
+                    {
+                        Twin(t, from.state.AddTransition(boot), param);
+                        twins++;
+                    }
+                foreach (AnimatorStateTransition t in sm.anyStateTransitions.Where(t => t.destinationState == plain).ToArray())
+                {
+                    Twin(t, sm.AddAnyStateTransition(boot), param);
+                    twins++;
+                }
+            }
+            EditorUtility.SetDirty(controller);
+            AssetDatabase.SaveAssets();
+            Debug.Log($"[Thundergun] First raise draw: {twins} way(s) into OUT TO IDLE twinned to OUT TO IDLE ARM on {param}");
+        }
+
+        private static void Twin(AnimatorStateTransition t, AnimatorStateTransition copy, string param)
+        {
+            copy.hasExitTime = t.hasExitTime;
+            copy.exitTime = t.exitTime;
+            copy.duration = t.duration;
+            copy.offset = t.offset;
+            copy.hasFixedDuration = t.hasFixedDuration;
+            copy.interruptionSource = t.interruptionSource;
+            copy.orderedInterruption = t.orderedInterruption;
+            copy.canTransitionToSelf = t.canTransitionToSelf;
+            foreach (AnimatorCondition c in t.conditions)
+                copy.AddCondition(c.mode, c.threshold, c.parameter);
+            copy.AddCondition(AnimatorConditionMode.If, 0f, param);
+            t.AddCondition(AnimatorConditionMode.IfNot, 0f, param);
+        }
 
         // A state can leave before its clip ends (EFT's transitions use exit times), so late notes are pulled in
         private const float LatestNote = 0.88f;
@@ -145,13 +196,18 @@ namespace Thundergun.Editor
         private static Dictionary<string, List<(float, string)>> StateSounds(Dictionary<string, (string anim, int first, int last, bool loop)> map,
             Dictionary<string, int> lastFrame)
         {
-            var result = new Dictionary<string, List<(float, string)>>();
+            var result = new Dictionary<string, List<(float, string)>>
+            {
+                // The plain pullout plays no draw sound (the base gun's SndDraw is the first raise's): only the first
+                // raise has its own
+                ["OUT TO IDLE"] = new List<(float, string)>(),
+            };
             foreach (var (state, (anim, first, last, _)) in map)
             {
                 if (!Notetracks.TryGetValue(anim, out var notes))
                     continue;
                 int span = Math.Max(1, last - first);
-                // An empty list still replaces the Saiga's sounds: only BO3's own play during the reload. A note on
+                // An empty list still replaces the Saiga's sounds: only the original's own play during the reload. A note on
                 // the frame where one piece hands over to the next belongs to the next (it played in both)
                 int end = lastFrame[anim];
                 result[state] = notes.Where(n => n.frame >= first && (n.frame < last || last == end))
@@ -161,7 +217,7 @@ namespace Thundergun.Editor
         }
 
         /// <summary>
-        /// State pairs that play one BO1 animation in consecutive pieces (the reload's start, out, in and end): the
+        /// State pairs that play one the original animation in consecutive pieces (the reload's start, out, in and end): the
         /// next piece starts where the last one stopped, so the hand-over must be instant and at the very end. The
         /// Saiga's exit times and crossfades, tuned to its own clips, made the reload stall and jump.
         /// </summary>
@@ -183,9 +239,9 @@ namespace Thundergun.Editor
             TgPaths.EnsureDirs();
             var warnings = new List<string>();
 
-            // BO3's HD Thundergun; BO1's arms rig (same bone names) gives the hierarchy above the arms
-            CodModel gun = TgBo3.LoadModel();
-            CodModel bind = CodModel.Load(Path.Combine(TgPaths.ModelDir, "am_t5_thundergun.xmodel_bin"));
+            // The original's HD Thundergun; the original's arms rig (same bone names) gives the hierarchy above the arms
+            SrcModel gun = TgClassic.LoadModel();
+            SrcModel bind = SrcModel.Load(Path.Combine(TgPaths.ModelDir, "am_t5_thundergun.xmodel_bin"));
             Debug.Log($"[Thundergun] Gun model: {gun.Bones.Count} bones, {gun.Vertices.Count} verts, {gun.Faces.Count} faces, {gun.Materials.Count} materials");
 
             Dictionary<string, AudioClip> sounds = ImportSounds();
@@ -195,7 +251,7 @@ namespace Thundergun.Editor
             try
             {
                 Transform weapon = rig["weapon"];
-                // The gun model's root (j_gun) faces the way BO1's identity pose does in prefab space: forward +Z, up +Y
+                // The gun model's root (j_gun) faces the way the original's identity pose does in prefab space: forward +Z, up +Y
                 var jgun = new GameObject("j_gun").transform;
                 jgun.SetParent(weapon, false);
                 jgun.gameObject.layer = weapon.gameObject.layer;
@@ -209,13 +265,13 @@ namespace Thundergun.Editor
                 BuildGunMeshes(gun, gunBones, materials);
                 AddOriginsMaterials(gun, jgun, materials);
 
-                var anims = new Dictionary<string, CodAnim>();
+                var anims = new Dictionary<string, SrcAnim>();
                 Notetracks.Clear();
-                CodAnim Anim(string n)
+                SrcAnim Anim(string n)
                 {
-                    if (anims.TryGetValue(n, out CodAnim a))
+                    if (anims.TryGetValue(n, out SrcAnim a))
                         return a;
-                    a = anims[n] = TgBo3.LoadAnim(n, gun, bind, out var notes);
+                    a = anims[n] = TgClassic.LoadAnim(n, gun, bind, out var notes);
                     var noteSounds = new List<(int, string)>();
                     foreach (var (frame, note) in notes.Where(x => x.note.StartsWith("sndnt#")))
                     {
@@ -241,7 +297,7 @@ namespace Thundergun.Editor
                 var handsClips = new Dictionary<string, AnimationClip>();
                 foreach (var (state, (anim, first, last, loop)) in HandsMap)
                 {
-                    CodAnim a = Anim(anim);
+                    SrcAnim a = Anim(anim);
                     int f0 = Math.Min(first, a.Frames.Count - 1), f1 = Math.Min(last, a.Frames.Count - 1);
                     Ease.TryGetValue(state, out var ease);
                     string key = $"{anim.Replace(Anims, "tg_")}_{f0}_{f1}" + (ease.easeIn + ease.easeOut > 0 ? $"_e{ease.easeIn}_{ease.easeOut}" : "");
@@ -268,6 +324,7 @@ namespace Thundergun.Editor
                     Math.Min(kv.Value.last, Anim(kv.Value.anim).Frames.Count - 1), kv.Value.loop));
                 AnimatorController controller = TgController.Build(ControllerPath, root.transform, handsClips, idle,
                     StateSounds(resolved, anims.ToDictionary(kv => kv.Key, kv => kv.Value.Frames.Count - 1)), Contiguous(resolved), StateSpeeds);
+                AddBootUpChoice(controller);
                 AddGunCollider(weapon, jgun);
                 // The air wave the client plays along each shot (inactive here: a template, copied into the world)
                 if (rig.TryGetValue("fireport", out Transform fireport))
@@ -275,7 +332,7 @@ namespace Thundergun.Editor
                 else
                     warnings.Add("no fireport in the rig: no blast wave");
 
-                // The canisters are part of the gun model (BO1 animates both through every reload), so the Zeus
+                // The canisters are part of the gun model (the original animates both through every reload), so the Zeus
                 // canister item EFT hangs in the magazine slots, and the charge it shows in the chamber, stay out of
                 // sight. The slots still ride the canisters' bones.
                 foreach (string slot in new[] { "mod_magazine", "mod_magazine_new", "patron_in_weapon" })
@@ -313,14 +370,14 @@ namespace Thundergun.Editor
 
         // ---------- Gun model ----------
 
-        private static Dictionary<string, Transform> BuildGunSkeleton(CodModel gun, Transform jgun)
+        private static Dictionary<string, Transform> BuildGunSkeleton(SrcModel gun, Transform jgun)
         {
             var bones = new Dictionary<string, Transform> { [gun.Bones[0].Name] = jgun };
             Quaternion[] world = gun.Bones.Select(b => TgSpace.Rot(b.Rest)).ToArray();
             Vector3[] pos = gun.Bones.Select(b => TgSpace.Pos(b.Rest.Pos)).ToArray();
             for (int i = 1; i < gun.Bones.Count; i++)
             {
-                CodBone b = gun.Bones[i];
+                SrcBone b = gun.Bones[i];
                 var t = new GameObject(b.Name).transform;
                 t.SetParent(bones[gun.Bones[b.Parent].Name], false);
                 t.gameObject.layer = jgun.gameObject.layer;
@@ -333,7 +390,7 @@ namespace Thundergun.Editor
         }
 
         /// <summary>The model is rigid (one bone per vertex): a plain mesh per bone, no skinning.</summary>
-        private static void BuildGunMeshes(CodModel gun, Dictionary<string, Transform> bones, Dictionary<int, Material> materials)
+        private static void BuildGunMeshes(SrcModel gun, Dictionary<string, Transform> bones, Dictionary<int, Material> materials)
         {
             int hidden = gun.Materials.FindIndex(m => m.Name == HiddenMaterial);
             foreach (var group in Wires(gun, materials, LightSections(gun, materials)).Where(f => f.Material != hidden).GroupBy(f => FaceBone(gun, f)))
@@ -391,12 +448,12 @@ namespace Thundergun.Editor
         /// The wire bundle shares front_body_b with body panels; its faces (the colourful strip at the right of the
         /// texture, u above 0.74) get their own copy of the material so the camo can skip just the wires.
         /// </summary>
-        private static IEnumerable<CodFace> Wires(CodModel gun, Dictionary<int, Material> materials, IEnumerable<CodFace> faces)
+        private static IEnumerable<SrcFace> Wires(SrcModel gun, Dictionary<int, Material> materials, IEnumerable<SrcFace> faces)
         {
             int body = gun.Materials.FindIndex(m => m.Name == "mtl_wpn_t7_zmb_hd_thundergun_front_body_b");
             if (body < 0)
             {
-                foreach (CodFace f in faces)
+                foreach (SrcFace f in faces)
                     yield return f;
                 yield break;
             }
@@ -406,10 +463,10 @@ namespace Thundergun.Editor
             KeepLook(wires);
             AssetDatabase.CreateAsset(wires, path);
             materials[WiresMaterial] = wires;
-            foreach (CodFace f in faces)
+            foreach (SrcFace f in faces)
             {
                 if (f.Material == body && f.Corners.All(c => c.U > 0.74f))
-                    yield return new CodFace { Object = f.Object, Material = WiresMaterial, Corners = f.Corners };
+                    yield return new SrcFace { Object = f.Object, Material = WiresMaterial, Corners = f.Corners };
                 else
                     yield return f;
             }
@@ -420,13 +477,13 @@ namespace Thundergun.Editor
         /// model it's one material, so its faces are split by section (nearest of the disc's four glow_N patches)
         /// into tg_light_1..4, each glowing with the grille texture; the client mod turns them on and off.
         /// </summary>
-        private static IEnumerable<CodFace> LightSections(CodModel gun, Dictionary<int, Material> materials)
+        private static IEnumerable<SrcFace> LightSections(SrcModel gun, Dictionary<int, Material> materials)
         {
             int grille = gun.Materials.FindIndex(m => m.Name == "mtl_t5_weapon_thundergun_mesh");
             if (grille < 0)
             {
                 // The HD model has real bulbs (glow_1..4 on tag_bulb1..4): nothing to split
-                foreach (CodFace f in gun.Faces)
+                foreach (SrcFace f in gun.Faces)
                     yield return f;
                 yield break;
             }
@@ -434,23 +491,23 @@ namespace Thundergun.Editor
             for (int n = 1; n <= 4; n++)
             {
                 int glow = gun.Materials.FindIndex(m => m.Name == $"mtl_wpn_t7_zmb_hd_thundergun_glow_{n}");
-                List<CodFace> patch = gun.Faces.Where(f => f.Material == glow).ToList();
+                List<SrcFace> patch = gun.Faces.Where(f => f.Material == glow).ToList();
                 if (glow >= 0 && patch.Count > 0)
                     centres[n] = patch.Select(Centre).Aggregate(Vector3.zero, (a, b) => a + b) / patch.Count;
             }
             if (grille < 0 || centres.Count < 4)
             {
                 Debug.LogWarning("[Thundergun] Canister grille or its four glow patches not found; no ammo lights");
-                foreach (CodFace f in gun.Faces)
+                foreach (SrcFace f in gun.Faces)
                     yield return f;
                 yield break;
             }
             for (int n = 1; n <= 4; n++)
                 materials[LightMaterialBase + n] = BuildLightMaterial(gun.Materials[grille], n);
 
-            Vector3 Centre(CodFace f) => f.Corners.Select(c => TgSpace.Pos(gun.Vertices[c.Vertex].Pos)).Aggregate(Vector3.zero, (a, b) => a + b) / 3f;
+            Vector3 Centre(SrcFace f) => f.Corners.Select(c => TgSpace.Pos(gun.Vertices[c.Vertex].Pos)).Aggregate(Vector3.zero, (a, b) => a + b) / 3f;
             var counts = new int[5];
-            foreach (CodFace f in gun.Faces)
+            foreach (SrcFace f in gun.Faces)
             {
                 if (f.Material != grille)
                 {
@@ -460,13 +517,13 @@ namespace Thundergun.Editor
                 Vector3 c = Centre(f);
                 int section = centres.OrderBy(kv => (kv.Value - c).sqrMagnitude).First().Key;
                 counts[section]++;
-                yield return new CodFace { Object = f.Object, Material = LightMaterialBase + section, Corners = f.Corners };
+                yield return new SrcFace { Object = f.Object, Material = LightMaterialBase + section, Corners = f.Corners };
             }
             Debug.Log($"[Thundergun] Ammo light sections: {string.Join(", ", Enumerable.Range(1, 4).Select(n => $"{n}: {counts[n]} faces"))}");
         }
 
         /// <summary>A grille section: the grille's own texture, glowing orange. Shipped lit for sections 3 and 4 (a full plain canister).</summary>
-        private static Material BuildLightMaterial(CodMaterial grille, int section)
+        private static Material BuildLightMaterial(SrcMaterial grille, int section)
         {
             Material source = BuildMaterial(grille, false);
             string path = $"{TgPaths.Materials}/tg_light_{section}.mat";
@@ -478,14 +535,14 @@ namespace Thundergun.Editor
             return mat;
         }
 
-        private static int FaceBone(CodModel gun, CodFace f)
+        private static int FaceBone(SrcModel gun, SrcFace f)
         {
             var votes = f.Corners.Select(c => gun.Vertices[c.Vertex].Weights.OrderByDescending(w => w.weight).First().bone).ToList();
             return votes.GroupBy(v => v).OrderByDescending(g => g.Count()).First().Key;
         }
 
         /// <summary>Faces into a mesh in the bone's local space, one submesh per material.</summary>
-        private static Mesh BuildMesh(CodModel gun, List<CodFace> faces, int bone, string name, out List<int> materialOrder)
+        private static Mesh BuildMesh(SrcModel gun, List<SrcFace> faces, int bone, string name, out List<int> materialOrder)
         {
             Quaternion inv = Quaternion.Inverse(TgSpace.Rot(gun.Bones[bone].Rest));
             Vector3 origin = TgSpace.Pos(gun.Bones[bone].Rest.Pos);
@@ -495,14 +552,14 @@ namespace Thundergun.Editor
             var unique = new Dictionary<(int, Vector3, Vector2), int>();
             var submeshes = new Dictionary<int, List<int>>();
 
-            foreach (CodFace f in faces)
+            foreach (SrcFace f in faces)
             {
                 if (!submeshes.TryGetValue(f.Material, out List<int> tris))
                     submeshes[f.Material] = tris = new List<int>();
                 var corner = new int[3];
                 for (int c = 0; c < 3; c++)
                 {
-                    CodCorner k = f.Corners[c];
+                    SrcCorner k = f.Corners[c];
                     Vector3 n = (inv * TgSpace.Dir(k.Normal)).normalized;
                     var uv = new Vector2(k.U, 1f - k.V);
                     var key = (k.Vertex, n, uv);
@@ -566,13 +623,13 @@ namespace Thundergun.Editor
         /// The Pressure Cartridge item model: the drum, with the four bulb cards set in it (tag_bulb1..4 hang off the
         /// drum). They're the gun's own tg_light materials; the client mod lights two on a full cartridge.
         /// </summary>
-        private static void BuildCanister(CodModel gun, Dictionary<string, Transform> bones, Dictionary<int, Material> materials, string path)
+        private static void BuildCanister(SrcModel gun, Dictionary<string, Transform> bones, Dictionary<int, Material> materials, string path)
         {
             int boneIndex = gun.BoneIndex(CanisterBones[0]);
             var drumBones = new HashSet<int> { boneIndex };
             for (int n = 1; n <= 4; n++)
                 drumBones.Add(gun.BoneIndex($"tag_bulb{n}"));
-            List<CodFace> faces = gun.Faces.Where(f => drumBones.Contains(FaceBone(gun, f))).ToList();
+            List<SrcFace> faces = gun.Faces.Where(f => drumBones.Contains(FaceBone(gun, f))).ToList();
             string name = Path.GetFileNameWithoutExtension(path);
             Mesh mesh = BuildMesh(gun, faces, boneIndex, $"{name}_mesh", out List<int> mats);
             if (mesh == null)
@@ -701,7 +758,7 @@ namespace Thundergun.Editor
             }
         }
 
-        /// <summary>BO1 / BO3 Thundergun foley for each of EFT's weapon sound events.</summary>
+        /// <summary>the original / the original Thundergun foley for each of EFT's weapon sound events.</summary>
         private static string FoleyFor(string eventName, out float volume)
         {
             volume = 1f;
@@ -764,11 +821,11 @@ namespace Thundergun.Editor
                 @"wpn\energy\thundergun\lfe\wpn_thundergun_fire_lfe.wav",
             })
             {
-                string full = Path.Combine(TgPaths.Bo3SoundDir, rel);
+                string full = Path.Combine(TgPaths.SourceSoundDir, rel);
                 if (File.Exists(full))
                     sources.Add(full);
                 else
-                    Debug.LogWarning($"[Thundergun] BO3 sound missing: {full}");
+                    Debug.LogWarning($"[Thundergun] sound missing: {full}");
             }
 
             string silence = $"{TgPaths.Audio}/silence.wav";
@@ -837,7 +894,7 @@ namespace Thundergun.Editor
 
         /// <summary>
         /// Standard (Specular setup), like PaP. The port's _images folder per material holds the colour (_c), normal
-        /// (_n), specular (_s) and gloss (_g) maps; the four glow materials light up the back body with BO3's emissive
+        /// (_n), specular (_s) and gloss (_g) maps; the four glow materials light up the back body with the original's emissive
         /// map (its _up variant for the Pack-a-Punched look).
         /// </summary>
         /// <summary>
@@ -845,7 +902,7 @@ namespace Thundergun.Editor
         /// They ride on a switched-off renderer (tg_origins_materials); the client swaps them in on a gun upgraded in the
         /// Origins machine, and back out.
         /// </summary>
-        private static void AddOriginsMaterials(CodModel gun, Transform jgun, Dictionary<int, Material> materials)
+        private static void AddOriginsMaterials(SrcModel gun, Transform jgun, Dictionary<int, Material> materials)
         {
             var blues = new List<Material>();
             foreach (int index in Enumerable.Range(0, gun.Materials.Count).Where(i => gun.Materials[i].Name.EndsWith("_control_box")))
@@ -884,7 +941,7 @@ namespace Thundergun.Editor
             Debug.Log($"[Thundergun] Origins materials: {string.Join(", ", blues.Select(m => m.name))}");
         }
 
-        public static Material BuildMaterial(CodMaterial m, bool upgraded)
+        public static Material BuildMaterial(SrcMaterial m, bool upgraded)
         {
             if (m.Name.StartsWith("mtl_wpn_t7_zmb_hd_thundergun"))
                 return BuildMaterialHd(m, upgraded);
@@ -961,7 +1018,7 @@ namespace Thundergun.Editor
         /// _s specular with _g gloss in its alpha, _o occlusion). glow_1..4 are the canister drum's four bulbs, the
         /// ammo lights, named tg_light_1..4 for the client mod; shipped with the plain gun's two (2 and 3) lit.
         /// </summary>
-        private static Material BuildMaterialHd(CodMaterial m, bool upgraded)
+        private static Material BuildMaterialHd(SrcMaterial m, bool upgraded)
         {
             string light = m.Name.StartsWith("mtl_wpn_t7_zmb_hd_thundergun_glow_") ? m.Name.Substring(m.Name.Length - 1) : null;
             string name = light != null ? $"tg_light_{light}" : m.Name;
@@ -976,10 +1033,10 @@ namespace Thundergun.Editor
             mat.SetColor("_EmissionColor", Color.black);
             mat.DisableKeyword("_EMISSION");
 
-            string folder = Path.Combine(TgBo3.ModelDir, "_images", m.Name);
+            string folder = Path.Combine(TgClassic.ModelDir, "_images", m.Name);
             if (light != null)
             {
-                // A grille section's glow card, behind the cut-out grille: BO3's own section glow (back_body_d_e),
+                // A grille section's glow card, behind the cut-out grille: the original's own section glow (back_body_d_e),
                 // or flat purple for the Zeus Cannon
                 // Shipped dark: the client lights them from the charges, and a model it isn't driving stays dark
                 bool lit = false;
@@ -1025,13 +1082,13 @@ namespace Thundergun.Editor
                 if (occlusion != null)
                     mat.SetTexture("_OcclusionMap", ImportTexture(occlusion, TextureImporterType.Default, false));
 
-                // Glowing details (the gauge's backlight, the lens, the knob) come from BO3's emissive maps
+                // Glowing details (the gauge's backlight, the lens, the knob) come from the original's emissive maps
                 string emissive = FindBySuffix(folder, "_e.png");
                 if (emissive != null)
                     SetEmission(mat, ImportEmissive(emissive), Color.white * 1.6f);
 
                 // The drum's ring grille is a mesh with holes (the colour map's alpha): cut out, so the glowing
-                // sections behind it show through as in BO3
+                // sections behind it show through as in the original
                 if (m.Name.EndsWith("_back_body_b") || m.Name.EndsWith("_back_body_c"))
                     MakeCutout(mat, 0.5f);
                 else if (m.Name.EndsWith("_control_box"))
@@ -1128,7 +1185,7 @@ namespace Thundergun.Editor
         private const int EmissiveSize = 1024;
 
         /// <summary>
-        /// BO3's glow maps are small (the grille sections' is 128x128) and compressed they read as a grid of pixels up
+        /// The original's glow maps are small (the grille sections' is 128x128) and compressed they read as a grid of pixels up
         /// close. Imported as a smooth copy instead: upscaled bilinearly to <see cref="EmissiveSize"/>, blurred by
         /// about one source pixel so no texel edges remain, and stored uncompressed with trilinear filtering.
         /// </summary>

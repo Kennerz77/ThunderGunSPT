@@ -38,11 +38,11 @@ namespace Thundergun
         public static void Bind(ConfigFile config)
         {
             const string audio = "Volume";
-            ShotVolume = config.Bind(audio, "Shot", 1f, Volume("The Thundergun's blast. (The Zeus Cannon's BO3 shot on top is Pack-a-Punch's \"Pack-a-Punch shot\" slider.)"));
+            ShotVolume = config.Bind(audio, "Shot", 1f, Volume("The Thundergun's blast. (The Zeus Cannon's upgraded shot on top is Pack-a-Punch's \"Pack-a-Punch shot\" slider.)"));
             FoleyVolume = config.Bind(audio, "Reload and handling", 1f, Volume("Drawing, reloading, the tech beep, the dry click and the gun's rattle."));
-            PurchaseVolume = config.Bind(audio, "Purchase", 0.8f, Volume("BO3's \"cha-ching\" when you buy from the wall or the ammo box."));
+            PurchaseVolume = config.Bind(audio, "Purchase", 0.8f, Volume("The \"cha-ching\" when you buy from the wall or the ammo box."));
             WallBuyVolume = config.Bind(audio, "Wall buy", 0.8f, Volume("The sound of the gun coming out of the chalk wall."));
-            DenyVolume = config.Bind(audio, "Deny", 0.8f, Volume("BO3's buzz when a purchase is refused (not enough money, no room)."));
+            DenyVolume = config.Bind(audio, "Deny", 0.8f, Volume("The buzz when a purchase is refused (not enough money, no room)."));
             ThundergunFit.Bind(config);
             DropOldEntries(config);
         }
@@ -90,7 +90,64 @@ namespace Thundergun
                 postfix: new HarmonyMethod(Method(nameof(ShotPostfix))));
             harmony.Patch(AccessTools.Method(typeof(Player), nameof(Player.ApplyCorpseImpulse)),
                 new HarmonyMethod(Method(nameof(CorpseImpulsePrefix))));
+            _harmony = harmony;
+            PatchOverrides();
         }
+
+        private static Harmony _harmony;
+        private static bool _overridesPatched;
+
+        /// <summary>
+        /// Other mods' players can override ApplyCorpseImpulse without calling EFT's own (Fika's players do), so the hook
+        /// above never runs for them and nothing was thrown: every override found among the loaded player types gets the
+        /// same prefix. Found by reflection only (no other mod referenced or changed). Tried again at the first shot in
+        /// case such a mod loaded after this one.
+        /// </summary>
+        private static void PatchOverrides()
+        {
+            if (_overridesPatched || _harmony == null)
+                return;
+            int patched = 0;
+            foreach (Assembly asm in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                System.Type[] types;
+                try
+                {
+                    types = asm.GetTypes();
+                }
+                catch (ReflectionTypeLoadException e)
+                {
+                    types = e.Types.Where(t => t != null).ToArray();
+                }
+                catch
+                {
+                    continue;
+                }
+                foreach (System.Type t in types)
+                {
+                    if (t == typeof(Player) || !typeof(Player).IsAssignableFrom(t))
+                        continue;
+                    MethodInfo m = t.GetMethod(nameof(Player.ApplyCorpseImpulse), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly,
+                        null, System.Type.EmptyTypes, null);
+                    if (m == null || m.IsAbstract)
+                        continue;
+                    try
+                    {
+                        _harmony.Patch(m, new HarmonyMethod(Method(nameof(CorpseImpulsePrefix))));
+                        patched++;
+                        ThundergunPlugin.Log.LogInfo($"Thundergun fling: also on {t.FullName}.ApplyCorpseImpulse");
+                    }
+                    catch (System.Exception e)
+                    {
+                        ThundergunPlugin.Log.LogWarning($"Thundergun fling: {t.FullName}.ApplyCorpseImpulse not hooked ({e.Message})");
+                    }
+                }
+            }
+            if (patched > 0 || Fired)
+                _overridesPatched = true;
+        }
+
+        private static bool Fired;
 
         private static MethodInfo Method(string name) => typeof(ThundergunBlast).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic);
 
@@ -100,8 +157,27 @@ namespace Thundergun
             try
             {
                 Player player = __instance._player;
-                if (!(weapon?.Item is Weapon gun) || !ThundergunIds.Is(gun) || player == null || !player.IsYourPlayer)
+                if (!(weapon?.Item is Weapon gun) || !ThundergunIds.Is(gun) || player == null)
                     return;
+                // Another player's shot (Fika plays it through the same method on their copy): the blast is shown and
+                // the bodies it reaches fly when they die, but it does no damage here, their own game does that
+                // (user, 2026-11-09: only the shooter saw the wave and the flying bodies)
+                if (!player.IsYourPlayer)
+                {
+                    // The corpse hook too, so the bodies fly here (it was only set up by a shot of your own)
+                    if (!_overridesPatched)
+                    {
+                        Fired = true;
+                        PatchOverrides();
+                    }
+                    Fire(player, __instance, gun, shotPosition, shotDirection.normalized, showOnly: true);
+                    return;
+                }
+                if (!_overridesPatched)
+                {
+                    Fired = true;
+                    PatchOverrides();
+                }
                 Fire(player, __instance, gun, shotPosition, shotDirection.normalized);
             }
             catch (System.Exception e)
@@ -110,7 +186,7 @@ namespace Thundergun
             }
         }
 
-        private static void Fire(Player player, Player.FirearmController hands, Weapon gun, Vector3 origin, Vector3 forward)
+        private static void Fire(Player player, Player.FirearmController hands, Weapon gun, Vector3 origin, Vector3 forward, bool showOnly = false)
         {
             bool zeus = ThundergunPaP.IsInfused(gun);
             float killRange = zeus ? ThundergunSettings.ZeusKillRange.Value : ThundergunSettings.KillRange.Value;
@@ -123,7 +199,8 @@ namespace Thundergun
                 return;
             GameWorld world = Singleton<GameWorld>.Instance;
 
-            int killed = 0, stunned = 0;
+            int killed = 0, stunned = 0, blocked = 0;
+            string blocker = null;
             foreach (Player target in world.AllAlivePlayersList.ToList())
             {
                 if (target == null || target == player || !target.HealthController.IsAlive || Spared(player, target))
@@ -137,8 +214,18 @@ namespace Thundergun
                     continue;
                 // Walls and cover stop the air; fences, grates, glass and the like let it through
                 if (Blocked(origin, chest))
+                {
+                    blocked++;
+                    blocker = LastBlocker;
                     continue;
+                }
 
+                if (showOnly)
+                {
+                    if (distance <= killRange)
+                        ToFling[target] = (FlingFor(forward), Time.time);
+                    continue;
+                }
                 if (distance <= killRange)
                 {
                     Kill(player, target, gun, origin, forward, chest);
@@ -151,8 +238,9 @@ namespace Thundergun
                     stunned++;
                 }
             }
-            if (killed + stunned > 0)
-                ThundergunPlugin.Log.LogInfo($"{(zeus ? ThundergunIds.UpgradedName : ThundergunIds.Name)} blast: {killed} killed, {stunned} stunned");
+            if (killed + stunned + blocked > 0)
+                ThundergunPlugin.Log.LogInfo($"{(zeus ? ThundergunIds.UpgradedName : ThundergunIds.Name)} blast: {killed} killed, {stunned} stunned" +
+                                             (blocked > 0 ? $", {blocked} behind cover (last: {blocker})" : ""));
         }
 
         // What a rush of air goes through or past: open mesh, glass, plants, cloth, paper, thin plastic, and bodies
@@ -166,14 +254,19 @@ namespace Thundergun
         };
 
         private static readonly RaycastHit[] Hits = new RaycastHit[32];
+        private static int _bulletLayers;
+        private static string LastBlocker;
 
         /// <summary>True if something solid stands between the gun and the target, by the surfaces bullets see.</summary>
         private static bool Blocked(Vector3 from, Vector3 to)
         {
             Vector3 dir = to - from;
             float distance = dir.magnitude;
-            int count = Physics.RaycastNonAlloc(from, dir / distance, Hits, distance, BallisticsCalculatorConstants.StaticObjectsHitMask,
-                QueryTriggerInteraction.Ignore);
+            // Only what a bullet would hit: invisible movement blockers (LowPolyCollider: walk boxes, no-climb boxes,
+            // play-area walls, barricade frames) let a bullet through, so they let the air through too
+            if (_bulletLayers == 0)
+                _bulletLayers = LayerMask.GetMask("HighPolyCollider", "TransparentCollider", "Terrain");
+            int count = Physics.RaycastNonAlloc(from, dir / distance, Hits, distance, _bulletLayers, QueryTriggerInteraction.Ignore);
             for (int i = 0; i < count; i++)
             {
                 Collider collider = Hits[i].collider;
@@ -182,15 +275,50 @@ namespace Thundergun
                 BallisticCollider surface = collider.GetComponent<BaseBallistic>()?.Get(Hits[i].point);
                 // Unmarked colliders are scenery: solid
                 if (surface == null || !AirPasses.Contains(surface.TypeOfMaterial))
+                {
+                    LastBlocker = $"{collider.name} ({LayerMask.LayerToName(collider.gameObject.layer)}, {surface?.TypeOfMaterial.ToString() ?? "unmarked"})";
                     return true;
+                }
             }
             return false;
+        }
+
+        private static Vector3 FlingFor(Vector3 forward)
+        {
+            Vector3 flat = new Vector3(forward.x, 0f, forward.z).normalized;
+            return flat * ThundergunSettings.FlingSpeed.Value + Vector3.up * ThundergunSettings.FlingLift.Value;
+        }
+
+        // Fika (co-op): on another game, a bot run by the host is a copy whose IsAI is false; Fika marks it with its own
+        // IsObservedAI field (read by name: this mod needs no Fika). Without it every bot there counted as a player
+        // and the blast passed through them (user, 2026-11-09)
+        private static FieldInfo _observedAI;
+        private static bool _observedLooked;
+
+        private static bool IsBot(Player target)
+        {
+            if (target.IsAI)
+                return true;
+            if (!_observedLooked)
+            {
+                _observedLooked = true;
+                for (System.Type t = target.GetType(); t != null && _observedAI == null; t = t.BaseType)
+                    _observedAI = t.GetField("IsObservedAI", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            }
+            try
+            {
+                return _observedAI != null && _observedAI.DeclaringType.IsInstanceOfType(target) && (bool)_observedAI.GetValue(target);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>The shooter's own group (and any other human player) are left alone.</summary>
         private static bool Spared(Player shooter, Player target)
         {
-            if (!target.IsAI)
+            if (!IsBot(target))
                 return true;
             string group = shooter.Profile?.Info?.GroupId;
             return !string.IsNullOrEmpty(group) && target.Profile?.Info?.GroupId == group;
@@ -229,13 +357,20 @@ namespace Thundergun
                 SourceId = gun.TemplateId.ToString(),
             };
             // Thrown back along the blast, and a bit up; the corpse hook picks this up
-            Vector3 flat = new Vector3(forward.x, 0f, forward.z).normalized;
             // Kept until the corpse is made (the death can land a frame later); a stale one is ignored after 3 s
-            ToFling[target] = (flat * ThundergunSettings.FlingSpeed.Value + Vector3.up * ThundergunSettings.FlingLift.Value, Time.time);
+            ToFling[target] = (FlingFor(forward), Time.time);
 
-            target.ApplyDamageInfo(damage, EBodyPart.Chest, EBodyPartColliderType.RibcageUp, 0f);
-            if (target.HealthController.IsAlive)
-                target.ActiveHealthController?.Kill(EDamageType.Bullet);
+            // Fika (co-op): another game's copy of a player or bot only records a direct hit; the shot path sends it to
+            // the game that runs it. Checked by type name, so this mod needs no Fika (user, 2026-11-09: a client's
+            // blast did nothing to the host's zombies). Everyone else: the direct hit, then a kill to be sure
+            if (target.GetType().Name == "ObservedPlayer")
+                target.ApplyShot(damage, EBodyPart.Chest, EBodyPartColliderType.RibcageUp, (EArmorPlateCollider)0, default);
+            else
+            {
+                target.ApplyDamageInfo(damage, EBodyPart.Chest, EBodyPartColliderType.RibcageUp, 0f);
+                if (target.HealthController.IsAlive)
+                    target.ActiveHealthController?.Kill(EDamageType.Bullet);
+            }
         }
 
         // ---------- Fling ----------

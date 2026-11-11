@@ -34,14 +34,14 @@ namespace Thundergun
         public static void Bind(ConfigFile settings)
         {
             Choice = settings.Bind("Size", "Size", GunSize.Default, new ConfigDescription(
-                "Default: smaller, fitted to sit like EFT's own guns. Large: BO3's full size, as the gun first shipped."));
+                "Default: smaller, fitted to sit like EFT's own guns. Large: full size, as the gun first shipped."));
             // While tuning, the fit sliders are in the mod's own config (F12). Otherwise they live in a config nothing
             // ever saves, set from the size choice
             ConfigFile config = TuningMenu ? settings : new ConfigFile(Path.Combine(BepInEx.Paths.ConfigPath, ThundergunPlugin.PluginGuid + ".fit.unsaved"), false) { SaveOnConfigSet = false };
 
             int order = 1000;
             const string size = "1. Gun size";
-            Size = config.Bind(size, "Size", 0.7f, new ConfigDescription("The gun's size in your hands and on the menu character (1 = BO3 size). The hands stay on it.",
+            Size = config.Bind(size, "Size", 0.7f, new ConfigDescription("The gun's size in your hands and on the menu character (1 = full size). The hands stay on it.",
                 new AcceptableValueRange<float>(0.25f, 1f), Attributes(order--)));
             config.Bind(size, "Quick sizes", "", new ConfigDescription("Snap the size.", null, new ConfigurationManagerAttributes
             {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Thundergun.CodFormats;
+using Thundergun.ModelFormats;
 using UnityEngine;
 
 namespace Thundergun.Editor
@@ -16,8 +16,9 @@ namespace Thundergun.Editor
         public static readonly string AnimDir = Directory.GetDirectories(PortRoot + @"\xanim_export", "t5_thundergun",
             SearchOption.AllDirectories).FirstOrDefault();
         public const string SoundDir = PortRoot + @"\sound_assets\t5_thundergun";
-        // BO3's own (remastered) Thundergun sounds, exported with Greyhound
-        public const string Bo3SoundDir = @"E:\Greyhound boz\exported_files\black_ops_3\sounds";
+        // The original's own (remastered) Thundergun sounds, exported with Greyhound
+        // The asset export folder on the author's PC: the KZ_EXPORT_ROOT user environment variable (kept out of the source)
+        public static readonly string SourceSoundDir = System.IO.Path.Combine(System.Environment.GetEnvironmentVariable("KZ_EXPORT_ROOT", System.EnvironmentVariableTarget.User) ?? "", @"sounds");
 
         public const string Root = "Assets/Thundergun";
         public const string Generated = Root + "/Generated";
@@ -46,7 +47,7 @@ namespace Thundergun.Editor
     }
 
     /// <summary>
-    /// CoD space (right-handed, Z up, X forward, Y left, inches) to Unity prefab space (left-handed, Y up, Z forward,
+    /// The original game space (right-handed, Z up, X forward, Y left, inches) to Unity prefab space (left-handed, Y up, Z forward,
     /// metres). The mapping mirrors one axis; a bone's rotation is built from its mapped Y and Z axes so its X axis
     /// still maps to the mapped X (the proof: for a mirror M, Ma × Mb = −M(a × b)).
     /// </summary>
@@ -54,9 +55,9 @@ namespace Thundergun.Editor
     {
         public const float Scale = 0.0254f;
 
-        public static Vector3 Dir(CodVec v) => new Vector3(-v.Y, v.Z, v.X);
-        public static Vector3 Pos(CodVec v) => Dir(v) * Scale;
-        public static Quaternion Rot(CodPose p) => Quaternion.LookRotation(-Dir(p.AxisZ), Dir(p.AxisY));
+        public static Vector3 Dir(SrcVec v) => new Vector3(-v.Y, v.Z, v.X);
+        public static Vector3 Pos(SrcVec v) => Dir(v) * Scale;
+        public static Quaternion Rot(SrcPose p) => Quaternion.LookRotation(-Dir(p.AxisZ), Dir(p.AxisY));
 
         /// <summary>The swing-free part of <paramref name="q"/> about <paramref name="axis"/> (unit).</summary>
         public static Quaternion Twist(Quaternion q, Vector3 axis)

@@ -15,7 +15,7 @@ namespace Thundergun
     /// </summary>
     internal static class ThundergunCooldown
     {
-        public const float Cooldown = 1.3f;
+        public const float Cooldown = 1.2f; // The original: shots 1.2 s apart at best (the user's gameplay video, 2026-11-07)
 
         // Per gun: when it last fired, and from which canister (a new canister starts with no wait)
         private static readonly Dictionary<string, (float time, string canister)> LastShot = new Dictionary<string, (float, string)>();

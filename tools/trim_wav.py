@@ -1,6 +1,6 @@
 """Trims a 16-bit PCM WAV to a length with a linear fade-out at the end.
 
-The BO1 port's shots run 9-10 s of rumble; in game the Thundergun's blast should be about 3 s.
+The the original port's shots run 9-10 s of rumble; in game the Thundergun's blast should be about 3 s.
 Usage: python -I trim_wav.py in.wav out.wav seconds fade_seconds
 """
 import array

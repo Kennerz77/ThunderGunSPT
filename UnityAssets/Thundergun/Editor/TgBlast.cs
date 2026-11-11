@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Thundergun.Editor
 {
     /// <summary>
-    /// The visible air blast. Neither BO1's nor BO3's export carries the Thundergun's effect (only its name), so it's
+    /// The visible air blast. Neither the original's nor the original's export carries the Thundergun's effect (only its name), so it's
     /// built here: a cone of rippling, bending air, a pale rush of air through it and a shock ring racing ahead. It
     /// sits inactive under the gun's fireport as <see cref="TemplateName"/>; the client copies it into the world along
     /// each shot and plays it (it doesn't follow the gun). Every system fires once and is gone within half a second.

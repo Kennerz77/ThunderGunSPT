@@ -84,7 +84,7 @@ namespace Thundergun.Editor
                     AnimatorState state = sm.AddState(stateName, new Vector3(250 * (si % 6), 80 * (si / 6), 0));
                     states[stateName] = state;
 
-                    // Hands: our BO1 clips (EFT's speeds were tuned to the Saiga's clip lengths, ours play as authored).
+                    // Hands: our the original clips (EFT's speeds were tuned to the Saiga's clip lengths, ours play as authored).
                     // LActions: the idle pose, masked to the left arm, so door/loot gestures keep the hand where it was.
                     // The gun-part layers (selector, hammer, stock, malfunction) animate bones the Thundergun doesn't use.
                     if (hands)
@@ -162,7 +162,7 @@ namespace Thundergun.Editor
                         foreach (object C in T.Get("conditions").Arr())
                             tr.AddCondition(Mode(C.Str("mode")), C.Num("threshold"), C.Str("param"));
 
-                        // Consecutive pieces of one BO1 animation: carry on from the exact last frame, no blend
+                        // Consecutive pieces of one the original animation: carry on from the exact last frame, no blend
                         if (hands && to != null && contiguous.Contains((S.Str("name"), to)))
                         {
                             if (tr.hasExitTime)
@@ -252,7 +252,7 @@ namespace Thundergun.Editor
                 foreach (object e in coll.Get("_animationEvents").Arr())
                 {
                     if (ours != null && e.Str("_functionName") == "Sound")
-                        continue; // timed to the Saiga's clip; ours follow BO1's notetracks
+                        continue; // timed to the Saiga's clip; ours follow the original's notetracks
                     object p = e.Get("Parameter");
                     list._animationEvents.Add(new AnimatorControllerStaticData_AnimationEvent
                     {

@@ -20,7 +20,7 @@ using UnityEngine;
 namespace Thundergun
 {
     /// <summary>
-    /// The mod's own way to get the Thundergun, no other mod needed: a chalk outline of it on a hideout wall (BO's wall
+    /// The mod's own way to get the Thundergun, no other mod needed: a chalk outline of it on a hideout wall (the original's wall
     /// buy) sells the gun, and a green ammo case beside it sells full pressure cartridges, both for roubles from the
     /// stash. A bought gun sits in its outline until the next raid; the wall offers it again on the first hideout visit
     /// after one. The two stations are root objects named <see cref="WallName"/> and <see cref="BoxName"/>, at fixed
@@ -71,6 +71,38 @@ namespace Thundergun
                 _raidSinceBuy = true;
         }
 
+        // The server's config.json InNormalGame: -1 not known yet, 0 off (zombies only), 1 on
+        private static volatile int _inNormalGame = -1;
+        private static volatile bool _asking;
+        private static int _askFails;
+        private static float _nextAsk;
+
+        private static void AskServer()
+        {
+            if (_inNormalGame >= 0 || _asking || Time.unscaledTime < _nextAsk)
+                return;
+            _asking = true;
+            _nextAsk = Time.unscaledTime + 5f;
+            Task.Run(() =>
+            {
+                try
+                {
+                    string reply = SPT.Common.Http.RequestHandler.PostJson("/thundergun/normalgame", "{}") ?? "";
+                    // What this server start runs with ("now"); an older server without the route: on, as before
+                    _inNormalGame = reply.Replace(" ", "").Contains("\"now\":false") ? 0 : 1;
+                }
+                catch
+                {
+                    if (++_askFails >= 3)
+                        _inNormalGame = 1;
+                }
+                finally
+                {
+                    _asking = false;
+                }
+            });
+        }
+
         private void Update()
         {
             HideoutPlayerOwner owner = _owner;
@@ -80,8 +112,10 @@ namespace Thundergun
                 _boxMenu.Reset();
                 return;
             }
-            // Only once the hideout's side room is open; shut again (a guest's hideout, say), the stations go quiet
-            bool open = SideRoomOpen();
+            // Only once the hideout's side room is open; shut again (a guest's hideout, say), the stations go quiet.
+            // Never while the server's InNormalGame is off (zombies only), or before it has said
+            AskServer();
+            bool open = _inNormalGame == 1 && SideRoomOpen();
             if (_wall != null && _wall.gameObject.activeSelf != open)
             {
                 _wall.gameObject.SetActive(open);
@@ -153,7 +187,7 @@ namespace Thundergun
                 StationSounds.Play("purchase_accept", ThundergunSettings.PurchaseVolume.Value);
                 if (what == "weapon")
                 {
-                    // BO's wall buy: the cha-ching and the gun coming off the wall together (the wall sound runs longer)
+                    // The original's wall buy: the cha-ching and the gun coming off the wall together (the wall sound runs longer)
                     StationSounds.Play("wallbuy", ThundergunSettings.WallBuyVolume.Value);
                     _bought = true;
                     _raidSinceBuy = false;
@@ -246,7 +280,7 @@ namespace Thundergun
 
         /// <summary>
         /// A bought gun hangs inside its outline until the next raid, loaded with a cartridge. Just bought, it slides
-        /// slowly out of the wall as in BO; on a later visit it's simply there.
+        /// slowly out of the wall as in the original; on a later visit it's simply there.
         /// </summary>
         private void ShowWallGun(bool show)
         {
@@ -383,8 +417,8 @@ namespace Thundergun
     }
 
     /// <summary>
-    /// The stations' BO3 sounds (sounds\*.wav beside the plugin): "purchase_accept" (the cha-ching), "wallbuy" (the gun
-    /// coming off the wall) and "deny" (refused). Played in the player's head like BO's, at their F12 volumes.
+    /// The stations' the original sounds (sounds\*.wav beside the plugin): "purchase_accept" (the cha-ching), "wallbuy" (the gun
+    /// coming off the wall) and "deny" (refused). Played in the player's head like the original's, at their F12 volumes.
     /// </summary>
     internal static class StationSounds
     {

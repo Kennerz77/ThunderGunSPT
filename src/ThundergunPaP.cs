@@ -59,10 +59,24 @@ namespace Thundergun
             PaPApi.KeepOriginsPlain("control_box");
             PaPApi.SetOriginsLook("back_body", false);
             PaPApi.SetOriginsLook("stock", false);
+            // The camo drawn smaller over the whole gun: its the original texture layout stretched the default size into long
+            // streaks on the front barrels (user, 2026-11-10). PaP 2.1.2+ only: an older PaP just keeps its size
+            try
+            {
+                SmallerCamo();
+            }
+            catch (System.MissingMethodException)
+            {
+            }
             PaPApi.WeaponUpgraded += OnUpgraded;
             PaPApi.InfusedChanged += OnInfusedChanged;
             _infused = new HashSet<string>(PaPApi.InfusedIds);
         }
+
+        public const float CamoTiling = 2.5f;
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        private static void SmallerCamo() => PaPApi.SetCamoTiling("thundergun", CamoTiling);
 
         // Out of the machine: the Zeus Cannon shows, and its canister is topped up to four, as the server did
         private static void OnUpgraded(Item item)
@@ -143,7 +157,7 @@ namespace Thundergun
                 ThundergunPaPBridge.ApplyCamo(model, item);
         }
 
-        /// <summary>BO3's remastered shot (in the weapon bundle) becomes the Pack-a-Punched Thundergun's sound.</summary>
+        /// <summary>the original's remastered shot (in the weapon bundle) becomes the Pack-a-Punched Thundergun's sound.</summary>
         public static void RegisterShot(AudioClip shot)
         {
             if (!Installed || _shotRegistered || shot == null)

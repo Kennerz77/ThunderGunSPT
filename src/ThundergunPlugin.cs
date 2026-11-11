@@ -1,3 +1,4 @@
+using System.Linq;
 using BepInEx;
 using BepInEx.Logging;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Thundergun
     /// Client side of the Thundergun. Pack-a-Punch support is optional (soft dependency): nothing here touches PaP
     /// unless it's installed. Hideout Uncensored is required: weapons in the hideout, where the wall buy is, come from it.
     /// </summary>
-    [BepInPlugin(PluginGuid, "Kennerz-Thundergun", "1.1.1")] // Forge rule: "Username-ModName"
+    [BepInPlugin(PluginGuid, "Kenner-Thundergun", "1.2.0")] // Forge rule: "Username-ModName"
     [BepInDependency("com.kennerz.paphideoutmodule", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(ThundergunDraw.HideoutUncensoredGuid, "1.3.0")] // hard: the wall buy hands you the gun through it
     public class ThundergunPlugin : BaseUnityPlugin
@@ -22,9 +23,12 @@ namespace Thundergun
 
         private void Awake()
         {
+            // Release builds: F12 shows players only their own settings
+            ReleaseMenu.Install(this, d => d.Section == "1. Normal gameplay" || d.Section == "Size" || d.Section == "Volume");
             Log = Logger;
             Runner = this;
             ThundergunSettings.Bind(Config);
+            ThundergunNormalGame.Enable(Config, gameObject);
             ThundergunSounds.Enable();            var harmony = new HarmonyLib.Harmony(PluginGuid);
             try
             {
@@ -64,6 +68,7 @@ namespace Thundergun
             try
             {
                 ThundergunBlast.Enable(harmony);
+                ThundergunBootUp.Enable(harmony);
                 ThundergunMenuPose.Enable(harmony);
                 ThundergunHandling.Enable(harmony);
             }

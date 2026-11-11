@@ -19,9 +19,9 @@ public record ModMetadata : IModMetadata
 {
     public string ModGuid { get; init; } = "com.kennerz.thundergun"; // same GUID as the client plugin (Forge rule)
     public string Name { get; init; } = "Thundergun";
-    public string Author { get; init; } = "Kennerz";
+    public string Author { get; init; } = "Kenner";
     public List<string>? Contributors { get; init; }
-    public SemanticVersioning.Version Version { get; init; } = new("1.1.1");
+    public SemanticVersioning.Version Version { get; init; } = new("1.2.0");
     public SemanticVersioning.Range SptVersion { get; init; } = new("~4.1.0");
     public List<string>? Incompatibilities { get; init; }
     /// <summary>Hideout Uncensored provides weapons in the hideout, where the wall buy is (the client depends on it too).</summary>
@@ -63,7 +63,7 @@ internal static class ThundergunIds
     public const string CanisterBundle = "mag_thundergun_canister.bundle";
 
     public const int CanisterCharges = 2;
-    public const int UpgradedCanisterCharges = 4; // BO1's upgraded clip size
+    public const int UpgradedCanisterCharges = 4; // The original's upgraded clip size
 
     public static bool IsOurs(string? templateId) => templateId != null && templateId.StartsWith(Prefix);
 }
@@ -82,8 +82,10 @@ public record ThundergunConfig
         string path = Path.Combine(Path.GetDirectoryName(typeof(ThundergunConfig).Assembly.Location)!, "config.json");
         try
         {
-            if (File.Exists(path))
-                return JsonSerializer.Deserialize<ThundergunConfig>(File.ReadAllText(path)) ?? new();
+            ThundergunConfig config = File.Exists(path) ? JsonSerializer.Deserialize<ThundergunConfig>(File.ReadAllText(path)) ?? new() : new();
+            // Written back so settings added in a newer version show up
+            File.WriteAllText(path, JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true }));
+            return config;
         }
         catch (Exception e)
         {
@@ -203,7 +205,7 @@ public class ThundergunItemLoader(
         gun.RecoilCamera = 0;
         if (gun.WeaponRecoilSettings != null)
             gun.WeaponRecoilSettings.Enable = false;
-        // Half a second between shots: the second follows quickly, as in BO
+        // Half a second between shots: the second follows quickly, as in the original
         gun.BFirerate = 120;
         gun.SingleFireRate = 120;
 
